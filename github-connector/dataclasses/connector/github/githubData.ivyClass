@@ -1,0 +1,4 @@
+githubData #class
+connector.github #namespace
+data connector.github.Data #field
+data PERSISTENT #fieldModifier

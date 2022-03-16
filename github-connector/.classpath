@@ -29,5 +29,6 @@
 	<classpathentry exported="true" kind="con" path="IVY_CONTAINER"/>
 	<classpathentry kind="con" path="WEBAPP_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="lib" path="lib/generated/rest/jaxRsClient_4895b78f-4d15-49f6-9754-de015d91d52e.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
