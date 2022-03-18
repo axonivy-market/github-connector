@@ -1,2 +1,4 @@
 Data #class
 connector.github.test #namespace
+environment String #field
+environment PERSISTENT #fieldModifier

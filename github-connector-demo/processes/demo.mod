@@ -191,16 +191,16 @@ do0 f17 statusErrorCode ivy:error:rest:client #txt
 do0 f17 168 306 112 44 0 -8 #rect
 do0 f18 111 328 168 328 #arcP
 do0 f19 280 328 337 328 #arcP
-do0 f20 outLink start5.ivp #txt
+do0 f20 outLink repoList.ivp #txt
 do0 f20 inParamDecl '<> param;' #txt
 do0 f20 requestEnabled true #txt
 do0 f20 triggerEnabled false #txt
-do0 f20 callSignature start5() #txt
+do0 f20 callSignature repoList() #txt
 do0 f20 caseData businessCase.attach=true #txt
 do0 f20 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
-        <name>start5.ivp</name>
+        <name>repoList.ivp</name>
     </language>
 </elementInfo>
 ' #txt
