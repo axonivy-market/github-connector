@@ -1,0 +1,4 @@
+RepositoriesData #class
+connector.github.demo.Repositories #namespace
+data connector.github.demo.Data #field
+data PERSISTENT #fieldModifier
