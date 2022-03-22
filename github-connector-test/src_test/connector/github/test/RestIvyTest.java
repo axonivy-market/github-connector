@@ -23,12 +23,13 @@ import ch.ivyteam.ivy.environment.IvyTest;
 @IvyTest
 public class RestIvyTest {
 
-  private final WebTarget target = Ivy.rest().client(UUID.fromString("4895b78f-4d15-49f6-9754-de015d91d52e"))
-          .path("/user/repos");
+  private WebTarget target;
 
   @BeforeEach
   void beforeEach(AppFixture fixture) {
     fixture.environment("dev-axonivy");
+    target = Ivy.rest().client(UUID.fromString("4895b78f-4d15-49f6-9754-de015d91d52e"))
+    .path("/user/repos");
   }
 
   @Test
