@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.axonivy.connector.github.models.RepoAdvanced;
 import com.axonivy.connector.github.models.RepositoriesWithCount;
 import com.axonivy.connector.github.wrappers.GithubApiRest;
 import com.github.api.client.Repository;
@@ -51,7 +52,8 @@ public class RestIvyTest {
   public void restApiToRepositoryClass() {
     var repos = target.request(MediaType.APPLICATION_JSON).get()
             .readEntity(new GenericType<List<Repository>>() {});
-    RepositoriesWithCount repositories = new RepositoriesWithCount(repos, 10);
+    var reposWithPrsAndRuns = RepoAdvanced.fromList(repos);
+    RepositoriesWithCount repositories = new RepositoriesWithCount(reposWithPrsAndRuns, 10);
     assertThat(repos.size() > 0);
     assertThat(repositories.getRepositories().size()).isEqualTo(repos.size());
   }
@@ -63,4 +65,33 @@ public class RestIvyTest {
     assertThat(repos.getCount() >= repos.getRepositories().size());
   }
 
+  @Test
+  public void githubApiReposWithWorkflows() {
+    var repos = new GithubApiRest().perPage(10).page(1).getRepos();
+    assertThat(repos.getRepositories().get(0).getWorkflowruns()).isNull();
+    repos.fetchReposWorkflows();
+    assertThat(repos.getRepositories().get(0).getWorkflowruns()).isNotNull();
+  }
+
+  @Test
+  public void githubApiReposWithPullrequests() {
+    var repos = new GithubApiRest().perPage(10).page(1).getRepos();
+    assertThat(repos.getRepositories().get(0).getPullRequests()).isNull();
+    repos.fetchReposPullRequests();
+    assertThat(repos.getRepositories().get(0).getPullRequests()).isNotNull();
+  }
+
+  @Test
+  public void githubApiReposWithPullrequestsAndWorkflows() {
+    var repos = new GithubApiRest().perPage(10).page(1).getRepos();
+
+    assertThat(repos.getRepositories().get(0).getPullRequests()).isNull();
+    assertThat(repos.getRepositories().get(0).getWorkflowruns()).isNull();
+
+    repos.fetchReposPullRequests();
+    repos.fetchReposWorkflows();
+
+    assertThat(repos.getRepositories().get(0).getPullRequests()).isNotNull();
+    assertThat(repos.getRepositories().get(0).getWorkflowruns()).isNotNull();
+  }
 }
