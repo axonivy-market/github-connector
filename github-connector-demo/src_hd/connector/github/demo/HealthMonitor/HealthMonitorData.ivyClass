@@ -1,0 +1,4 @@
+HealthMonitorData #class
+connector.github.demo.HealthMonitor #namespace
+data connector.github.demo.Data #field
+data PERSISTENT #fieldModifier
