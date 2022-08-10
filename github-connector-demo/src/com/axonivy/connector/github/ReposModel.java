@@ -3,21 +3,23 @@ package com.axonivy.connector.github;
 import java.util.List;
 import java.util.Map;
 
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import com.axonivy.connector.github.models.RepoAdvanced;
 import com.axonivy.connector.github.models.RepositoriesWithCount;
 import com.axonivy.connector.github.wrappers.GithubApiRest;
+import ch.ivyteam.ivy.jsf.primefaces.legazy.LazyDataModel7;
 
-public class ReposModel extends LazyDataModel<RepoAdvanced> {
+@SuppressWarnings("deprecation")
+public class ReposModel extends LazyDataModel7<RepoAdvanced> {
 
+  private static final long serialVersionUID = -6946640556684919260L;
   private boolean showDetailedPullRequests = false;
   private boolean showWorkflowRunStatus = true;
 
   @Override
-  public Object getRowKey(RepoAdvanced repo) {
-    return repo.getId();
+  public String getRowKey(RepoAdvanced repo) {
+    return repo.getId().toString();
   }
 
   @Override

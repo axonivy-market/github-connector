@@ -14,7 +14,7 @@
         
         <p:dataTable id="reposTable" var="repo" widgetVar="reposTable" value="#{healthMonitorBean.repos}" rows="10"
             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-            paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50">
+            paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50" lazy="false">
           
             <p:column headerText="Repo" id="repoName" sortBy="#{repo.repo.fullName}">
               <p:link value="#{repo.repo.fullName}" href="#{repo.repo.htmlUrl}"/>

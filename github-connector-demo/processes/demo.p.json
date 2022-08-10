@@ -1,0 +1,146 @@
+{
+  "format" : "9.4.17",
+  "id" : "17F92CE6CA3FD67B",
+  "data" : "connector.github.demo.Data",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "reposSimple.ivp",
+      "config" : {
+        "callSignature" : "reposSimple",
+        "outLink" : "reposSimple.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : -21, "y" : 17 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "SubProcessCall",
+      "name" : "github",
+      "config" : {
+        "processCall" : "github:call(connector.github.Data)",
+        "output" : {
+          "map" : {
+            "out.repos" : "result.data.repos"
+          }
+        },
+        "call" : {
+          "params" : [
+            { "name" : "data", "type" : "connector.github.Data" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "size" : { "width" : 112, "height" : 44 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : { "id" : "f5", "to" : "f2" }
+    }, {
+      "id" : "f20",
+      "type" : "RequestStart",
+      "name" : "repoList.ivp",
+      "config" : {
+        "callSignature" : "repoList",
+        "outLink" : "repoList.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 },
+        "labelOffset" : { "x" : -24, "y" : 17 }
+      },
+      "connect" : { "id" : "f23", "to" : "f21" }
+    }, {
+      "id" : "f21",
+      "type" : "DialogCall",
+      "name" : "Repositories",
+      "config" : {
+        "dialogId" : "connector.github.demo.Repositories",
+        "startMethod" : "start(connector.github.demo.Data)",
+        "call" : {
+          "params" : [
+            { "name" : "data", "type" : "connector.github.demo.Data" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 },
+        "size" : { "width" : 112, "height" : 44 },
+        "labelOffset" : { "x" : -35, "y" : -8 }
+      },
+      "connect" : { "id" : "f24", "to" : "f22" }
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 160 }
+      }
+    }, {
+      "id" : "f25",
+      "type" : "RequestStart",
+      "name" : "healthMonitor.ivp",
+      "config" : {
+        "callSignature" : "healthMonitor",
+        "outLink" : "healthMonitor.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 256 },
+        "labelOffset" : { "x" : -24, "y" : 17 }
+      },
+      "connect" : { "id" : "f28", "to" : "f26" }
+    }, {
+      "id" : "f26",
+      "type" : "DialogCall",
+      "name" : "HealthMonitor",
+      "config" : {
+        "dialogId" : "connector.github.demo.HealthMonitor",
+        "startMethod" : "start(connector.github.demo.Data)",
+        "call" : {
+          "params" : [
+            { "name" : "data", "type" : "connector.github.demo.Data" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 256 },
+        "size" : { "width" : 112, "height" : 44 },
+        "labelOffset" : { "x" : -38, "y" : -8 }
+      },
+      "connect" : { "id" : "f29", "to" : "f27" }
+    }, {
+      "id" : "f27",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 256 }
+      }
+    }, {
+      "id" : "f2",
+      "type" : "DialogCall",
+      "name" : "SimpleRepos",
+      "config" : {
+        "dialogId" : "connector.github.demo.SimpleRepos",
+        "startMethod" : "start(java.util.List<com.github.api.client.Repository>)",
+        "call" : {
+          "params" : [
+            { "name" : "repos", "type" : "java.util.List<com.github.api.client.Repository>" }
+          ],
+          "map" : {
+            "param.repos" : "in.repos"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 64 },
+        "size" : { "width" : 112, "height" : 44 },
+        "labelOffset" : { "x" : -38, "y" : -8 }
+      },
+      "connect" : { "id" : "f6", "to" : "f1" }
+    } ]
+}
