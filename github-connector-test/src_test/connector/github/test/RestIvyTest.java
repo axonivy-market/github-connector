@@ -45,7 +45,7 @@ public class RestIvyTest {
   public void restApiToList() {
     var repos = target.request(MediaType.APPLICATION_JSON).get()
             .readEntity(new GenericType<List<Repository>>() {});
-    assertThat(repos.size() > 0);
+    assertThat(repos).isNotEmpty();
   }
 
   @Test
@@ -54,15 +54,15 @@ public class RestIvyTest {
             .readEntity(new GenericType<List<Repository>>() {});
     var reposWithPrsAndRuns = RepoAdvanced.fromList(repos);
     RepositoriesWithCount repositories = new RepositoriesWithCount(reposWithPrsAndRuns, 10);
-    assertThat(repos.size() > 0);
+    assertThat(repos).isNotEmpty();
     assertThat(repositories.getRepositories().size()).isEqualTo(repos.size());
   }
 
   @Test
   public void githubApiWrapper() {
     var repos = new GithubApiRest().perPage(10).page(1).getRepos();
-    assertThat(repos.getRepositories().size() > 0);
-    assertThat(repos.getCount() >= repos.getRepositories().size());
+    assertThat(repos.getRepositories()).isNotEmpty();
+    assertThat(repos.getCount()).isGreaterThanOrEqualTo(repos.getRepositories().size());
   }
 
   @Test
