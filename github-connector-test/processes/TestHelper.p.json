@@ -1,0 +1,46 @@
+{
+  "format" : "9.4.17",
+  "id" : "17FB22AD8C155AB0",
+  "data" : "connector.github.test.Data",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "start.ivp",
+      "config" : {
+        "callSignature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "environment", "type" : "String" }
+          ],
+          "map" : {
+            "out.environment" : "param.environment"
+          }
+        },
+        "outLink" : "start.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : -21, "y" : 17 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : "ivy.task.getApplication().setActiveEnvironment(in.environment);"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "size" : { "width" : 112, "height" : 44 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    } ]
+}
