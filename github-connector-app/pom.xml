@@ -50,12 +50,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>com.axonivy.ivy.ci</groupId>
-        <artifactId>project-build-plugin</artifactId>
-        <version>9.4.0-SNAPSHOT</version>
-        <extensions>true</extensions>
-      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
