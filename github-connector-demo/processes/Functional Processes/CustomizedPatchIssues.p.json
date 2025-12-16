@@ -1,0 +1,76 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "19B110C13207E176",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.IssuesFilter"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getPatchIssueRequest(String,String,BigInteger)",
+      "config" : {
+        "signature" : "getPatchIssueRequest",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" }
+          ],
+          "map" : {
+            "out.issueNumber" : "param.issueNumber",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "patchIssueBody", "type" : "com.github.api.client.IssuesIssueNumberBody", "desc" : "" }
+          ],
+          "map" : {
+            "result.patchIssueBody" : "in.patchIssueBody"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 336, "y" : 192 },
+        "labelOffset" : { "x" : 1, "y" : 41 }
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f2" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 864, "y" : 192 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "This sub process can be customized",
+        "",
+        "The custom process signature must be: \"getPatchIssueRequest(String,String,BigInteger)\""
+      ],
+      "visual" : {
+        "at" : { "x" : 336, "y" : 97 },
+        "size" : { "width" : 558, "height" : 66 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f0" }
+      ]
+    }, {
+      "id" : "f2",
+      "type" : "Script",
+      "name" : "Prepare the IssuesIssueNumberBody for request",
+      "visual" : {
+        "at" : { "x" : 610, "y" : 192 },
+        "size" : { "width" : 316, "height" : 71 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    } ]
+}

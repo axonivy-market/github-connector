@@ -1,0 +1,38 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "19B0154B27782A06",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "com.axonivy.connector.github.demo.SimpleIssues.SimpleIssuesData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start(Issue>)",
+      "config" : {
+        "signature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" }
+          ],
+          "map" : {
+            "out.issues" : "param.issues"
+          }
+        },
+        "guid" : "19B0154B28644764"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "labelOffset" : { "x" : 10, "y" : 30 }
+      }
+    } ]
+}

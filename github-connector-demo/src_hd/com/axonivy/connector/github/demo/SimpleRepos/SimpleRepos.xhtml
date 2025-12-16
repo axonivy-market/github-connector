@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="/layouts/frame-10.xhtml">
+    <ui:define name="title">#{ivy.cms.co('/Labels/Repositories')}</ui:define>
+    <ui:define name="content">
+      <h1>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleRepos/SimpleView')}</h1>
+      <h:form id="form">
+        <p:dataTable id="repos-table" var="repo" widgetVar="reposTable" value="#{data.repos}" rows="10"
+          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+          paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50" lazy="false">
+
+          <p:column headerText="#{ivy.cms.co('/Labels/Repo')}" id="repo-name">
+            <p:link value="#{repo.fullName}" href="#{repo.htmlUrl}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/Stars')}" id="repo-stars" width="10%">
+            <p:outputLabel value="#{repo.stargazersCount}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/Forks')}" id="repo-forks" width="10%">
+            <p:outputLabel value="#{repo.forksCount}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/Issues')}" id="repo-issues" width="10%">
+            <p:outputLabel value="#{repo.openIssuesCount}" />
+          </p:column>
+
+        </p:dataTable>
+
+        <br />
+        <div class="command-btns">
+          <p:commandButton id="close" actionListener="#{logic.close}"
+            value="#{ivy.cms.co('/Labels/Close')}"
+            update="form" icon="ui-icon-check" />
+        </div>
+      </h:form>
+
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>

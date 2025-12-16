@@ -1,0 +1,19 @@
+Dialogs:
+  com:
+    axonivy:
+      connector:
+        github:
+          demo:
+            SimpleRepos:
+              SimpleView: Simple Repositories View
+Labels:
+  Close: Close
+  Forks: Forks
+  Issues: Issues
+  PullRequests: Pull Requests
+  Repo: Repo
+  Repositories: Repositories
+  ShowPullRequest: Show pull requests
+  ShowWorkflowRun: Show workflow runs
+  Stars: Stars
+  WorkflowStatus: Workflow status

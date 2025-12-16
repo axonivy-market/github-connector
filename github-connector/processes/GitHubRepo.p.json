@@ -1,0 +1,335 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "17F92A2C7E745913",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.GitHubRepoData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getUserRepos(String,String,String,String,String,Integer,Integer,OffsetDateTime,OffsetDateTime)",
+      "config" : {
+        "signature" : "getUserRepos",
+        "input" : {
+          "params" : [
+            { "name" : "visibility", "type" : "String", "desc" : "" },
+            { "name" : "affiliation", "type" : "String", "desc" : "" },
+            { "name" : "type", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "direction", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
+            { "name" : "since", "type" : "java.time.OffsetDateTime", "desc" : "" },
+            { "name" : "before", "type" : "java.time.OffsetDateTime", "desc" : "" }
+          ],
+          "map" : {
+            "out.affiliation" : "param.#affiliation",
+            "out.before" : "param.#before",
+            "out.direction" : "param.#direction",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.since" : "param.#since",
+            "out.sort" : "param.#sort",
+            "out.type" : "param.#type",
+            "out.visibility" : "param.#visibility"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "repos", "type" : "List<com.github.api.client.Repository>", "desc" : "" }
+          ],
+          "map" : {
+            "result.repos" : "in.repos"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 120 },
+        "labelOffset" : { "x" : 129, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 576, "y" : 120 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "Get User repos",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/user/repos",
+          "queryParams" : {
+            "visibility" : "in.#visibility is initialized ? in.#visibility : null",
+            "affiliation" : "in.#affiliation is initialized ? in.#affiliation : null",
+            "type" : "in.#type is initialized ? in.#type : null",
+            "sort" : "in.#sort is initialized ? in.#sort : null",
+            "direction" : "in.#direction is initialized ? in.#direction : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50",
+            "page" : "in.#page is initialized ? in.#page : 1",
+            "since" : "in.#since is initialized ? in.#since : null",
+            "before" : "in.#before is initialized ? in.#before : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.github.api.client.Repository>",
+            "map" : {
+              "out.repos" : "result"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 120 },
+        "size" : { "width" : 144, "height" : 62 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "searchRepos(String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "searchRepos",
+        "input" : {
+          "params" : [
+            { "name" : "query", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.query" : "param.query",
+            "out.sort" : "param.#sort"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "repoAdvanced", "type" : "com.axonivy.connector.github.models.RepoAdvanced", "desc" : "" }
+          ],
+          "map" : {
+            "result.repoAdvanced" : "in.repoAdvanced"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 272 },
+        "labelOffset" : { "x" : 33, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "RestClientCall",
+      "name" : "Get Repos",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/search/repositories",
+          "queryParams" : {
+            "q" : "in.#query",
+            "sort" : "in.#sort is initialized ? in.#sort : null",
+            "page" : "in.#page is initialized ? in.#page : 1",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.InlineResponse20033",
+            "code" : [
+              "import com.axonivy.connector.github.models.RepoAdvanced;",
+              "out.repoAdvanced = new RepoAdvanced(result);"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 272 },
+        "size" : { "width" : 144, "height" : 62 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 576, "y" : 272 }
+      }
+    }, {
+      "id" : "f10",
+      "type" : "CallSubStart",
+      "name" : "getActionsRun(String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "getActionsRun",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.owner" : "param.#owner",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.repo" : "param.#repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "workflowRunAdvanced", "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced", "desc" : "" }
+          ],
+          "map" : {
+            "result.workflowRunAdvanced" : "in.workflowRunAdvanced"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 424 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 576, "y" : 424 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f13",
+      "type" : "RestClientCall",
+      "name" : "Get Actions runs",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/actions/runs",
+          "templateParams" : {
+            "owner" : "in.#owner is initialized ? in.#owner : null",
+            "repo" : "in.#repo is initialized ? in.repo : null"
+          },
+          "queryParams" : {
+            "page" : "in.#page is initialized ? in.#page : 1",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.InlineResponse20016",
+            "code" : [
+              "import com.axonivy.connector.github.models.WorkflowRunAdvanced;",
+              "out.workflowRunAdvanced = new WorkflowRunAdvanced(result);"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 424 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f11", "color" : "default" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "CallSubStart",
+      "name" : "getPullRequests(String,String,String,String,String,String,String)",
+      "config" : {
+        "signature" : "getPullRequests",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "state", "type" : "String", "desc" : "" },
+            { "name" : "head", "type" : "String", "desc" : "" },
+            { "name" : "base", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "direction", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.base" : "param.#base",
+            "out.direction" : "param.#direction",
+            "out.head" : "param.#head",
+            "out.owner" : "param.#owner",
+            "out.repo" : "param.#repo",
+            "out.sort" : "param.#sort",
+            "out.state" : "param.#state"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "pullRequests", "type" : "List<com.github.api.client.PullRequestSimple>", "desc" : "" }
+          ],
+          "map" : { }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 552 },
+        "labelOffset" : { "x" : 113, "y" : 49 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f16" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "RestClientCall",
+      "name" : "Get list of pull requests",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/pulls",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo"
+          },
+          "queryParams" : {
+            "state" : "in.#state is initialized ? in.state : null",
+            "head" : "in.#head is initialized ? in.head : null",
+            "base" : "in.#base is initialized ? in.base : null",
+            "sort" : "in.#sort is initialized ? in.sort : null",
+            "direction" : "in.#direction is initialized ? in.direction : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.github.api.client.PullRequestSimple>",
+            "map" : {
+              "out.pullRequests" : "result"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 394, "y" : 552 },
+        "size" : { "width" : 140, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f17", "color" : "default" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 576, "y" : 552 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    } ]
+}

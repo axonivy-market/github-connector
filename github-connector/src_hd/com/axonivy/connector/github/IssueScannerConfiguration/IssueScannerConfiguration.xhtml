@@ -1,0 +1,207 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="/layouts/frame-10.xhtml">
+    <ui:define name="title">IssueScannerConfiguration</ui:define>
+    <ui:define name="content">
+
+      <h2>The issue scanner configuration</h2>
+
+      <h:form id="form">
+        <p:messages />
+        <h3>Main information</h3>
+        <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid"
+          columnClasses="ui-g-4, ui-g-4, ui-g-4,">
+          <h:panelGroup>
+            <p:outputLabel for="org" value="Org Name" />
+            <p:inputText id="org" value="#{issueScannerConfigurationBean.issueScannerConfig.org}" 
+              required="true" requiredMessage="Organization name must not be empty"/>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="repo" value="Repo Name" />
+            <p:inputText id="repo" value="#{issueScannerConfigurationBean.issueScannerConfig.repo}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="keyword" value="Keywords" />
+            <p:inputText id="keyword" value="#{issueScannerConfigurationBean.issueScannerConfig.keywords}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="state" value="State" />
+            <p:selectOneMenu id="state" value="#{issueScannerConfigurationBean.issueScannerConfig.state}">
+              <f:selectItem itemLabel="Please select" noSelectionOption="true" itemValue=""/>
+              <f:selectItems value="#{issueScannerConfigurationBean.issueStates}"/>
+            </p:selectOneMenu>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="in-title" value="In Title" />
+            <p:inputText id="in-title" value="#{issueScannerConfigurationBean.issueScannerConfig.inTitle}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="in-body" value="In Body" />
+            <p:inputText id="in-body" value="#{issueScannerConfigurationBean.issueScannerConfig.inBody}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="in-comments" value="In Comments" />
+            <p:inputText id="in-comments" value="#{issueScannerConfigurationBean.issueScannerConfig.inComments}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="project" value="Project" />
+            <p:inputText id="project" value="#{issueScannerConfigurationBean.issueScannerConfig.project}" />
+            <p:message for="project" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="milestone" value="Milestore" />
+            <p:inputText id="milestone" value="#{issueScannerConfigurationBean.issueScannerConfig.milestone}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="labels" value="Labels" />
+            <p:autoComplete id="labels" value="#{issueScannerConfigurationBean.issueScannerConfig.labels}"
+              completeMethod="#{issueScannerConfigurationBean.completeIssueLabels}" multiple="true" unique="true"/>
+          </h:panelGroup>
+          <p:spacer/>
+          <p:spacer/>
+        </p:panelGrid>
+
+        <h3>User filter</h3>
+        <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid align-items-end"
+          columnClasses="ui-g-4,ui-g-4,ui-g-4">
+          <h:panelGroup>
+            <p:outputLabel for="author" value="Author" />
+            <p:inputText id="author" value="#{issueScannerConfigurationBean.issueScannerConfig.author}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="involves" value="Involves" />
+            <p:inputText id="involves" value="#{issueScannerConfigurationBean.issueScannerConfig.involves}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="mentions" value="Mentions" />
+            <p:inputText id="mentions" value="#{issueScannerConfigurationBean.issueScannerConfig.mentions}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="commenter" value="Commenter" />
+            <p:inputText id="commenter" value="#{issueScannerConfigurationBean.issueScannerConfig.commenter}" />
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="assignee" value="Assignee" />
+            <p:inputText id="assignee" value="#{issueScannerConfigurationBean.issueScannerConfig.assignee}" />
+          </h:panelGroup>
+          <p:spacer />
+
+          <p:selectBooleanCheckbox id="no-assignee"
+            value="#{issueScannerConfigurationBean.issueScannerConfig.noAssignee}" itemLabel="No Assignee"/>
+          <p:selectBooleanCheckbox id="assignee-any"
+            value="#{issueScannerConfigurationBean.issueScannerConfig.assigneeAny}" itemLabel="Assignee to Any"/>
+        </p:panelGrid>
+
+        <h3>Time filter</h3>
+        <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid"
+          columnClasses="ui-g-4, ui-g-4, ui-g-4,">
+          <h:panelGroup>
+            <p:outputLabel for="create-after" value="Created after" />
+            <p:datePicker id="create-after" value="#{issueScannerConfigurationBean.issueScannerConfig.createdAfter}" showIcon="true"/>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="create-before" value="Created before" />
+            <p:datePicker id="create-before" value="#{issueScannerConfigurationBean.issueScannerConfig.createdBefore}" showIcon="true"/>
+          </h:panelGroup>
+          <p:spacer/>
+
+          <h:panelGroup>
+            <p:outputLabel for="closed-after" value="Closed after" />
+            <p:datePicker id="closed-after" value="#{issueScannerConfigurationBean.issueScannerConfig.closedAfter}" showIcon="true"/>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="closed-before" value="Closed before" />
+            <p:datePicker id="closed-before" value="#{issueScannerConfigurationBean.issueScannerConfig.closedBefore}" showIcon="true"/>
+          </h:panelGroup>
+          <p:spacer/>
+        </p:panelGrid>
+        
+        <h3>Interactions filter</h3>
+        <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid"
+          columnClasses="ui-g-4, ui-g-4, ui-g-4,">
+          <h:panelGroup>
+            <p:outputLabel for="comments" value="Total of Comments" />
+            <p:inputText id="comments" value="#{issueScannerConfigurationBean.issueScannerConfig.comments}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="comments-min" value="Comments Min" />
+            <p:inputText id="comments-min" value="#{issueScannerConfigurationBean.issueScannerConfig.commentsMin}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="comments-max" value="Comments Max" />
+            <p:inputText id="comments-max" value="#{issueScannerConfigurationBean.issueScannerConfig.commentsMax}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+
+          <h:panelGroup>
+            <p:outputLabel for="interactions" value="Total interactions" />
+            <p:inputText id="interactions" value="#{issueScannerConfigurationBean.issueScannerConfig.interactions}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="interactions-min" value="Interactions Min" />
+            <p:inputText id="interactions-min" value="#{issueScannerConfigurationBean.issueScannerConfig.interactionsMin}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="interactions-max" value="Interactions Max" />
+            <p:inputText id="interactions-max" value="#{issueScannerConfigurationBean.issueScannerConfig.interactionsMax}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+
+          <h:panelGroup>
+            <p:outputLabel for="reactions" value="Reactions" />
+            <p:inputText id="reactions" value="#{issueScannerConfigurationBean.issueScannerConfig.reactions}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="reactions-min" value="Reactions Min" />
+            <p:inputText id="reactions-min" value="#{issueScannerConfigurationBean.issueScannerConfig.reactionsMin}">
+              <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+          <h:panelGroup>
+            <p:outputLabel for="reactions-max" value="Reactions Max" />
+            <p:inputText id="reactions-max" value="#{issueScannerConfigurationBean.issueScannerConfig.reactionsMax}">
+            <p:keyFilter mask="num" />
+            </p:inputText>
+          </h:panelGroup>
+        </p:panelGrid>
+
+        <h3>Other filter</h3>
+        <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid"
+          columnClasses="ui-g-4, ui-g-4, ui-g-4,">
+          <p:selectBooleanCheckbox id="archived" value="#{issueScannerConfigurationBean.issueScannerConfig.archived}" itemLabel="Archived"/>
+          <p:selectBooleanCheckbox id="locked" value="#{issueScannerConfigurationBean.issueScannerConfig.locked}" itemLabel="Locked"/>
+          <p:selectBooleanCheckbox id="is-private" value="#{issueScannerConfigurationBean.issueScannerConfig.isPrivate}" itemLabel="Is Private"/>
+          <p:selectBooleanCheckbox id="is-public" value="#{issueScannerConfigurationBean.issueScannerConfig.isPublic}" itemLabel="Is Public"/>
+          <p:selectBooleanCheckbox id="no-project" value="#{issueScannerConfigurationBean.issueScannerConfig.noProject}" itemLabel="No Project"/>
+          <p:selectBooleanCheckbox id="linked-pr" value="#{issueScannerConfigurationBean.issueScannerConfig.linkedPr}" itemLabel="Linked Pr"/>
+          <p:selectBooleanCheckbox id="no-milestone" value="#{issueScannerConfigurationBean.issueScannerConfig.noMilestone}" itemLabel="No Milestone"/>
+          <p:selectBooleanCheckbox id="no-label" value="#{issueScannerConfigurationBean.issueScannerConfig.noLabel}" itemLabel="No Label"/>
+          <p:spacer/>
+        </p:panelGrid>
+        <br />
+        <div class="command-btns grid align-items-center">
+          <p:commandLink id="cancel" actionListener="#{ivyWorkflowView.cancel()}" process="@this" value="Cancel" />
+          <p:commandButton id="proceed" styleClass="ml-2" actionListener="#{logic.save}"
+            value="Save config" update="form" icon="pi pi-check" />
+        </div>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>
