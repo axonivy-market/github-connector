@@ -1,0 +1,55 @@
+Dialogs:
+  com:
+    axonivy:
+      connector:
+        github:
+          IssueScannerConfiguration:
+            Header: The issue scanner configuration
+            Interactions: Interactions filter
+            MainInformation: Main information
+            OtherFilter: Other filter
+            SaveConfig: Save config
+            TimeFilter: Time filter
+            Title: Issue Scanner Configuration
+            UserFilter: User filter
+Labels:
+  Archived: Archived
+  Assignee: Assignee
+  AssigneeToAny: Assignee to Any
+  Author: Author
+  Cancel: Cancel
+  ClosedAfter: Closed after
+  ClosedBefore: Closed before
+  Commenter: Commenter
+  CommentsMax: Comments Max
+  CommentsMin: Comments Min
+  CreatedAfter: Created after
+  CreatedBefore: Created before
+  InBody: In Body
+  InComments: In Comments
+  InTitle: In Title
+  InteractionsMax: Interactions Max
+  InteractionsMin: Interactions Min
+  Involves: Involves
+  IsPrivate: Is Private
+  IsPublic: Is Public
+  Keywords: Keywords
+  Labels: Labels
+  LinkedPr: Linked Pr
+  Locked: Locked
+  Mentions: Mentions
+  Milestore: Milestore
+  NoAssignee: No Assignee
+  NoLabel: No Label
+  NoMilestone: No Milestone
+  NoProject: No Project
+  OrgName: Org Name
+  Project: Project
+  Reactions: Reactions
+  ReactionsMax: Reactions Max
+  ReactionsMin: Reactions Min
+  RepoName: Repo Name
+  State: State
+  Total: Total interactions
+  TotalInterations: Total interactions
+  TotalOfComments: Total of Comments

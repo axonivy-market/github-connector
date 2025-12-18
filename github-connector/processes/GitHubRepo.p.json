@@ -117,10 +117,10 @@
         },
         "result" : {
           "params" : [
-            { "name" : "repoAdvanced", "type" : "com.axonivy.connector.github.models.RepoAdvanced", "desc" : "" }
+            { "name" : "repositorySearch", "type" : "com.axonivy.connector.github.models.RepositorySearch", "desc" : "" }
           ],
           "map" : {
-            "result.repoAdvanced" : "in.repoAdvanced"
+            "result.repositorySearch" : "in.repositorySearch"
           }
         }
       },
@@ -135,7 +135,7 @@
     }, {
       "id" : "f6",
       "type" : "RestClientCall",
-      "name" : "Get Repos",
+      "name" : "Search Repositories",
       "config" : {
         "target" : {
           "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
@@ -151,15 +151,15 @@
           "entity" : {
             "type" : "com.github.api.client.InlineResponse20033",
             "code" : [
-              "import com.axonivy.connector.github.models.RepoAdvanced;",
-              "out.repoAdvanced = new RepoAdvanced(result);"
+              "import com.axonivy.connector.github.models.RepositorySearch;",
+              "in.repositorySearch = new RepositorySearch(result);"
             ]
           }
         }
       },
       "visual" : {
         "at" : { "x" : 392, "y" : 272 },
-        "size" : { "width" : 144, "height" : 62 },
+        "size" : { "width" : 176, "height" : 63 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       },
       "connect" : [
@@ -169,167 +169,8 @@
       "id" : "f7",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 576, "y" : 272 }
-      }
-    }, {
-      "id" : "f10",
-      "type" : "CallSubStart",
-      "name" : "getActionsRun(String,String,Integer,Integer)",
-      "config" : {
-        "signature" : "getActionsRun",
-        "input" : {
-          "params" : [
-            { "name" : "owner", "type" : "String", "desc" : "" },
-            { "name" : "repo", "type" : "String", "desc" : "" },
-            { "name" : "page", "type" : "Integer", "desc" : "" },
-            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
-          ],
-          "map" : {
-            "out.owner" : "param.#owner",
-            "out.page" : "param.#page",
-            "out.pageSize" : "param.#pageSize",
-            "out.repo" : "param.#repo"
-          }
-        },
-        "result" : {
-          "params" : [
-            { "name" : "workflowRunAdvanced", "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced", "desc" : "" }
-          ],
-          "map" : {
-            "result.workflowRunAdvanced" : "in.workflowRunAdvanced"
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 192, "y" : 424 },
+        "at" : { "x" : 576, "y" : 272 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
-      },
-      "connect" : [
-        { "id" : "f12", "to" : "f13" }
-      ]
-    }, {
-      "id" : "f11",
-      "type" : "CallSubEnd",
-      "visual" : {
-        "at" : { "x" : 576, "y" : 424 },
-        "labelOffset" : { "x" : 13, "y" : 33 }
-      }
-    }, {
-      "id" : "f13",
-      "type" : "RestClientCall",
-      "name" : "Get Actions runs",
-      "config" : {
-        "target" : {
-          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
-          "path" : "/repos/{owner}/{repo}/actions/runs",
-          "templateParams" : {
-            "owner" : "in.#owner is initialized ? in.#owner : null",
-            "repo" : "in.#repo is initialized ? in.repo : null"
-          },
-          "queryParams" : {
-            "page" : "in.#page is initialized ? in.#page : 1",
-            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50"
-          }
-        },
-        "response" : {
-          "entity" : {
-            "type" : "com.github.api.client.InlineResponse20016",
-            "code" : [
-              "import com.axonivy.connector.github.models.WorkflowRunAdvanced;",
-              "out.workflowRunAdvanced = new WorkflowRunAdvanced(result);"
-            ]
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 392, "y" : 424 },
-        "size" : { "width" : 144, "height" : 62 }
-      },
-      "connect" : [
-        { "id" : "f14", "to" : "f11", "color" : "default" }
-      ]
-    }, {
-      "id" : "f15",
-      "type" : "CallSubStart",
-      "name" : "getPullRequests(String,String,String,String,String,String,String)",
-      "config" : {
-        "signature" : "getPullRequests",
-        "input" : {
-          "params" : [
-            { "name" : "owner", "type" : "String", "desc" : "" },
-            { "name" : "repo", "type" : "String", "desc" : "" },
-            { "name" : "state", "type" : "String", "desc" : "" },
-            { "name" : "head", "type" : "String", "desc" : "" },
-            { "name" : "base", "type" : "String", "desc" : "" },
-            { "name" : "sort", "type" : "String", "desc" : "" },
-            { "name" : "direction", "type" : "String", "desc" : "" }
-          ],
-          "map" : {
-            "out.base" : "param.#base",
-            "out.direction" : "param.#direction",
-            "out.head" : "param.#head",
-            "out.owner" : "param.#owner",
-            "out.repo" : "param.#repo",
-            "out.sort" : "param.#sort",
-            "out.state" : "param.#state"
-          }
-        },
-        "result" : {
-          "params" : [
-            { "name" : "pullRequests", "type" : "List<com.github.api.client.PullRequestSimple>", "desc" : "" }
-          ],
-          "map" : { }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 192, "y" : 552 },
-        "labelOffset" : { "x" : 113, "y" : 49 }
-      },
-      "connect" : [
-        { "id" : "f18", "to" : "f16" }
-      ]
-    }, {
-      "id" : "f16",
-      "type" : "RestClientCall",
-      "name" : "Get list of pull requests",
-      "config" : {
-        "target" : {
-          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
-          "path" : "/repos/{owner}/{repo}/pulls",
-          "templateParams" : {
-            "owner" : "in.owner",
-            "repo" : "in.repo"
-          },
-          "queryParams" : {
-            "state" : "in.#state is initialized ? in.state : null",
-            "head" : "in.#head is initialized ? in.head : null",
-            "base" : "in.#base is initialized ? in.base : null",
-            "sort" : "in.#sort is initialized ? in.sort : null",
-            "direction" : "in.#direction is initialized ? in.direction : null"
-          }
-        },
-        "response" : {
-          "entity" : {
-            "type" : "java.util.List<com.github.api.client.PullRequestSimple>",
-            "map" : {
-              "out.pullRequests" : "result"
-            }
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 394, "y" : 552 },
-        "size" : { "width" : 140, "height" : 62 }
-      },
-      "connect" : [
-        { "id" : "f19", "to" : "f17", "color" : "default" }
-      ]
-    }, {
-      "id" : "f17",
-      "type" : "CallSubEnd",
-      "visual" : {
-        "at" : { "x" : 576, "y" : 552 },
-        "labelOffset" : { "x" : 13, "y" : 33 }
       }
     } ]
 }

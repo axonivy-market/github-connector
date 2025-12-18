@@ -8,7 +8,7 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "getPullRequests(String,String,String,String,String,String,String)",
+      "name" : "getPullRequests(String,String,String,String,String,String,String,Integer,Integer)",
       "config" : {
         "signature" : "getPullRequests",
         "input" : {
@@ -19,13 +19,17 @@
             { "name" : "head", "type" : "String", "desc" : "" },
             { "name" : "base", "type" : "String", "desc" : "" },
             { "name" : "sort", "type" : "String", "desc" : "" },
-            { "name" : "direction", "type" : "String", "desc" : "" }
+            { "name" : "direction", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
             "out.base" : "param.#base",
             "out.direction" : "param.#direction",
             "out.head" : "param.#head",
             "out.owner" : "param.#owner",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
             "out.repo" : "param.#repo",
             "out.sort" : "param.#sort",
             "out.state" : "param.#state"
@@ -33,9 +37,11 @@
         },
         "result" : {
           "params" : [
-            { "name" : "pullRequests", "type" : "List<com.github.api.client.PullRequestSimple>", "desc" : "" }
+            { "name" : "pullRequestAdvanced", "type" : "com.axonivy.connector.github.models.PullRequestAdvanced", "desc" : "" }
           ],
-          "map" : { }
+          "map" : {
+            "result.pullRequestAdvanced" : "in.pullRequestAdvanced"
+          }
         }
       },
       "visual" : {
@@ -69,20 +75,25 @@
             "head" : "in.#head is initialized ? in.head : null",
             "base" : "in.#base is initialized ? in.base : null",
             "sort" : "in.#sort is initialized ? in.sort : null",
-            "direction" : "in.#direction is initialized ? in.direction : null"
+            "direction" : "in.#direction is initialized ? in.direction : null",
+            "page" : "in.#page is initialized ? in.#page : 1",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 1"
           }
         },
         "response" : {
           "entity" : {
             "type" : "java.util.List<com.github.api.client.PullRequestSimple>",
-            "map" : {
-              "out.pullRequests" : "result"
-            }
+            "code" : [
+              "import com.axonivy.connector.github.service.GitHubPullRequestService;",
+              "int totalCount = GitHubPullRequestService.getInstance().getTotalCountFromHeader(response, result.size());",
+              "out.pullRequestAdvanced.pullRequests = result;",
+              "out.pullRequestAdvanced.totalCount = totalCount;"
+            ]
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 276, "y" : 64 },
+        "at" : { "x" : 272, "y" : 64 },
         "size" : { "width" : 168 }
       },
       "connect" : [

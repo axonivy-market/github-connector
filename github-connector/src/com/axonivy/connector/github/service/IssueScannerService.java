@@ -7,9 +7,10 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
+import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.converter.JSONConverter;
 import com.axonivy.connector.github.enums.Variable;
-import com.axonivy.connector.github.models.IssueAdvanced;
+import com.axonivy.connector.github.models.IssueSearch;
 import com.axonivy.connector.github.models.criteria.SearchIssueCriteria;
 import com.axonivy.connector.github.util.GitHubApiUtils;
 import com.axonivy.connector.github.util.VariableUtils;
@@ -45,9 +46,9 @@ public class IssueScannerService {
     BigInteger totalCount = BigInteger.ZERO;
     do {
       page++;
-      IssueAdvanced issueAdvanced = issueService.searchIssuesByCriteria(criteria, page, pageSize);
-      totalCount = issueAdvanced.getTotalCountValue();
-      issues = issueAdvanced.getIssueItems();
+      IssueSearch issueSearch = issueService.searchIssuesByCriteria(criteria, page, pageSize);
+      totalCount = issueSearch.getTotalCountValue();
+      issues = issueSearch.getIssueItems();
       for (var issue : issues) {
         String repoUrl = issue.getRepositoryUrl().toString();
         var owner = GitHubApiUtils.extractRepoOwner(repoUrl);
@@ -55,7 +56,7 @@ public class IssueScannerService {
         BigInteger issueNumber = new BigInteger(issue.getNumber().toString());
         try {
           IssuesIssueNumberBody issueNumberBody = loadPatchIssueBody(owner, repoName, issueNumber);
-          //issueService.patchIssue(owner, repoName, issueNumber, issueNumberBody);
+          issueService.patchIssue(owner, repoName, issueNumber, issueNumberBody);
           Ivy.log().info("Patch issue {0} of {1}/{2} sucessfull", issueNumber, owner, repoName);
         } catch (Exception e) {
           Ivy.log().error("Cannot patch issue due to {0}", e, e.getMessage());
@@ -83,9 +84,9 @@ public class IssueScannerService {
       
       var issueBody = new IssuesIssueNumberBody();
       subProcessStartList.forEach(subProcessStart -> {
-        var result = subProcessStart.withParam("owner", owner)
-            .withParam("repo", repo)
-            .withParam("issueNumber", issueNumber)
+        var result = subProcessStart.withParam(GitHubConstants.OWNER, owner)
+            .withParam(GitHubConstants.REPO, repo)
+            .withParam(GitHubIssueService.ISSUE_NUMBER, issueNumber)
             .call().get("patchIssueBody", IssuesIssueNumberBody.class);
         if (result != null) {
           issueBody.setAssignee(ObjectUtils.getIfNull(result.getAssignee(), issueBody.getAssignee()));

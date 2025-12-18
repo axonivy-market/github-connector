@@ -197,7 +197,7 @@ public class IssuesBean {
     if (selectedIssue == null) {
       return List.of();
     }
-    return JSONConverter.convertToListDirect(selectedIssue.getAssignees(), User.class);
+    return JSONConverter.convertToList(selectedIssue.getAssignees(), User.class);
   }
 
   public List<SimpleUser> onCompleteUserSearch(String filter) {
@@ -214,7 +214,7 @@ public class IssuesBean {
     if (issue == null || issue.getAssignees() == null) {
       return StringUtils.EMPTY;
     }
-    List<User> users = JSONConverter.convertToListDirect(issue.getAssignees(), User.class);
+    List<User> users = JSONConverter.convertToList(issue.getAssignees(), User.class);
     return users.stream().map(User::getLogin)
         .map(Object::toString)
         .collect(Collectors.joining("; "));
@@ -249,7 +249,7 @@ private void loadUsersOfCurrentOrg() {
         .withParam("page", 1)
         .withParam("pageSize", 100)
         .call();
-    users = JSONConverter.convertToList(result.get("users"), SimpleUser.class);
+    users = JSONConverter.convertListObjectsToNewList(result.get("users"), SimpleUser.class);
   }
 
   private boolean isContainsKeyword(Object value, String filter) {

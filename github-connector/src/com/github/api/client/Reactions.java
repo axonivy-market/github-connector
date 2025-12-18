@@ -6,6 +6,9 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 
+/**
+ * This class to fix the OpenAPI swagger config
+ * */
 public class Reactions {
   private final Map<String, Object> values = new HashMap<>();
 

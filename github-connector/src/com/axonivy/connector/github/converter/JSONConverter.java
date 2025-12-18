@@ -20,7 +20,7 @@ public class JSONConverter {
 
   private JSONConverter() {}
 
-  public static <T> List<T> convertToList(Object entity, Class<T> clazz) {
+  public static <T> List<T> convertListObjectsToNewList(Object entity, Class<T> clazz) {
     List<T> result = new ArrayList<>();
     if (entity instanceof List) {
       ((List<?>) entity).forEach(item -> {
@@ -31,7 +31,7 @@ public class JSONConverter {
     return result;
   }
 
-  public static <T> List<T> convertToListDirect(Object entity, Class<T> clazz) {
+  public static <T> List<T> convertToList(Object entity, Class<T> clazz) {
     if (entity == null) {
       return List.of();
     }

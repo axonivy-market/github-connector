@@ -7,9 +7,9 @@ import com.axonivy.connector.github.converter.JSONConverter;
 import com.github.api.client.InlineResponse20031;
 import com.github.api.client.Issue;
 
-public class IssueAdvanced extends InlineResponse20031 {
+public class IssueSearch extends InlineResponse20031 {
   
-  public IssueAdvanced(InlineResponse20031 response20031) {
+  public IssueSearch(InlineResponse20031 response20031) {
     setItems(response20031.getItems());
     setTotalCount(response20031.getTotalCount());
     setIncompleteResults(response20031.getIncompleteResults());
@@ -26,6 +26,6 @@ public class IssueAdvanced extends InlineResponse20031 {
     if (getItems() == null) {
       return List.of();
     }
-    return JSONConverter.convertToList(getItems(), Issue.class);
+    return JSONConverter.convertListObjectsToNewList(getItems(), Issue.class);
   }
 }

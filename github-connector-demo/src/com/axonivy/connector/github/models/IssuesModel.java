@@ -10,7 +10,6 @@ import org.primefaces.model.SortMeta;
 
 import com.axonivy.connector.github.models.criteria.SearchIssueCriteria;
 import com.axonivy.connector.github.service.GitHubIssueService;
-import com.axonivy.connector.github.util.VariableUtils;
 import com.github.api.client.Issue;
 
 public class IssuesModel extends LazyDataModel<Issue> {
@@ -36,10 +35,10 @@ public class IssuesModel extends LazyDataModel<Issue> {
     }
 
     List<Issue> issues = new ArrayList<>();
-    IssueAdvanced issueAdvanced = service.searchIssuesByCriteria(criteria, first, pageSize);
-    if (issueAdvanced != null) {
-      setRowCount(issueAdvanced.getTotalCountValue().intValue());
-      issues = issueAdvanced.getIssueItems();
+    IssueSearch issueSearch = service.searchIssuesByCriteria(criteria, first, pageSize);
+    if (issueSearch != null) {
+      setRowCount(issueSearch.getTotalCountValue().intValue());
+      issues = issueSearch.getIssueItems();
     } else {
       setRowCount(0);
     }
@@ -49,11 +48,7 @@ public class IssuesModel extends LazyDataModel<Issue> {
 
   @Override
   public int count(Map<String, FilterMeta> filterBy) {
-    SearchIssueCriteria criteria = SearchIssueCriteria.builder()
-        .org(VariableUtils.getDefaultOrg())
-        .stateOpen()
-        .build();
-    return service.countIssuesByCriteria(criteria).intValue();
+    return 0;
   }
 
   public void search(SearchIssueCriteria searchIssueCriteria) {

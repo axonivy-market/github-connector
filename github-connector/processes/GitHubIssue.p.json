@@ -51,7 +51,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 160, "y" : 96 },
+        "at" : { "x" : 160, "y" : 192 },
         "labelOffset" : { "x" : 193, "y" : 49 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
@@ -62,7 +62,7 @@
       "id" : "f1",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 96 },
+        "at" : { "x" : 544, "y" : 192 },
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
@@ -94,16 +94,12 @@
             "type" : "java.util.List<com.github.api.client.Issue>",
             "map" : {
               "out.issues" : "result"
-            },
-            "code" : [
-              "import com.axonivy.connector.github.service.GitHubIssueService;",
-              "GitHubIssueService.getInstance().extractTotalCountInResponse(response);"
-            ]
+            }
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 344, "y" : 95 },
+        "at" : { "x" : 344, "y" : 191 },
         "size" : { "width" : 152, "height" : 59 }
       },
       "connect" : [
@@ -149,7 +145,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 160, "y" : 240 },
+        "at" : { "x" : 160, "y" : 320 },
         "labelOffset" : { "x" : 97, "y" : 49 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
@@ -183,16 +179,12 @@
             "type" : "java.util.List<com.github.api.client.Issue>",
             "map" : {
               "out.issues" : "result"
-            },
-            "code" : [
-              "import com.axonivy.connector.github.service.GitHubIssueService;",
-              "GitHubIssueService.getInstance().extractTotalCountInResponse(response);"
-            ]
+            }
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 344, "y" : 239 },
+        "at" : { "x" : 344, "y" : 319 },
         "size" : { "width" : 152, "height" : 59 }
       },
       "connect" : [
@@ -202,92 +194,10 @@
       "id" : "f7",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 240 },
+        "at" : { "x" : 544, "y" : 320 },
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
-    }, {
-      "id" : "f12",
-      "type" : "CallSubStart",
-      "name" : "searchIssues(String,String,String,Integer,Integer)",
-      "config" : {
-        "signature" : "searchIssues",
-        "input" : {
-          "params" : [
-            { "name" : "query", "type" : "String", "desc" : "" },
-            { "name" : "sort", "type" : "String", "desc" : "" },
-            { "name" : "order", "type" : "String", "desc" : "" },
-            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
-            { "name" : "page", "type" : "Integer", "desc" : "" }
-          ],
-          "map" : {
-            "out.order" : "param.#order",
-            "out.page" : "param.#page",
-            "out.pageSize" : "param.#pageSize",
-            "out.query" : "param.#query",
-            "out.sort" : "param.#sort"
-          }
-        },
-        "result" : {
-          "params" : [
-            { "name" : "issues", "type" : "com.axonivy.connector.github.models.IssueAdvanced", "desc" : "" }
-          ],
-          "map" : {
-            "result.issues" : "in.searchIssuesResult"
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 160, "y" : 368 },
-        "labelOffset" : { "x" : 1, "y" : 49 },
-        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
-      },
-      "connect" : [
-        { "id" : "f14", "to" : "f15" }
-      ]
-    }, {
-      "id" : "f13",
-      "type" : "CallSubEnd",
-      "visual" : {
-        "at" : { "x" : 544, "y" : 368 },
-        "labelOffset" : { "x" : 13, "y" : 33 },
-        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
-      }
-    }, {
-      "id" : "f15",
-      "type" : "RestClientCall",
-      "name" : "Search Issue",
-      "config" : {
-        "target" : {
-          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
-          "path" : "/search/issues",
-          "queryParams" : {
-            "q" : "in.#query is initialized ? in.query : null",
-            "sort" : "in.#sort is initialized ? in.sort : null",
-            "order" : "in.#order is initialized ? in.#order : null",
-            "per_page" : "",
-            "page" : ""
-          }
-        },
-        "response" : {
-          "entity" : {
-            "type" : "com.github.api.client.InlineResponse20031",
-            "code" : [
-              "import com.axonivy.connector.github.service.GitHubIssueService;",
-              "import com.axonivy.connector.github.models.IssueAdvanced;",
-              "out.searchIssuesResult = new IssueAdvanced(result);",
-              "GitHubIssueService.getInstance().extractTotalCountInResponse(response);"
-            ]
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 344, "y" : 368 },
-        "size" : { "width" : 144, "height" : 62 }
-      },
-      "connect" : [
-        { "id" : "f16", "to" : "f13", "color" : "default" }
-      ]
     }, {
       "id" : "f10",
       "type" : "CallSubStart",
@@ -318,7 +228,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 160, "y" : 496 },
+        "at" : { "x" : 160, "y" : 448 },
         "labelOffset" : { "x" : 17, "y" : 41 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
@@ -329,7 +239,7 @@
       "id" : "f11",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 496 },
+        "at" : { "x" : 544, "y" : 448 },
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
@@ -366,7 +276,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 344, "y" : 496 },
+        "at" : { "x" : 344, "y" : 448 },
         "size" : { "width" : 144, "height" : 62 }
       },
       "connect" : [
@@ -402,7 +312,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 160, "y" : 624 },
+        "at" : { "x" : 160, "y" : 576 },
         "labelOffset" : { "x" : 9, "y" : 41 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
@@ -442,7 +352,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 344, "y" : 624 },
+        "at" : { "x" : 344, "y" : 576 },
         "size" : { "width" : 144, "height" : 63 }
       },
       "connect" : [
@@ -452,7 +362,7 @@
       "id" : "f22",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 624 },
+        "at" : { "x" : 544, "y" : 576 },
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
@@ -486,7 +396,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 160, "y" : 752 },
+        "at" : { "x" : 160, "y" : 704 },
         "labelOffset" : { "x" : 57, "y" : 49 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
@@ -526,7 +436,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 344, "y" : 752 },
+        "at" : { "x" : 344, "y" : 704 },
         "size" : { "width" : 144, "height" : 62 }
       },
       "connect" : [
@@ -536,7 +446,7 @@
       "id" : "f27",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 752 },
+        "at" : { "x" : 544, "y" : 704 },
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
@@ -568,7 +478,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 160, "y" : 896 },
+        "at" : { "x" : 160, "y" : 848 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
       "connect" : [
@@ -578,7 +488,7 @@
       "id" : "f31",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 896 },
+        "at" : { "x" : 544, "y" : 848 },
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
@@ -606,11 +516,91 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 344, "y" : 896 },
+        "at" : { "x" : 344, "y" : 848 },
         "size" : { "width" : 144, "height" : 62 }
       },
       "connect" : [
         { "id" : "f34", "to" : "f31", "color" : "default" }
       ]
+    }, {
+      "id" : "f12",
+      "type" : "CallSubStart",
+      "name" : "searchIssues(String,String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "searchIssues",
+        "input" : {
+          "params" : [
+            { "name" : "query", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "order", "type" : "String", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.order" : "param.#order",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.query" : "param.#query",
+            "out.sort" : "param.#sort"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issueSearch", "type" : "com.axonivy.connector.github.models.IssueSearch", "desc" : "" }
+          ],
+          "map" : {
+            "result.issueSearch" : "in.issuesSearch"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 160, "y" : 64 },
+        "labelOffset" : { "x" : 57, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "RestClientCall",
+      "name" : "Search Issue",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/search/issues",
+          "queryParams" : {
+            "q" : "in.#query is initialized ? in.query : null",
+            "sort" : "in.#sort is initialized ? in.sort : null",
+            "order" : "in.#order is initialized ? in.#order : null",
+            "per_page" : "",
+            "page" : ""
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.InlineResponse20031",
+            "code" : [
+              "import com.axonivy.connector.github.models.IssueSearch;",
+              "out.issuesSearch = new IssueSearch(result);"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 64 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f13", "color" : "default" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      }
     } ]
 }

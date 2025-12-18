@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -26,8 +25,7 @@ public class IssueScannerConfigurationBean implements Serializable {
 
   public static IssueScannerConfigurationBean getInstance() {
     var currentInstance = FacesContext.getCurrentInstance();
-    Application application = currentInstance.getApplication();
-    return application.evaluateExpressionGet(currentInstance,
+    return currentInstance.getApplication().evaluateExpressionGet(currentInstance,
         "#{issueScannerConfigurationBean}",
         IssueScannerConfigurationBean.class);
   }

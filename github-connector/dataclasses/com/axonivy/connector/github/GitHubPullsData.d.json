@@ -27,5 +27,14 @@
   }, {
     "name" : "pullRequests",
     "type" : "List<com.github.api.client.PullRequestSimple>"
+  }, {
+    "name" : "page",
+    "type" : "java.lang.Integer"
+  }, {
+    "name" : "pageSize",
+    "type" : "java.lang.Integer"
+  }, {
+    "name" : "pullRequestAdvanced",
+    "type" : "com.axonivy.connector.github.models.PullRequestAdvanced"
   } ]
 }

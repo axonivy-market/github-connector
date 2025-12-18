@@ -70,7 +70,7 @@
                 oncomplete="PF('comment-dialog').show();"/>
               <p:menuitem value="Assign user" actionListener="#{issuesBean.onSelectIssue(issue)}" update="assign-user-dialog" icon="pi pi-user-plus"
                 oncomplete="PF('assign-user-dialog').show();"/>
-              <p:menuitem value="Update Issue Title" actionListener="#{issuesBean.onSelectIssue(issue)}" oncomplete="PF('update-issue-dialog').show()" update="update-issue-dialog"
+              <p:menuitem value="Update Issue Data" actionListener="#{issuesBean.onSelectIssue(issue)}" oncomplete="PF('update-issue-dialog').show()" update="update-issue-dialog"
                 icon="pi pi-server"/>
               <p:menuitem value="View comments" actionListener="#{issuesBean.loadCommentsForIssue(issue)}" oncomplete="PF('view-comments-dialog').show()" update="view-comments-dialog" 
               icon="pi pi-comments"/>
@@ -165,7 +165,7 @@
         </f:facet>
       </p:dialog>
 
-      <p:dialog id="update-issue-dialog" header="Update issue title" widgetVar="update-issue-dialog" width="600"
+      <p:dialog id="update-issue-dialog" header="Update issue data" widgetVar="update-issue-dialog" width="600"
         fitViewport="true" closeOnEscape="false" closable="false" appendTo="@(body)" modal="true" blockScroll="true">
         <h:panelGroup id="update-issue-group" styleClass="ui-fluid m-0 p-0 w-full grid" layout="block">
           <p:messages redisplay="false" styleClass="col-12 p-0 m-0" />

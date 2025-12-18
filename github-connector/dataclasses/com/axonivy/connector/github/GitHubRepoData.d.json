@@ -37,17 +37,14 @@
     "name" : "query",
     "type" : "String"
   }, {
-    "name" : "repoAdvanced",
-    "type" : "com.axonivy.connector.github.models.RepoAdvanced"
+    "name" : "repositorySearch",
+    "type" : "com.axonivy.connector.github.models.RepositorySearch"
   }, {
     "name" : "owner",
     "type" : "String"
   }, {
     "name" : "repo",
     "type" : "String"
-  }, {
-    "name" : "workflowRunAdvanced",
-    "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced"
   }, {
     "name" : "pullRequests",
     "type" : "List<com.github.api.client.PullRequestSimple>"

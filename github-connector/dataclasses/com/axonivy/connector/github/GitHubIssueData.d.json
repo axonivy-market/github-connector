@@ -49,8 +49,8 @@
     "name" : "query",
     "type" : "String"
   }, {
-    "name" : "searchIssuesResult",
-    "type" : "com.axonivy.connector.github.models.IssueAdvanced"
+    "name" : "issuesSearch",
+    "type" : "com.axonivy.connector.github.models.IssueSearch"
   }, {
     "name" : "order",
     "type" : "String"
