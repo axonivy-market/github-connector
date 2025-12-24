@@ -77,7 +77,7 @@ public class SearchRepositoryCriteria extends SearchCriteria {
   }
 
   @Override
-  protected List<String> buildQueryFromSelfProperties() {
+  protected List<String> buildQueryFromProperties() {
     List<String> parts = new ArrayList<>();
     // Search scope (in qualifiers)
     List<String> inParts = new ArrayList<>();
@@ -210,7 +210,7 @@ public class SearchRepositoryCriteria extends SearchCriteria {
     }
 
     @Override
-    protected Builder builderType() {
+    protected Builder builder() {
       return this;
     }
 

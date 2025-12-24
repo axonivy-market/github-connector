@@ -27,15 +27,15 @@ public class Reactions {
   }
 
   public Integer getInt(String key) {
-      Object v = values.get(key);
-      if (v instanceof Number) {
-          return ((Number) v).intValue();
+      Object value = values.get(key);
+      if (value instanceof Number) {
+          return ((Number) value).intValue();
       }
       return null;
   }
 
   @Override
   public String toString() {
-      return "Reactions" + values;
+      return this.getClass().getSimpleName() + values;
   }
 }

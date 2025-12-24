@@ -7,11 +7,11 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "start",
+      "name" : "startScanner",
       "config" : {
-        "signature" : "start",
+        "signature" : "startScanner",
         "request" : {
-          "name" : "Manual Start Issues Scanner"
+          "name" : "<%=ivy.cms.co(\"/Processes/IssuesScanner/Scanner/name\")%>"
         },
         "permission" : {
           "anonymous" : false,
@@ -28,12 +28,13 @@
       "id" : "f1",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 512, "y" : 64 },
+        "at" : { "x" : 528, "y" : 64 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
       "id" : "f3",
       "type" : "ProgramStart",
+      "name" : "startByTimer",
       "config" : {
         "javaClass" : "ch.ivyteam.ivy.process.eventstart.beans.TimerBean",
         "userConfig" : {
@@ -42,11 +43,10 @@
         "link" : "eventLink.ivp"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 208 },
-        "labelOffset" : { "x" : 13, "y" : 33 }
+        "at" : { "x" : 96, "y" : 176 }
       },
       "connect" : [
-        { "id" : "f6", "to" : "f4", "via" : [ { "x" : 240, "y" : 208 } ] }
+        { "id" : "f6", "to" : "f4", "via" : [ { "x" : 240, "y" : 176 } ] }
       ]
     }, {
       "id" : "f4",
@@ -85,7 +85,8 @@
       "config" : {
         "signature" : "startConfig",
         "request" : {
-          "name" : "Config the Issue Scanner"
+          "name" : "<%=ivy.cms.co(\"/Processes/IssuesScanner/Configuration/name\")%>",
+          "description" : "<%=ivy.cms.co(\"/Processes/IssuesScanner/Configuration/description\")%>"
         },
         "permission" : {
           "anonymous" : false,
@@ -117,7 +118,7 @@
       "id" : "f12",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 504, "y" : 336 },
+        "at" : { "x" : 528, "y" : 336 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     } ]

@@ -19,7 +19,7 @@
       },
       "visual" : {
         "at" : { "x" : 144, "y" : 80 },
-        "labelOffset" : { "x" : 33, "y" : 33 }
+        "labelOffset" : { "x" : 17, "y" : 33 }
       },
       "connect" : [
         { "id" : "f4", "to" : "f3" }
@@ -66,7 +66,7 @@
       },
       "visual" : {
         "at" : { "x" : 144, "y" : 176 },
-        "labelOffset" : { "x" : 19, "y" : 37 }
+        "labelOffset" : { "x" : 17, "y" : 33 }
       },
       "connect" : [
         { "id" : "f23", "to" : "f21" }
@@ -90,7 +90,7 @@
       "id" : "f22",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 504, "y" : 176 }
+        "at" : { "x" : 512, "y" : 176 }
       }
     }, {
       "id" : "f25",
@@ -107,7 +107,7 @@
       },
       "visual" : {
         "at" : { "x" : 144, "y" : 272 },
-        "labelOffset" : { "x" : 17, "y" : 41 }
+        "labelOffset" : { "x" : 17, "y" : 33 }
       },
       "connect" : [
         { "id" : "f28", "to" : "f26" }
@@ -121,7 +121,8 @@
       },
       "visual" : {
         "at" : { "x" : 312, "y" : 272 },
-        "size" : { "width" : 144, "height" : 62 }
+        "size" : { "width" : 144, "height" : 62 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       },
       "connect" : [
         { "id" : "f29", "to" : "f27" }
@@ -130,7 +131,7 @@
       "id" : "f27",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 504, "y" : 272 }
+        "at" : { "x" : 512, "y" : 272 }
       }
     }, {
       "id" : "f2",
@@ -196,7 +197,7 @@
       "id" : "f10",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 656, "y" : 432 }
+        "at" : { "x" : 648, "y" : 432 }
       }
     }, {
       "id" : "f12",
@@ -211,7 +212,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 516, "y" : 432 },
+        "at" : { "x" : 512, "y" : 432 },
         "size" : { "width" : 136 }
       },
       "connect" : [
@@ -237,7 +238,7 @@
       "id" : "f17",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 504, "y" : 544 }
+        "at" : { "x" : 512, "y" : 544 }
       }
     }, {
       "id" : "f31",
@@ -266,7 +267,7 @@
             "color" : "lane1"
           }, {
             "name" : "Issues Demo",
-            "size" : 336,
+            "size" : 344,
             "color" : "lane2"
           } ]
       } ],

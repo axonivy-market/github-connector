@@ -61,13 +61,13 @@
           "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
           "path" : "/orgs/{org}/members",
           "templateParams" : {
-            "org" : "in.#org is initialized ? in.#org : ivy.var.githubConnector_org"
+            "org" : "in.#org is initialized ? in.#org : null"
           },
           "queryParams" : {
             "filter" : "in.#filter is initialized ? in.#filter : null",
             "role" : "in.#role is initialized ? in.#role : null",
-            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50",
-            "page" : "in.#page is initialized ? in.#page : 1"
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null",
+            "page" : "in.#page is initialized ? in.#page : null"
           }
         },
         "response" : {

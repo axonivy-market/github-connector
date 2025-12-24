@@ -8,6 +8,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.connector.github.constant.GitHubConstants;
+import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.converter.JSONConverter;
 import com.axonivy.connector.github.models.IssueSearch;
 import com.axonivy.connector.github.models.criteria.SearchIssueCriteria;
@@ -22,19 +23,20 @@ import ch.ivyteam.ivy.process.call.SubProcessCallResult;
 import ch.ivyteam.ivy.process.call.SubProcessCallStartParamCaller;
 
 public class GitHubIssueService extends AbstractGitHubService {
-
-  public static final String GITHUB_ISSUE_PROCESS = "GitHubIssue";
-  public static final String GH_SEARCH_ISSUES_START = "searchIssues";
-  public static final String GH_GET_ASSIGNED_ISSUES_START = "getAssignedIssues";
-  public static final String GH_GET_ORG_ISSUES_START = "getOrgIssues";
-  public static final String GH_ADD_COMMENT_START = "addComment";
-  public static final String GH_ASSIGN_USER_START = "assignUser";
-  public static final String GH_GET_COMMENTS_START = "getComments";
-  public static final String GH_PATCH_ISSUE_START = "patchIssue";
-  public static final String GH_LIST_ISSUES_RESULT = "issues";
-  public static final String GH_ISSUES_SEARCH_RESULT = "issueSearch";
-  public static final String GH_ISSUE_RESULT = "issue";
-  public static final String ISSUE_NUMBER = "issueNumber";
+  public static final String ISSUE_PROCESS = "GitHubIssue";
+  public static final String SEARCH_ISSUES_START = "searchIssues";
+  public static final String SEARCH_ISSUES_RESULT = "issueSearch";
+  public static final String GET_ASSIGNED_ISSUES_START = "getAssignedIssues";
+  public static final String GET_ORG_ISSUES_START = "getOrgIssues";
+  public static final String ADD_COMMENT_START = "addComment";
+  public static final String ADD_COMMENT_RESULT = "issueComment";
+  public static final String ASSIGN_USER_START = "assignUser";
+  public static final String GET_COMMENTS_START = "getComments";
+  public static final String GET_COMMENTS_RESULT = "issueComments";
+  public static final String PATCH_ISSUE_START = "patchIssue";
+  public static final String ISSUES_RESULT = "issues";
+  public static final String ISSUE_RESULT = "issue";
+  public static final String PATCH_ISSUE_BODY = "patchIssueBody";
   private static GitHubIssueService instance;
 
   private GitHubIssueService() {}
@@ -47,13 +49,13 @@ public class GitHubIssueService extends AbstractGitHubService {
   }
 
   public List<Issue> getAssignedIssues(int page, int pageSize) {
-    SubProcessCallResult result = createCallSubProcessWithDefaultParams(GH_GET_ASSIGNED_ISSUES_START, page, pageSize).call();
-    return JSONConverter.convertToList(result.get(GH_LIST_ISSUES_RESULT), Issue.class);
+    SubProcessCallResult result = createCallSubProcessWithDefaultParams(GET_ASSIGNED_ISSUES_START, page, pageSize).call();
+    return JSONConverter.convertToList(result.get(ISSUES_RESULT), Issue.class);
   }
 
   public List<Issue> getOrgIssues(int page, int pageSize) {
-    SubProcessCallResult result = createCallSubProcessWithDefaultParams(GH_GET_ORG_ISSUES_START, page, pageSize).call();
-    return JSONConverter.convertToList(result.get(GH_LIST_ISSUES_RESULT), Issue.class);
+    SubProcessCallResult result = createCallSubProcessWithDefaultParams(GET_ORG_ISSUES_START, page, pageSize).call();
+    return JSONConverter.convertToList(result.get(ISSUES_RESULT), Issue.class);
   }
 
   public IssueNumberAssigneesBody buildAssigneeBodyRequest(List<String> usernames) {
@@ -94,34 +96,50 @@ public class GitHubIssueService extends AbstractGitHubService {
 
   public IssueComment addCommentToIssue(String owner, String repo, BigInteger issueNumber, String comment) {
     validateParams(owner, repo, issueNumber);
-    var result =  createCallSubProcessWithStartPath(GH_ADD_COMMENT_START)
+    SubProcessCallStartParamCaller caller = createCallSubProcessWithStartPath(ADD_COMMENT_START)
         .withParam(GitHubConstants.OWNER, owner)
         .withParam(GitHubConstants.REPO, repo)
-        .withParam(ISSUE_NUMBER, issueNumber)
-        .withParam("comment", comment)
-        .call();
-    IssueComment issueComment = result.get("issueComment", IssueComment.class);
-    return issueComment;
+        .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
+        .withParam(GitHubParamConstants.COMMENT, comment);
+    return caller.call().get(ADD_COMMENT_RESULT, IssueComment.class);
   }
 
   public List<IssueComment> getIssueComments(String owner, String repo, BigInteger issueNumber) {
     validateParams(owner, repo, issueNumber);
-    var result =  createCallSubProcessWithStartPath(GH_GET_COMMENTS_START)
+    SubProcessCallStartParamCaller caller = createCallSubProcessWithStartPath(GET_COMMENTS_START)
         .withParam(GitHubConstants.OWNER, owner)
         .withParam(GitHubConstants.REPO, repo)
-        .withParam(ISSUE_NUMBER, issueNumber)
-        .call();
-    List<IssueComment> issueComment = JSONConverter.convertListObjectsToNewList(result.get("issueComments"), IssueComment.class);
-    return issueComment;
+        .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber);
+    return JSONConverter.convertListObjectsToNewList(caller.call().get(GET_COMMENTS_RESULT), IssueComment.class);
   }
 
   public IssueSearch searchIssuesByCriteria(SearchIssueCriteria criteria, int page, int pageSize) {
     if (criteria == null) {
       return null;
     }
-    SubProcessCallStartParamCaller caller = createCallSubProcessWithDefaultParams(GH_SEARCH_ISSUES_START, page, pageSize);
-    SubProcessCallResult result = caller.withParam(GitHubConstants.QUERY, criteria.getQuery()).call();
-    return result.get(GH_ISSUES_SEARCH_RESULT, IssueSearch.class);
+    SubProcessCallStartParamCaller caller = createCallSubProcessWithDefaultParams(SEARCH_ISSUES_START, page, pageSize);
+    caller.withParam(GitHubConstants.QUERY, criteria.getQuery());
+    return caller.call().get(SEARCH_ISSUES_RESULT, IssueSearch.class);
+  }
+
+  public Issue assignUsersToIssue(String owner, String repo, BigInteger issueNumber, List<String> usernames) {
+    validateParams(owner, repo, issueNumber);
+    var usernamesParam = ch.ivyteam.ivy.scripting.objects.List.create(String.class, usernames);
+    SubProcessCallStartParamCaller caller =  createCallSubProcessWithStartPath(ASSIGN_USER_START)
+        .withParam(GitHubConstants.OWNER, owner)
+        .withParam(GitHubConstants.REPO, repo)
+        .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
+        .withParam(GitHubParamConstants.USERNAMES, usernamesParam);
+    return caller.call().get(ISSUE_RESULT, Issue.class);
+  }
+
+  public Issue patchIssue(String owner, String repo, BigInteger issueNumber, IssuesIssueNumberBody issueNumberBody) {
+    SubProcessCallStartParamCaller caller =  createCallSubProcessWithStartPath(PATCH_ISSUE_START)
+        .withParam(GitHubConstants.OWNER, owner)
+        .withParam(GitHubConstants.REPO, repo)
+        .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
+        .withParam(GitHubParamConstants.ISSUE_REQUEST, issueNumberBody);
+    return caller.call().get(ISSUE_RESULT, Issue.class);
   }
 
   private void validateParams(String owner, String repo, BigInteger issueNumber) {
@@ -130,30 +148,8 @@ public class GitHubIssueService extends AbstractGitHubService {
     ObjectUtils.requireNonEmpty(issueNumber, "IssueNumber must not be empty");
   }
 
-  public Issue assignUsersToIssue(String owner, String repo, BigInteger issueNumber, List<String> usernames) {
-    var usernamesParam = ch.ivyteam.ivy.scripting.objects.List.create(String.class, usernames);
-    validateParams(owner, repo, issueNumber);
-    var result =  createCallSubProcessWithStartPath(GH_ASSIGN_USER_START)
-        .withParam(GitHubConstants.OWNER, owner)
-        .withParam(GitHubConstants.REPO, repo)
-        .withParam(ISSUE_NUMBER, issueNumber)
-        .withParam("usernames", usernamesParam)
-        .call();
-    return result.get(GH_ISSUE_RESULT, Issue.class);
-  }
-
-  public Issue patchIssue(String owner, String repo, BigInteger issueNumber, IssuesIssueNumberBody issueNumberBody) {
-    var result =  createCallSubProcessWithStartPath(GH_PATCH_ISSUE_START)
-        .withParam(GitHubConstants.OWNER, owner)
-        .withParam(GitHubConstants.REPO, repo)
-        .withParam(ISSUE_NUMBER, issueNumber)
-        .withParam("issueRequest", issueNumberBody)
-        .call();
-    return result.get(GH_ISSUE_RESULT, Issue.class);
-  }
-
   @Override
   protected String getProcessName() {
-    return GITHUB_ISSUE_PROCESS;
+    return ISSUE_PROCESS;
   }
 }

@@ -56,17 +56,12 @@ public abstract class AbstractGitHubService {
   private int getElementsCount(String header, String uri) {
     List<String> elements = Arrays.asList(header.split(GitHubConstants.COMMA));
     Map<String, Integer> params = getParamMap(uri);
-    int page = params.get(GitHubConstants.PAGE);
     int pageSize = params.get(PER_PAGE);
-    for (String element : elements) {
-      if (element.contains(LAST_REF)) {
-        String link = StringUtils.substringBetween(element, GitHubConstants.QUESTION, ">");
-        params = getParamMap(link);
-        page = params.get(GitHubConstants.PAGE);
-        return page * pageSize;
-      }
-    }
-
+    int page = elements.stream()
+        .filter(element -> element.contains(LAST_REF))
+        .map(hrefLink -> StringUtils.substringBetween(hrefLink, GitHubConstants.QUESTION, GitHubConstants.GREATER))
+        .map(linkValue -> getParamMap(linkValue).get(GitHubConstants.PAGE))
+        .findFirst().orElse(params.get(GitHubConstants.PAGE));
     return page * pageSize;
   }
   

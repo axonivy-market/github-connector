@@ -97,7 +97,7 @@ public class SearchIssueCriteria extends SearchCriteria {
   }
 
   @Override
-  protected List<String> buildQueryFromSelfProperties() {
+  protected List<String> buildQueryFromProperties() {
     List<String> parts = new ArrayList<>();
     if (StringUtils.isNotBlank(state)) {
       parts.add(joinWith(GitHubConstants.COLON, STATE, state));
@@ -244,7 +244,7 @@ public class SearchIssueCriteria extends SearchCriteria {
     }
 
     @Override
-    protected Builder builderType() {
+    protected Builder builder() {
       return this;
     }
 

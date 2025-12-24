@@ -2,6 +2,8 @@ package com.axonivy.connector.github.managedbean;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +16,8 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.axonivy.connector.github.constant.GitHubConstants;
+import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.converter.JSONConverter;
 import com.axonivy.connector.github.enums.IssueState;
 import com.axonivy.connector.github.models.IssuesModel;
@@ -27,11 +31,14 @@ import com.github.api.client.IssuesIssueNumberBody;
 import com.github.api.client.SimpleUser;
 import com.github.api.client.User;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.process.call.SubProcessCall;
 
 @ManagedBean
 @ViewScoped
 public class IssuesBean {
+  private static final String FAILED_CMS = "/Dialogs/com/axonivy/connector/github/demo/Issues/Failed";
+  private static final String EXCEPTION_MESSAGE = "/Dialogs/com/axonivy/connector/github/demo/Issues/ExceptionMessage";
   private String keyword;
   private String orgName;
   private String repoName;
@@ -45,7 +52,7 @@ public class IssuesBean {
   private Issue selectedIssue;
   private IssuesModel issuesModel;
   private List<SimpleUser> users;
-  private List<Object> selectedUsernames;
+  private List<SimpleUser> selectedUsers;
   private IssuesIssueNumberBody updateIssue;
   private List<IssueComment> issueComments;
   private GitHubIssueService issueService;
@@ -55,10 +62,7 @@ public class IssuesBean {
     updateIssue = new IssuesIssueNumberBody();
     issueService = GitHubIssueService.getInstance();
     orgName = VariableUtils.getDefaultOrg();
-    var criteria = SearchIssueCriteria.builder()
-        .org(orgName)
-        .stateOpen()
-        .build();
+    var criteria = SearchIssueCriteria.builder().org(orgName).stateOpen().build();
     issuesModel = new IssuesModel(criteria);
   }
 
@@ -85,7 +89,6 @@ public class IssuesBean {
     } else if (StringUtils.isNoneBlank(orgName)) {
       criteria.org(orgName);
     }
-
     if (createdRange != null) {
       criteria.createdBetween(createdRange.getFirst(), createdRange.getLast());
     }
@@ -108,16 +111,19 @@ public class IssuesBean {
     try {
       IssueComment issueComment = issueService.addCommentToIssue(owner, repoName, issueNumber, comment);
       if (issueComment != null) {
-        message = new FacesMessage("Added Comment",
-            "Your comment is added to the issue " + issueNumber + " successfull with #Id:" + issueComment.getId());
+        message = new FacesMessage(getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/AddedComment"),
+            getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/AddedMessageDetails", issueNumber,
+                issueComment.getId()));
         message.setSeverity(FacesMessage.SEVERITY_INFO);
         this.comment = null;
       } else {
-        message = new FacesMessage("Failed", "Cannot add your comment to the issue " + issueNumber);
+        message = new FacesMessage(getCMSContent(FAILED_CMS),
+            getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/CannotAddCommentMessage", issueComments));
         message.setSeverity(FacesMessage.SEVERITY_ERROR);
       }
     } catch (Exception e) {
-      message = new FacesMessage("Failed", "Exception " + e.getMessage());
+      message = new FacesMessage(getCMSContent(FAILED_CMS),
+          getCMSContent(EXCEPTION_MESSAGE, e.getMessage()));
       message.setSeverity(FacesMessage.SEVERITY_ERROR);
       FacesContext.getCurrentInstance().validationFailed();
     }
@@ -135,17 +141,20 @@ public class IssuesBean {
     FacesMessage message;
     try {
       Issue issue = issueService.assignUsersToIssue(owner, repoName, issueNumber,
-          selectedUsernames.stream().map(Object::toString).toList());
+          selectedUsers.stream().map(Object::toString).toList());
       if (issue != null) {
-        message = new FacesMessage("Assign Users", "Assigned users to the issue " + issueNumber + " successfull");
+        message = new FacesMessage(getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/AssignUsers"),
+            getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/AssignUserMessage", issueNumber));
         message.setSeverity(FacesMessage.SEVERITY_INFO);
-        selectedUsernames.clear();
+        selectedUsers.clear();
       } else {
-        message = new FacesMessage("Failed", "Cannot assign users to the issue " + issueNumber);
+        message = new FacesMessage(getCMSContent(FAILED_CMS),
+            getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/CannotAssignUserMessage", issueNumber));
         message.setSeverity(FacesMessage.SEVERITY_ERROR);
       }
     } catch (Exception e) {
-      message = new FacesMessage("Failed", "Exception " + e.getMessage());
+      message = new FacesMessage(getCMSContent(FAILED_CMS),
+          getCMSContent(EXCEPTION_MESSAGE, e.getMessage()));
       message.setSeverity(FacesMessage.SEVERITY_ERROR);
       FacesContext.getCurrentInstance().validationFailed();
     }
@@ -164,15 +173,17 @@ public class IssuesBean {
     try {
       Issue issue = issueService.patchIssue(owner, repoName, issueNumber, updateIssue);
       if (issue != null) {
-        message = new FacesMessage("Patch Issue", "Patch the issue " + issueNumber + " successfull");
+        message = new FacesMessage(getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/PatchIssue"),
+            getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/PatchIssueMessage", issueNumber));
         message.setSeverity(FacesMessage.SEVERITY_INFO);
-        selectedUsernames.clear();
+        selectedUsers.clear();
       } else {
-        message = new FacesMessage("Failed", "Cannot update the issue " + issueNumber);
+        message = new FacesMessage(Ivy.cms().co(FAILED_CMS),
+            getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/CannotPatchIssueMessage", issueNumber));
         message.setSeverity(FacesMessage.SEVERITY_ERROR);
       }
     } catch (Exception e) {
-      message = new FacesMessage("Failed", "Exception " + e.getMessage());
+      message = new FacesMessage(Ivy.cms().co(FAILED_CMS), getCMSContent(EXCEPTION_MESSAGE, e.getMessage()));
       message.setSeverity(FacesMessage.SEVERITY_ERROR);
       FacesContext.getCurrentInstance().validationFailed();
     }
@@ -180,16 +191,21 @@ public class IssuesBean {
   }
 
   public void onSelectIssue(Issue issue) {
+    selectedUsers = new ArrayList<>();
     setSelectedIssue(issue);
     updateIssue = new IssuesIssueNumberBody();
     if (issue != null) {
       updateIssue.setTitle(issue.getTitle());
       updateIssue.setBody(issue.getBody());
-      updateIssue.setAssignees(issue.getAssignees());
       updateIssue.setLabels(issue.getLabels());
       updateIssue.setMilestone(issue.getMilestone());
       updateIssue.setState(issue.getState());
       updateIssue.setStateReason(issue.getStateReason());
+      if (issue.getAssignees() != null) {
+        List<SimpleUser> assignees = JSONConverter.convertListObjectsToNewList(issue.getAssignees(), SimpleUser.class);
+        selectedUsers.addAll(assignees);
+        updateIssue.setAssignees(assignees);
+      }
     }
   }
 
@@ -205,9 +221,7 @@ public class IssuesBean {
       loadUsersOfCurrentOrg();
     }
     return users.stream().filter(user -> isContainsKeyword(user.getLogin(), filter)
-          || isContainsKeyword(user.getName(), filter)
-          || isContainsKeyword(user.getEmail(), filter))
-        .toList();
+        || isContainsKeyword(user.getName(), filter) || isContainsKeyword(user.getEmail(), filter)).toList();
   }
 
   public String getAssignessDisplayName(Issue issue) {
@@ -215,17 +229,14 @@ public class IssuesBean {
       return StringUtils.EMPTY;
     }
     List<User> users = JSONConverter.convertToList(issue.getAssignees(), User.class);
-    return users.stream().map(User::getLogin)
-        .map(Object::toString)
-        .collect(Collectors.joining("; "));
+    return users.stream().map(User::getLogin).map(Object::toString).collect(Collectors.joining(GitHubConstants.COMMA));
   }
 
   public String getDisplayUser(SimpleUser simpleUser) {
     if (simpleUser == null) {
-      return "N/A";
+      return getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/NoName");
     }
-    final String displayUserPattern = "%s (%s)";
-    return displayUserPattern.formatted(simpleUser.getLogin(), simpleUser.getEmail());
+    return getCMSContent("/Dialogs/com/axonivy/connector/github/demo/Issues/DisplayNamePattern", simpleUser.getLogin(), simpleUser.getEmail());
   }
 
   public void loadCommentsForIssue(Issue issue) {
@@ -238,18 +249,15 @@ public class IssuesBean {
     BigInteger issueNumber = new BigInteger(issue.getNumber().toString());
     issueComments = issueService.getIssueComments(owner, repoName, issueNumber);
   }
-  
+
   public List<IssueState> getIssueStates() {
     return List.of(IssueState.OPEN, IssueState.CLOSED);
   }
 
-private void loadUsersOfCurrentOrg() {
-    var result = SubProcessCall.withPath("GitHubOrg").withStartName("getOrgMembers")
-        .withParam("org", orgName)
-        .withParam("page", 1)
-        .withParam("pageSize", 100)
-        .call();
-    users = JSONConverter.convertListObjectsToNewList(result.get("users"), SimpleUser.class);
+  private void loadUsersOfCurrentOrg() {
+    var result = SubProcessCall.withPath("GitHubOrg").withStartName("getOrgMembers").withParam(GitHubParamConstants.ORG, orgName)
+        .withParam(GitHubConstants.PAGE, 1).withParam(GitHubConstants.PAGE_SIZE, 100).call();
+    users = JSONConverter.convertListObjectsToNewList(result.get(GitHubParamConstants.USERS), SimpleUser.class);
   }
 
   private boolean isContainsKeyword(Object value, String filter) {
@@ -258,6 +266,14 @@ private void loadUsersOfCurrentOrg() {
     }
     return value.toString().contains(filter);
   }
+
+  private String getCMSContent(String cmsURI, Object... params) {
+    if (params != null) {
+      return Ivy.cms().co(cmsURI, Arrays.asList(params));
+    }
+    return Ivy.cms().co(cmsURI);
+  }
+
   public IssuesModel getIssuesModel() {
     return issuesModel;
   }
@@ -297,7 +313,6 @@ private void loadUsersOfCurrentOrg() {
   public void setRepoName(String repoName) {
     this.repoName = repoName;
   }
-
 
   public boolean isShowNoAssignee() {
     return showNoAssignee;
@@ -347,12 +362,12 @@ private void loadUsersOfCurrentOrg() {
     this.users = users;
   }
 
-  public List<Object> getSelectedUsernames() {
-    return selectedUsernames;
+  public List<SimpleUser> getSelectedUsers() {
+    return selectedUsers;
   }
 
-  public void setSelectedUsernames(List<Object> selectedUsernames) {
-    this.selectedUsernames = selectedUsernames;
+  public void setSelectedUsers(List<SimpleUser> selectedUsers) {
+    this.selectedUsers = selectedUsers;
   }
 
   public IssuesIssueNumberBody getUpdateIssue() {

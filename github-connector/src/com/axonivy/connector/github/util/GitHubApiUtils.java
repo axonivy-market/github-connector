@@ -7,28 +7,32 @@ import org.apache.commons.lang3.Strings;
 import com.axonivy.connector.github.constant.GitHubConstants;
 
 public class GitHubApiUtils {
-  private static final String REPO = "https://api.github.com/repos/";
+  private static final String API_REPO = "https://api.github.com/repos/";
 
   private GitHubApiUtils() {
   }
 
   public static String extractRepoOwner(String repoUrl) {
     validateRepoUrl(repoUrl);
-    var repoRemoved = Strings.CS.remove(repoUrl, REPO);
-    var repoArray = repoRemoved.split(GitHubConstants.SLASH);
-    return repoArray.length > 0 ? repoArray[0] : StringUtils.EMPTY;
+    var urlParts = extractRepoUrlParts(repoUrl);
+    return urlParts.length > 0 ? urlParts[0] : StringUtils.EMPTY;
   }
 
   public static String extractRepoName(String repoUrl) {
-    var repoRemoved = Strings.CS.remove(repoUrl, REPO);
+    var urlParts = extractRepoUrlParts(repoUrl);
+    return urlParts.length > 1 ? urlParts[1] : StringUtils.EMPTY;
+  }
+
+  private static String[] extractRepoUrlParts(String repoUrl) {
+    var repoRemoved = Strings.CS.remove(repoUrl, API_REPO);
     var repoArray = repoRemoved.split(GitHubConstants.SLASH);
-    return repoArray.length > 1 ? repoArray[1] : StringUtils.EMPTY;
+    return repoArray;
   }
 
   private static void validateRepoUrl(String repoUrl) {
     ObjectUtils.requireNonEmpty(repoUrl, "Repo URL must not be empty");
-    if (!repoUrl.startsWith(REPO)) {
-      throw new IllegalArgumentException("Repo URL must starts with " + REPO);
+    if (!repoUrl.startsWith(API_REPO)) {
+      throw new IllegalArgumentException("Repo URL must starts with " + API_REPO);
     }
   }
 }

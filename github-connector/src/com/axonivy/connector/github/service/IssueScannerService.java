@@ -8,6 +8,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
 import com.axonivy.connector.github.constant.GitHubConstants;
+import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.converter.JSONConverter;
 import com.axonivy.connector.github.enums.Variable;
 import com.axonivy.connector.github.models.IssueSearch;
@@ -25,7 +26,7 @@ import ch.ivyteam.ivy.security.exec.Sudo;
 
 public class IssueScannerService {
 
-  private static final String GET_PATCH_ISSUE_REQUEST_START = "buildPatchIssueBody(String,String,BigInteger)";
+  private static final String BUILD_PATCH_ISSUE_BODY_START = "buildPatchIssueBody(String,String,BigInteger)";
   private static IssueScannerService instance;
 
   private IssueScannerService() { }
@@ -41,16 +42,15 @@ public class IssueScannerService {
     SearchIssueCriteria criteria = getSearchIssueCriteria();
     List<Issue> issues = new ArrayList<>();
     var issueService = GitHubIssueService.getInstance();
-    int page = 0;
-    final int pageSize = 1000;
-    BigInteger totalCount = BigInteger.ZERO;
+    var page = 0;
+    var totalCount = BigInteger.ZERO;
     do {
       page++;
-      IssueSearch issueSearch = issueService.searchIssuesByCriteria(criteria, page, pageSize);
+      IssueSearch issueSearch = issueService.searchIssuesByCriteria(criteria, page, GitHubConstants.MAX_PAGE_SIZE);
       totalCount = issueSearch.getTotalCountValue();
       issues = issueSearch.getIssueItems();
       for (var issue : issues) {
-        String repoUrl = issue.getRepositoryUrl().toString();
+        var repoUrl = issue.getRepositoryUrl().toString();
         var owner = GitHubApiUtils.extractRepoOwner(repoUrl);
         var repoName = GitHubApiUtils.extractRepoName(repoUrl);
         BigInteger issueNumber = new BigInteger(issue.getNumber().toString());
@@ -63,7 +63,7 @@ public class IssueScannerService {
         }
       }
       issues.clear();
-    } while (page * pageSize < totalCount.intValue());
+    } while (page * GitHubConstants.MAX_PAGE_SIZE < totalCount.intValue());
   }
 
   private SearchIssueCriteria getSearchIssueCriteria() {
@@ -74,20 +74,20 @@ public class IssueScannerService {
   public IssuesIssueNumberBody loadPatchIssueBody(String owner, String repo, BigInteger issueNumber) {
     return Sudo.get(() -> {
       var filter = SubProcessSearchFilter.create().setSearchScope(SearchScope.SECURITY_CONTEXT)
-          .setSignature(GET_PATCH_ISSUE_REQUEST_START).toFilter();
+          .setSignature(BUILD_PATCH_ISSUE_BODY_START).toFilter();
 
       // Find subprocess
       var subProcessStartList = SubProcessCallStart.find(filter);
       if (CollectionUtils.isEmpty(subProcessStartList)) {
         return null;
       }
-      
+
       var issueBody = new IssuesIssueNumberBody();
       subProcessStartList.forEach(subProcessStart -> {
         var result = subProcessStart.withParam(GitHubConstants.OWNER, owner)
             .withParam(GitHubConstants.REPO, repo)
-            .withParam(GitHubIssueService.ISSUE_NUMBER, issueNumber)
-            .call().get("patchIssueBody", IssuesIssueNumberBody.class);
+            .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
+            .call().get(GitHubIssueService.PATCH_ISSUE_BODY, IssuesIssueNumberBody.class);
         if (result != null) {
           issueBody.setAssignee(ObjectUtils.getIfNull(result.getAssignee(), issueBody.getAssignee()));
           issueBody.setAssignees(ObjectUtils.getIfNull(result.getAssignees(), issueBody.getAssignees()));
@@ -99,7 +99,6 @@ public class IssueScannerService {
           issueBody.setTitle(ObjectUtils.getIfNull(result.getTitle(), issueBody.getTitle()));
         }
       });
-
       return issueBody;
     });
   }

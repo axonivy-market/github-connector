@@ -4,16 +4,70 @@ Dialogs:
       connector:
         github:
           demo:
+            HealthMonitor:
+              ForceRefresh: Force refresh
+              HealthMonitor: Health Monitor
+              LastUpdated: 'Last updated: {0}'
+            Issues:
+              AddCommentTo: Add comment to issue
+              AddedComment: Added Comment
+              AddedMessageDetails: 'Your comment is added to the issue {0} successfull with #Id: {1}'
+              AddsUpTo10ToAnIssue: Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
+              AdvanceFilter: Advance filter
+              AssignUserMessage: Assigned users to the issue {0} successfull
+              AssignUsers: Assign Users
+              AssignUsersToIssue: Assign users to issue
+              CannotAddCommentMessage: Cannot add your comment to the issue {0}
+              CannotAssignUserMessage: Cannot assign users to the issue {0}
+              CannotPatchIssueMessage: Cannot update the issue {0}
+              DisplayNamePattern: '{0} ({1})'
+              ExceptionMessage: Exception {0}
+              Failed: Failed
+              IssueHasNO: Issue has NO Assignee
+              IssuesHasNO: Issues has NO Comment
+              NoName: N/A
+              PatchIssue: Patch Issue
+              PatchIssueMessage: Patch the issue {0} successfull
+              SearchIssues: Search issues
+              ViewCommentsOfIssue: View comments of issue
+              uesBean.g: Assignees
+            Repositories:
+              IssuesOrPulls: Issues or Pull requests
+            SimpleIssues:
+              Header: Simple Issues View
+              SimpleIssues: Simple Issues
             SimpleRepos:
               SimpleView: Simple Repositories View
 Labels:
+  Actions: Actions
+  AddComment: Add comment
+  AssignUser: Assign user
+  Assignees: Assignees
+  Body: Body
   Close: Close
+  Comments: Comments
+  CreatedAt: Created At
+  CreatedBetween: Created between
   Forks: Forks
   Issues: Issues
+  IssuesHasNOComment: Issues has NO Comment
+  Milestone: Milestone
+  Proceed: Proceed
   PullRequests: Pull Requests
   Repo: Repo
   Repositories: Repositories
+  RepositoryUrl: Repository Url
+  Search: Search
   ShowPullRequest: Show pull requests
   ShowWorkflowRun: Show workflow runs
   Stars: Stars
+  StateReason: State Reason
+  Submit: Submit
+  TheseIsNoComment: These is no comment!
+  Title: Title
+  UpdateIssue: Update Issue Information
+  UpdatedAt: Updated At
+  UpdatedBetween: Updated between
+  Users: Users
+  ViewComments: View comments
   WorkflowStatus: Workflow status

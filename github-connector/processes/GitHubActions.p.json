@@ -61,8 +61,8 @@
             "repo" : "in.#repo is initialized ? in.repo : null"
           },
           "queryParams" : {
-            "page" : "in.#page is initialized ? in.#page : 1",
-            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50"
+            "page" : "in.#page is initialized ? in.#page : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null"
           }
         },
         "response" : {

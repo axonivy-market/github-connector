@@ -61,13 +61,13 @@ public abstract class SearchCriteria {
     if (query != null) {
       return query;
     }
-    List<String> parts = buildQueryFromSelfProperties();
-    return buildQueryFromProperties(parts);
+    List<String> parts = buildQueryFromProperties();
+    return buildQueryByParts(parts);
   }
 
-  protected abstract List<String> buildQueryFromSelfProperties();
+  protected abstract List<String> buildQueryFromProperties();
   
-  protected String buildQueryFromProperties(List<String> parts) {
+  protected String buildQueryByParts(List<String> parts) {
     if (StringUtils.isNotBlank(keywords)) {
       parts.add(keywords);
     }
@@ -80,7 +80,6 @@ public abstract class SearchCriteria {
     if (StringUtils.isNotBlank(user)) {
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, USER, user));
     }
-    // Dates
     addDateRange(parts, CREATED, createdAfter, createdBefore);
 
     if (Boolean.TRUE.equals(isPublic)) {
@@ -89,14 +88,12 @@ public abstract class SearchCriteria {
     if (Boolean.TRUE.equals(isPrivate)) {
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, IS, PRIVATE));
     }
-    // Repository
     if (StringUtils.isNotBlank(language)) {
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, LANGUAGE, language));
     }
     if (archived != null) {
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, ARCHIVED, String.valueOf(archived)));
     }
-    // Raw query
     if (StringUtils.isNotBlank(rawQuery)) {
       parts.add(rawQuery);
     }
@@ -128,7 +125,7 @@ public abstract class SearchCriteria {
     protected T criteria;
     protected String keywords;
 
-    protected abstract B builderType();
+    protected abstract B builder();
 
     /**
      * Add free-text keywords to search
@@ -136,7 +133,7 @@ public abstract class SearchCriteria {
     public B keywords(String keywords) {
       this.keywords = keywords;
       criteria.keywords = keywords;
-      return builderType();
+      return builder();
     }
 
     /**
@@ -147,7 +144,7 @@ public abstract class SearchCriteria {
     public B org(String org) {
       criteria.org = org;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, ORG, org));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -160,7 +157,7 @@ public abstract class SearchCriteria {
       String fullName = String.format(FORMAT_PATH, owner, repo);
       criteria.repo = fullName;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, REPO, fullName));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -169,7 +166,7 @@ public abstract class SearchCriteria {
     public B user(String username) {
       criteria.user = username;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, USER, username));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -177,19 +174,19 @@ public abstract class SearchCriteria {
      */
     public B created(LocalDate date) {
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, CREATED, date.format(DateTimeFormatter.ISO_DATE)));
-      return builderType();
+      return builder();
     }
 
     public B createdAfter(LocalDate date) {
       criteria.createdAfter = date;
       parts.add(String.format(FORMAT_QUALIFIER_GREATER, CREATED, date.format(DateTimeFormatter.ISO_DATE)));
-      return builderType();
+      return builder();
     }
 
     public B createdBefore(LocalDate date) {
       criteria.createdBefore = date;
       parts.add(String.format(FORMAT_QUALIFIER_LESS, CREATED, date.format(DateTimeFormatter.ISO_DATE)));
-      return builderType();
+      return builder();
     }
 
     public B createdBetween(LocalDate from, LocalDate to) {
@@ -197,7 +194,7 @@ public abstract class SearchCriteria {
       criteria.createdBefore = to;
       parts.add(String.format(FORMAT_QUALIFIER_RANGE, CREATED, from.format(DateTimeFormatter.ISO_DATE),
           to.format(DateTimeFormatter.ISO_DATE)));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -205,7 +202,7 @@ public abstract class SearchCriteria {
      */
     public B updated(String date) {
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, UPDATED, date));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -214,7 +211,7 @@ public abstract class SearchCriteria {
     public B isPublic() {
       criteria.isPublic = true;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, IS, PUBLIC));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -223,7 +220,7 @@ public abstract class SearchCriteria {
     public B isPrivate() {
       criteria.isPrivate = true;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, IS, PRIVATE));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -232,7 +229,7 @@ public abstract class SearchCriteria {
     public B language(String language) {
       criteria.language = language;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, LANGUAGE, language));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -241,7 +238,7 @@ public abstract class SearchCriteria {
     public B archived(boolean archived) {
       criteria.archived = archived;
       parts.add(String.format(FORMAT_QUALIFIER_VALUE, ARCHIVED, String.valueOf(archived)));
-      return builderType();
+      return builder();
     }
 
     /**
@@ -250,7 +247,7 @@ public abstract class SearchCriteria {
     public B raw(String queryPart) {
       criteria.rawQuery = queryPart;
       parts.add(queryPart);
-      return builderType();
+      return builder();
     }
 
     /**
@@ -258,7 +255,7 @@ public abstract class SearchCriteria {
      */
     public B sort(String sort) {
       criteria.sort = sort;
-      return builderType();
+      return builder();
     }
 
     public T build() {
@@ -267,8 +264,7 @@ public abstract class SearchCriteria {
         allParts.add(keywords);
       }
       allParts.addAll(parts);
-      String query = allParts.stream().filter(StringUtils::isNoneBlank)
-          .collect(Collectors.joining(StringUtils.SPACE));
+      String query = allParts.stream().filter(StringUtils::isNoneBlank).collect(Collectors.joining(StringUtils.SPACE));
 
       criteria.query = query;
       return criteria;

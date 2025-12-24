@@ -56,7 +56,7 @@
       "id" : "f1",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 576, "y" : 120 }
+        "at" : { "x" : 592, "y" : 120 }
       }
     }, {
       "id" : "f3",
@@ -72,8 +72,8 @@
             "type" : "in.#type is initialized ? in.#type : null",
             "sort" : "in.#sort is initialized ? in.#sort : null",
             "direction" : "in.#direction is initialized ? in.#direction : null",
-            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50",
-            "page" : "in.#page is initialized ? in.#page : 1",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null",
+            "page" : "in.#page is initialized ? in.#page : null",
             "since" : "in.#since is initialized ? in.#since : null",
             "before" : "in.#before is initialized ? in.#before : null"
           }
@@ -88,8 +88,8 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 392, "y" : 120 },
-        "size" : { "width" : 144, "height" : 62 },
+        "at" : { "x" : 400, "y" : 119 },
+        "size" : { "width" : 160, "height" : 63 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       },
       "connect" : [
@@ -143,8 +143,8 @@
           "queryParams" : {
             "q" : "in.#query",
             "sort" : "in.#sort is initialized ? in.#sort : null",
-            "page" : "in.#page is initialized ? in.#page : 1",
-            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50"
+            "page" : "in.#page is initialized ? in.#page : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null"
           }
         },
         "response" : {
@@ -158,8 +158,8 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 392, "y" : 272 },
-        "size" : { "width" : 176, "height" : 63 },
+        "at" : { "x" : 400, "y" : 272 },
+        "size" : { "width" : 160, "height" : 63 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       },
       "connect" : [
@@ -169,7 +169,7 @@
       "id" : "f7",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 576, "y" : 272 },
+        "at" : { "x" : 592, "y" : 272 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
     } ]

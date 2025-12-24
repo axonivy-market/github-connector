@@ -10,7 +10,7 @@ RestClients:
     - com.axonivy.connector.github.odata.OpenApiJsonFeature
     Properties:
       username: ''
-      password: ${decrypt:VVHLEXsPfw25QSE1w9SpX9w+2U6mzrSQpydT9i2PTamJQk47Q+rgFdE/QpqyzrH7}
+      password: ${decrypt:YPre0uLvtQxBFdWt2D9Tu7UY6RZRmyXr4N69dARQz4RBt3M6Z0loyjpUoHK+jO6Z6YQ3zo0jKDyfeQ2fd35sjg==}
     OpenAPI:
       SpecUrl: file:///C:/work/axonivy-market/market-products/github-connector/api.github.com.json
       Namespace: com.github.api.client

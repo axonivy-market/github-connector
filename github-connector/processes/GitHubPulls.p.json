@@ -76,8 +76,8 @@
             "base" : "in.#base is initialized ? in.base : null",
             "sort" : "in.#sort is initialized ? in.sort : null",
             "direction" : "in.#direction is initialized ? in.direction : null",
-            "page" : "in.#page is initialized ? in.#page : 1",
-            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 1"
+            "page" : "in.#page is initialized ? in.#page : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null"
           }
         },
         "response" : {

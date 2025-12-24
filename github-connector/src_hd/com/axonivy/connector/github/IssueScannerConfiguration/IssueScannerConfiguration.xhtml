@@ -6,8 +6,7 @@
   <ui:composition template="/layouts/frame-10.xhtml">
     <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/IssueScannerConfiguration/Title')}</ui:define>
     <ui:define name="content">
-
-      <h2>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/IssueScannerConfiguration/Header')}</h2>
+      <h1>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/IssueScannerConfiguration/Header')}</h1>
 
       <h:form id="form">
         <p:messages />
@@ -30,7 +29,7 @@
           <h:panelGroup>
             <p:outputLabel for="state" value="#{ivy.cms.co('/Labels/State')}" />
             <p:selectOneMenu id="state" value="#{issueScannerConfigurationBean.issueScannerConfig.state}">
-              <f:selectItem itemLabel="Please select" noSelectionOption="true" itemValue="" />
+              <f:selectItem itemLabel="#{ivy.cms.co('/Labels/PleaseSelect')}" noSelectionOption="true" itemValue="" />
               <f:selectItems value="#{issueScannerConfigurationBean.issueStates}" />
             </p:selectOneMenu>
           </h:panelGroup>
@@ -49,7 +48,6 @@
           <h:panelGroup>
             <p:outputLabel for="project" value="#{ivy.cms.co('/Labels/Project')}" />
             <p:inputText id="project" value="#{issueScannerConfigurationBean.issueScannerConfig.project}" />
-            <p:message for="project" />
           </h:panelGroup>
           <h:panelGroup>
             <p:outputLabel for="milestone" value="#{ivy.cms.co('/Labels/Milestore')}" />

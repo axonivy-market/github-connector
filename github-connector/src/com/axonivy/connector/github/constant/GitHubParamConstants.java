@@ -3,13 +3,14 @@ package com.axonivy.connector.github.constant;
 public class GitHubParamConstants {
   public GitHubParamConstants() {}
 
-  // Query qualifiers
   public static final String TYPE = "type";
   public static final String STATE = "state";
   public static final String IS = "is";
   public static final String ORG = "org";
   public static final String REPO = "repo";
+  public static final String USERS = "users";
   public static final String USER = "user";
+  public static final String USERNAMES = "usernames";
   public static final String ASSIGNEE = "assignee";
   public static final String NO = "no";
   public static final String AUTHOR = "author";
@@ -19,6 +20,7 @@ public class GitHubParamConstants {
   public static final String LABEL = "label";
   public static final String MILESTONE = "milestone";
   public static final String PROJECT = "project";
+  public static final String COMMENT = "comment";
   public static final String COMMENTS = "comments";
   public static final String CREATED = "created";
   public static final String UPDATED = "updated";
@@ -38,8 +40,8 @@ public class GitHubParamConstants {
   public static final String LANGUAGE = "language";
   public static final String ARCHIVED = "archived";
   public static final String SORT = "sort";
-  
-  // Values
+  public static final String ISSUE_REQUEST = "issueRequest";
+  public static final String ISSUE_NUMBER = "issueNumber";
   public static final String ISSUE = "issue";
   public static final String PR = "pr";
   public static final String DRAFT = "draft";
@@ -54,8 +56,6 @@ public class GitHubParamConstants {
   public static final String CHANGES_REQUESTED = "changes_requested";
   public static final String COMPLETED = "completed";
   public static final String NOT_PLANNED = "not planned";
-
-  //Repository search qualifiers
   public static final String NAME = "name";
   public static final String DESCRIPTION = "description";
   public static final String README = "readme";

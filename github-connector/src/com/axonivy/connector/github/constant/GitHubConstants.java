@@ -5,6 +5,7 @@ public class GitHubConstants {
   public static final String COMMA = ",";
   public static final String SLASH = "/";
   public static final String COLON = ":";
+  public static final String GREATER = ">";
   public static final String QUERY = "query";
   public static final String PAGE = "page";
   public static final String PAGE_SIZE = "pageSize";

@@ -4,7 +4,7 @@ Dialogs:
       connector:
         github:
           IssueScannerConfiguration:
-            Header: The issue scanner configuration
+            Header: Configuration the issue scanner
             Interactions: Interactions filter
             MainInformation: Main information
             OtherFilter: Other filter
@@ -15,41 +15,49 @@ Dialogs:
 Labels:
   Archived: Archived
   Assignee: Assignee
-  AssigneeToAny: Assignee to Any
+  AssigneeToAny: Assignee to any
   Author: Author
   Cancel: Cancel
   ClosedAfter: Closed after
   ClosedBefore: Closed before
   Commenter: Commenter
-  CommentsMax: Comments Max
-  CommentsMin: Comments Min
+  CommentsMax: Comments max
+  CommentsMin: Comments min
   CreatedAfter: Created after
   CreatedBefore: Created before
-  InBody: In Body
-  InComments: In Comments
-  InTitle: In Title
-  InteractionsMax: Interactions Max
-  InteractionsMin: Interactions Min
+  InBody: In body
+  InComments: In comments
+  InTitle: In title
+  InteractionsMax: Interactions max
+  InteractionsMin: Interactions min
   Involves: Involves
-  IsPrivate: Is Private
-  IsPublic: Is Public
+  IsPrivate: Is private
+  IsPublic: Is public
   Keywords: Keywords
   Labels: Labels
-  LinkedPr: Linked Pr
+  LinkedPr: Linked pull-request
   Locked: Locked
   Mentions: Mentions
   Milestore: Milestore
-  NoAssignee: No Assignee
-  NoLabel: No Label
-  NoMilestone: No Milestone
-  NoProject: No Project
-  OrgName: Org Name
+  NoAssignee: No assignee
+  NoLabel: No label
+  NoMilestone: No milestone
+  NoProject: No project
+  OrgName: Organization name
+  PleaseSelect: Please select
   Project: Project
   Reactions: Reactions
-  ReactionsMax: Reactions Max
-  ReactionsMin: Reactions Min
-  RepoName: Repo Name
+  ReactionsMax: Reactions max
+  ReactionsMin: Reactions min
+  RepoName: Repositpry name
   State: State
   Total: Total interactions
   TotalInterations: Total interactions
-  TotalOfComments: Total of Comments
+  TotalOfComments: Total of comments
+Processes:
+  IssuesScanner:
+    Configuration:
+      description: Use to config the issue criteria for scanning issues
+      name: Config the Issue Scanner
+    Scanner:
+      name: Manual Start Issues Scanner
