@@ -43,10 +43,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" }
+            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issues" : "in.issues"
+            "result.issues" : "in.issues",
+            "result.status" : "in.status"
           }
         }
       },
@@ -93,7 +95,8 @@
           "entity" : {
             "type" : "java.util.List<com.github.api.client.Issue>",
             "map" : {
-              "out.issues" : "result"
+              "out.issues" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -137,10 +140,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" }
+            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issues" : "in.issues"
+            "result.issues" : "in.issues",
+            "result.status" : "in.status"
           }
         }
       },
@@ -178,7 +183,8 @@
           "entity" : {
             "type" : "java.util.List<com.github.api.client.Issue>",
             "map" : {
-              "out.issues" : "result"
+              "out.issues" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -220,10 +226,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issueComment", "type" : "com.github.api.client.IssueComment", "desc" : "" }
+            { "name" : "issueComment", "type" : "com.github.api.client.IssueComment", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issueComment" : "in.issueComment"
+            "result.issueComment" : "in.issueComment",
+            "result.status" : "in.status"
           }
         }
       },
@@ -270,7 +278,8 @@
           "entity" : {
             "type" : "com.github.api.client.IssueComment",
             "map" : {
-              "out.issueComment" : "result"
+              "out.issueComment" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -304,10 +313,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issue", "type" : "com.github.api.client.Issue", "desc" : "" }
+            { "name" : "issue", "type" : "com.github.api.client.Issue", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issue" : "in.issue"
+            "result.issue" : "in.issue",
+            "result.status" : "in.status"
           }
         }
       },
@@ -346,7 +357,8 @@
           "entity" : {
             "type" : "com.github.api.client.Issue",
             "map" : {
-              "out.issue" : "result"
+              "out.issue" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -388,10 +400,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issue", "type" : "com.github.api.client.Issue", "desc" : "" }
+            { "name" : "issue", "type" : "com.github.api.client.Issue", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issue" : "in.issue"
+            "result.issue" : "in.issue",
+            "result.status" : "in.status"
           }
         }
       },
@@ -430,7 +444,8 @@
           "entity" : {
             "type" : "com.github.api.client.Issue",
             "map" : {
-              "out.issue" : "result"
+              "out.issue" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -470,10 +485,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issueComments", "type" : "List<com.github.api.client.IssueComment>", "desc" : "" }
+            { "name" : "issueComments", "type" : "List<com.github.api.client.IssueComment>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issueComments" : "in.issueComments"
+            "result.issueComments" : "in.issueComments",
+            "result.status" : "in.status"
           }
         }
       },
@@ -510,7 +527,8 @@
           "entity" : {
             "type" : "List<com.github.api.client.IssueComment>",
             "map" : {
-              "out.issueComments" : "result"
+              "out.issueComments" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -546,10 +564,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "issueSearch", "type" : "com.axonivy.connector.github.models.IssueSearch", "desc" : "" }
+            { "name" : "issueSearch", "type" : "com.axonivy.connector.github.models.IssueSearch", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.issueSearch" : "in.issuesSearch"
+            "result.issueSearch" : "in.issuesSearch",
+            "result.status" : "in.status"
           }
         }
       },
@@ -582,7 +602,8 @@
             "type" : "com.github.api.client.InlineResponse20031",
             "code" : [
               "import com.axonivy.connector.github.models.IssueSearch;",
-              "out.issuesSearch = new IssueSearch(result);"
+              "out.issuesSearch = new IssueSearch(result);",
+              "out.status = response.getStatus();"
             ]
           }
         }

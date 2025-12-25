@@ -58,7 +58,7 @@
         "output" : {
           "code" : [
             "// Call in.patchIssueBody to build the IssuesIssueNumberBody object",
-            "//in.patchIssueBody.title = \"Edited\";"
+            "// in.patchIssueBody.title = \"Edited\";"
           ]
         }
       },

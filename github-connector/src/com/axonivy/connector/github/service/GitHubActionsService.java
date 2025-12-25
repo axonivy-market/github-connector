@@ -1,6 +1,6 @@
 package com.axonivy.connector.github.service;
 
-import com.axonivy.connector.github.constant.GitHubConstants;
+import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.models.WorkflowRunAdvanced;
 
 import ch.ivyteam.ivy.process.call.SubProcessCallStartParamCaller;
@@ -22,8 +22,8 @@ public class GitHubActionsService extends AbstractGitHubService {
 
   public WorkflowRunAdvanced getWorkflowRuns(String owner, String repo, int page, int pageSize) {
     SubProcessCallStartParamCaller caller = createCallSubProcessWithDefaultParams(GH_ACTIONS_RUN_START, page, pageSize);
-    caller.withParam(GitHubConstants.OWNER, owner);
-    caller.withParam(GitHubConstants.REPO, repo);
+    caller.withParam(GitHubParamConstants.OWNER, owner);
+    caller.withParam(GitHubParamConstants.REPO, repo);
     return caller.call().get(GH_ACTIONS_RUN_RESULT, WorkflowRunAdvanced.class);
   }
 

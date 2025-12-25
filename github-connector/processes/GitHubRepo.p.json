@@ -37,10 +37,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "repos", "type" : "List<com.github.api.client.Repository>", "desc" : "" }
+            { "name" : "repos", "type" : "List<com.github.api.client.Repository>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.repos" : "in.repos"
+            "result.repos" : "in.repos",
+            "result.status" : "in.status"
           }
         }
       },
@@ -82,7 +84,8 @@
           "entity" : {
             "type" : "java.util.List<com.github.api.client.Repository>",
             "map" : {
-              "out.repos" : "result"
+              "out.repos" : "result",
+              "out.status" : "response.getStatus()"
             }
           }
         }
@@ -117,10 +120,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "repositorySearch", "type" : "com.axonivy.connector.github.models.RepositorySearch", "desc" : "" }
+            { "name" : "repositorySearch", "type" : "com.axonivy.connector.github.models.RepositorySearch", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.repositorySearch" : "in.repositorySearch"
+            "result.repositorySearch" : "in.repositorySearch",
+            "result.status" : "in.status"
           }
         }
       },
@@ -152,7 +157,8 @@
             "type" : "com.github.api.client.InlineResponse20033",
             "code" : [
               "import com.axonivy.connector.github.models.RepositorySearch;",
-              "in.repositorySearch = new RepositorySearch(result);"
+              "in.repositorySearch = new RepositorySearch(result);",
+              "in.status = response.getStatus();"
             ]
           }
         }

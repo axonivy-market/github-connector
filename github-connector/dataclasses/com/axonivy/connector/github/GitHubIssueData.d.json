@@ -81,5 +81,8 @@
   }, {
     "name" : "issueComments",
     "type" : "List<com.github.api.client.IssueComment>"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
   } ]
 }

@@ -57,5 +57,8 @@
   }, {
     "name" : "state",
     "type" : "String"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
   } ]
 }

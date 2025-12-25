@@ -18,5 +18,8 @@
   }, {
     "name" : "workflowRunAdvanced",
     "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
   } ]
 }

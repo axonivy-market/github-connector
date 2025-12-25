@@ -27,10 +27,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "workflowRunAdvanced", "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced", "desc" : "" }
+            { "name" : "workflowRunAdvanced", "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.workflowRunAdvanced" : "in.workflowRunAdvanced"
+            "result.workflowRunAdvanced" : "in.workflowRunAdvanced",
+            "result.status" : "in.status"
           }
         }
       },

@@ -97,8 +97,8 @@ public class GitHubIssueService extends AbstractGitHubService {
   public IssueComment addCommentToIssue(String owner, String repo, BigInteger issueNumber, String comment) {
     validateParams(owner, repo, issueNumber);
     SubProcessCallStartParamCaller caller = createCallSubProcessWithStartPath(ADD_COMMENT_START)
-        .withParam(GitHubConstants.OWNER, owner)
-        .withParam(GitHubConstants.REPO, repo)
+        .withParam(GitHubParamConstants.OWNER, owner)
+        .withParam(GitHubParamConstants.REPO, repo)
         .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
         .withParam(GitHubParamConstants.COMMENT, comment);
     return caller.call().get(ADD_COMMENT_RESULT, IssueComment.class);
@@ -107,8 +107,8 @@ public class GitHubIssueService extends AbstractGitHubService {
   public List<IssueComment> getIssueComments(String owner, String repo, BigInteger issueNumber) {
     validateParams(owner, repo, issueNumber);
     SubProcessCallStartParamCaller caller = createCallSubProcessWithStartPath(GET_COMMENTS_START)
-        .withParam(GitHubConstants.OWNER, owner)
-        .withParam(GitHubConstants.REPO, repo)
+        .withParam(GitHubParamConstants.OWNER, owner)
+        .withParam(GitHubParamConstants.REPO, repo)
         .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber);
     return JSONConverter.convertListObjectsToNewList(caller.call().get(GET_COMMENTS_RESULT), IssueComment.class);
   }
@@ -126,8 +126,8 @@ public class GitHubIssueService extends AbstractGitHubService {
     validateParams(owner, repo, issueNumber);
     var usernamesParam = ch.ivyteam.ivy.scripting.objects.List.create(String.class, usernames);
     SubProcessCallStartParamCaller caller =  createCallSubProcessWithStartPath(ASSIGN_USER_START)
-        .withParam(GitHubConstants.OWNER, owner)
-        .withParam(GitHubConstants.REPO, repo)
+        .withParam(GitHubParamConstants.OWNER, owner)
+        .withParam(GitHubParamConstants.REPO, repo)
         .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
         .withParam(GitHubParamConstants.USERNAMES, usernamesParam);
     return caller.call().get(ISSUE_RESULT, Issue.class);
@@ -135,8 +135,8 @@ public class GitHubIssueService extends AbstractGitHubService {
 
   public Issue patchIssue(String owner, String repo, BigInteger issueNumber, IssuesIssueNumberBody issueNumberBody) {
     SubProcessCallStartParamCaller caller =  createCallSubProcessWithStartPath(PATCH_ISSUE_START)
-        .withParam(GitHubConstants.OWNER, owner)
-        .withParam(GitHubConstants.REPO, repo)
+        .withParam(GitHubParamConstants.OWNER, owner)
+        .withParam(GitHubParamConstants.REPO, repo)
         .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
         .withParam(GitHubParamConstants.ISSUE_REQUEST, issueNumberBody);
     return caller.call().get(ISSUE_RESULT, Issue.class);

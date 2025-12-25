@@ -84,8 +84,8 @@ public class IssueScannerService {
 
       var issueBody = new IssuesIssueNumberBody();
       subProcessStartList.forEach(subProcessStart -> {
-        var result = subProcessStart.withParam(GitHubConstants.OWNER, owner)
-            .withParam(GitHubConstants.REPO, repo)
+        var result = subProcessStart.withParam(GitHubParamConstants.OWNER, owner)
+            .withParam(GitHubParamConstants.REPO, repo)
             .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
             .call().get(GitHubIssueService.PATCH_ISSUE_BODY, IssuesIssueNumberBody.class);
         if (result != null) {

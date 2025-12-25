@@ -3,7 +3,7 @@
   "id" : "19B26244F248C71C",
   "kind" : "CALLABLE_SUB",
   "config" : {
-    "data" : "com.axonivy.connector.github.GitHubPullsData"
+    "data" : "com.axonivy.connector.github.GitHubPullRequestData"
   },
   "elements" : [ {
       "id" : "f0",
@@ -37,10 +37,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "pullRequestAdvanced", "type" : "com.axonivy.connector.github.models.PullRequestAdvanced", "desc" : "" }
+            { "name" : "pullRequestAdvanced", "type" : "com.axonivy.connector.github.models.PullRequestAdvanced", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.pullRequestAdvanced" : "in.pullRequestAdvanced"
+            "result.pullRequestAdvanced" : "in.pullRequestAdvanced",
+            "result.status" : "in.status"
           }
         }
       },
@@ -87,7 +89,8 @@
               "import com.axonivy.connector.github.service.GitHubPullRequestService;",
               "int totalCount = GitHubPullRequestService.getInstance().getTotalCountFromHeader(response, result.size());",
               "out.pullRequestAdvanced.pullRequests = result;",
-              "out.pullRequestAdvanced.totalCount = totalCount;"
+              "out.pullRequestAdvanced.totalCount = totalCount;",
+              "out.status = response.getStatus();"
             ]
           }
         }

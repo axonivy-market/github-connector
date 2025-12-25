@@ -21,5 +21,8 @@
   }, {
     "name" : "users",
     "type" : "List<com.github.api.client.SimpleUser>"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
   } ]
 }

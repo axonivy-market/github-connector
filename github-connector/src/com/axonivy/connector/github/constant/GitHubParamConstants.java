@@ -8,6 +8,7 @@ public class GitHubParamConstants {
   public static final String IS = "is";
   public static final String ORG = "org";
   public static final String REPO = "repo";
+  public static final String OWNER = "owner";
   public static final String USERS = "users";
   public static final String USER = "user";
   public static final String USERNAMES = "usernames";

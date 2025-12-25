@@ -29,10 +29,12 @@
         },
         "result" : {
           "params" : [
-            { "name" : "users", "type" : "List<com.github.api.client.SimpleUser>", "desc" : "" }
+            { "name" : "users", "type" : "List<com.github.api.client.SimpleUser>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
           ],
           "map" : {
-            "result.users" : "in.users"
+            "result.users" : "in.users",
+            "result.status" : "in.status"
           }
         }
       },
@@ -74,6 +76,7 @@
           "entity" : {
             "type" : "java.util.List<com.github.api.client.SimpleUser>",
             "map" : {
+              "out.status" : "response.getStatus()",
               "out.users" : "result"
             }
           }

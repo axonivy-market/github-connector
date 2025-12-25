@@ -30,7 +30,6 @@ Dialogs:
               PatchIssueMessage: Patch the issue {0} successfull
               SearchIssues: Search issues
               ViewCommentsOfIssue: View comments of issue
-              uesBean.g: Assignees
             Repositories:
               IssuesOrPulls: Issues or Pull requests
             SimpleIssues:
@@ -71,3 +70,24 @@ Labels:
   Users: Users
   ViewComments: View comments
   WorkflowStatus: Workflow status
+Processes:
+  GitHubDemo:
+    HealthMonitor:
+      Tasks:
+        Monitor:
+          name: Health Monitor
+      name: Health Monitor
+    IssueLazy:
+      name: Show Issues in The Lazy Datatable
+    IssueSimple:
+      name: Show Issues in A Simple View
+    RepoLazy:
+      Tasks:
+        LazyView:
+          name: Show the repo as lazy datatable
+      name: Show Repositories in The Lazy Datatable
+    RepoSimple:
+      Tasks:
+        SimpleView:
+          name: Simple Repositories View
+      name: Show Repositories in A Simple View

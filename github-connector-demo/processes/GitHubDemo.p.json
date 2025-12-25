@@ -11,10 +11,10 @@
       "config" : {
         "signature" : "showSimpleRepositoriesView",
         "request" : {
-          "name" : "Show Repositories in A Simple View"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoSimple/name\")%>"
         },
         "task" : {
-          "name" : "Simple Repositories View"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoSimple/Tasks/SimpleView/name\")%>"
         }
       },
       "visual" : {
@@ -58,10 +58,10 @@
       "config" : {
         "signature" : "showRepoLazyDataTable",
         "request" : {
-          "name" : "Show Repositories in The Lazy Datatable"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoLazy/name\")%>"
         },
         "task" : {
-          "name" : "Show the repo as lazy datatable"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoLazy/Tasks/LazyView/name\")%>"
         }
       },
       "visual" : {
@@ -99,10 +99,10 @@
       "config" : {
         "signature" : "healthMonitor",
         "request" : {
-          "name" : "Health Monitor"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/HealthMonitor/name\")%>"
         },
         "task" : {
-          "name" : "Health Monitor"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/HealthMonitor/Tasks/Monitor/name\")%>"
         }
       },
       "visual" : {
@@ -159,7 +159,7 @@
       "config" : {
         "signature" : "showSimpleIssuesView",
         "request" : {
-          "name" : "Show Issues in A Simple View"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/IssueSimple/name\")%>"
         }
       },
       "visual" : {
@@ -225,7 +225,7 @@
       "config" : {
         "signature" : "showIssuesLazyDataTable",
         "request" : {
-          "name" : "Show Issues in The Lazy Datatable"
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/IssueLazy/name\")%>"
         }
       },
       "visual" : {

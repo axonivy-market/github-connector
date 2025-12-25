@@ -1,6 +1,6 @@
 {
   "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
-  "simpleName" : "GitHubPullsData",
+  "simpleName" : "GitHubPullRequestData",
   "namespace" : "com.axonivy.connector.github",
   "isBusinessCaseData" : false,
   "fields" : [ {
@@ -25,9 +25,6 @@
     "name" : "direction",
     "type" : "String"
   }, {
-    "name" : "pullRequests",
-    "type" : "List<com.github.api.client.PullRequestSimple>"
-  }, {
     "name" : "page",
     "type" : "java.lang.Integer"
   }, {
@@ -36,5 +33,8 @@
   }, {
     "name" : "pullRequestAdvanced",
     "type" : "com.axonivy.connector.github.models.PullRequestAdvanced"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
   } ]
 }

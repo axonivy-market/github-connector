@@ -9,8 +9,6 @@ public class GitHubConstants {
   public static final String QUERY = "query";
   public static final String PAGE = "page";
   public static final String PAGE_SIZE = "pageSize";
-  public static final String OWNER = "owner";
-  public static final String REPO = "repo";
   public static final int MAX_PAGE_SIZE = 100;
   public static final String LINK = "Link";
   public static final String QUESTION = "?";
