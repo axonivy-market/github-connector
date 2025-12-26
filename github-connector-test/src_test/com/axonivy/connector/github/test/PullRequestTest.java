@@ -37,7 +37,7 @@ public class PullRequestTest extends BaseSetup {
 
     GitHubPullRequestData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     } else {
       PullRequestAdvanced pullRequestAdvanced = data.getPullRequestAdvanced();
       assertNotNull(pullRequestAdvanced, "The PullRequestAdvanced is null");

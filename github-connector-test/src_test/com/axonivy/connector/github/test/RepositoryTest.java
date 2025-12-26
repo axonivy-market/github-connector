@@ -39,7 +39,7 @@ public class RepositoryTest extends BaseSetup {
 
     GitHubRepoData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     }
     List<Repository> repos = data.getRepos();
     assertNotNull(repos, "The repos is null");
@@ -56,7 +56,7 @@ public class RepositoryTest extends BaseSetup {
 
     GitHubRepoData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     }
     RepositorySearch repoSearch = data.getRepositorySearch();
     assertNotNull(repoSearch, "The repos is null");

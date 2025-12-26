@@ -36,7 +36,7 @@ public class IssuesTest extends BaseSetup {
 
     GitHubIssueData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     } else {
       IssueSearch issueSearch = data.getIssuesSearch();
       assertNotNull(issueSearch, "The IssueSearch is null");

@@ -37,7 +37,7 @@ public class ActionsTest extends BaseSetup {
 
     GitHubActionsData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     } else {
       WorkflowRunAdvanced workflowRunAdvanced = data.getWorkflowRunAdvanced();
       assertNotNull(workflowRunAdvanced, "The WorkflowRunAdvanced is null");
