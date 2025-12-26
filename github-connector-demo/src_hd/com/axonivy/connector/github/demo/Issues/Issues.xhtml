@@ -174,7 +174,7 @@
           <p:autoComplete multiple="true" value="#{issuesBean.selectedUsers}"
             completeMethod="#{issuesBean.onCompleteUserSearch}" var="simpleUser" itemValue="#{simpleUser}"
             itemLabel="#{simpleUser.login}" styleClass="mt-2" dropdown="true" unique="true" dynamic="true"
-            selectLimit="10" />
+            selectLimit="10" scrollHeight="500"/>
         </h:panelGroup>
         <f:facet name="footer">
           <p:commandLink value="#{ivy.cms.co('/Labels/Cancel')}" onclick="PF('assign-user-dialog').hide();"
@@ -236,7 +236,8 @@
             <p:autoComplete id="assignees" multiple="true" value="#{issuesBean.selectedUsers}" dynamic="true"
               dropdown="true" selectLimit="10" unique="true" completeMethod="#{issuesBean.onCompleteUserSearch}"
               var="simpleUser" itemValue="#{simpleUser}" itemLabel="#{simpleUser.login}" styleClass="mt-2"
-              converter="pojoConverter" />
+              converter="pojoConverter"
+              scrollHeight="500" />
           </h:panelGroup>
         </h:panelGroup>
         <f:facet name="footer">
