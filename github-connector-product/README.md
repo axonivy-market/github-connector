@@ -1,6 +1,6 @@
 # GitHub Connector
 
-An Axon Ivy REST API connector that integrates GitHub issues and workflows into your Ivy processes. This connector provides seamless communication with GitHub's REST API, enabling automated issue management, pull request handling, and workflow monitoring for Team Octopus and other development teams.
+An Axon Ivy REST API connector that integrates GitHub issues and workflows into your Ivy processes. This connector provides seamless communication with GitHub's REST API, enabling automated issue management, pull request handling, and workflow monitoring and more.
 
 ## Features
 
@@ -41,7 +41,6 @@ The GitHub Connector integrates seamlessly into Ivy workflows, enabling automate
 ## Setup
 
 ### Prerequisites
-- Axon Ivy Engine 9.0 or later
 - GitHub personal access token or OAuth token with appropriate permissions
 - Access to a GitHub organization or repository
 
@@ -75,4 +74,3 @@ The GitHub Connector integrates seamlessly into Ivy workflows, enabling automate
 4. Customize workflows using the provided services
 5. Schedule automated scans and let the connector handle GitHub integration
 
-For detailed API documentation and advanced configuration options, refer to the connector's process documentation within your Ivy Designer.
