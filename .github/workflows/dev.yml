@@ -1,4 +1,4 @@
-name: CI-Build
+name: Dev-Build
 
 on:
   push:
@@ -13,4 +13,4 @@ permissions:
 
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
+    uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v6
