@@ -68,11 +68,11 @@
         </div>
 
         <p:dataTable id="issues-table" widgetVar="issues-table" value="#{issuesBean.issuesModel}" var="issue"
-          lazy="true"
+          lazy="true" showGridlines="true" resizableColumns="true" liveResize="true"
           paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
           rows="10" paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="5,10,20,50"
           paginatorAlwaysVisible="false" scrollable="true" scrollHeight="500">
-          <p:column width="100px">
+          <p:column resizable="false" width="100px" styleClass="text-center">
             <p:menuButton value="#{ivy.cms.co('/Labels/Actions')}">
               <p:menuitem value="#{ivy.cms.co('/Labels/AddComment')}"
                 actionListener="#{issuesBean.setSelectedIssue(issue)}" update="comment-dialog" icon="pi pi-plus"
@@ -89,23 +89,23 @@
             </p:menuButton>
           </p:column>
 
-          <p:column headerText="#{ivy.cms.co('/Labels/Title')}" width="500px">
+          <p:column headerText="#{ivy.cms.co('/Labels/Title')}" width="200px">
             <h:outputText value="#{issue.title}" />
           </p:column>
 
-          <p:column headerText="#{ivy.cms.co('/Labels/State')}" width="100px">
+          <p:column headerText="#{ivy.cms.co('/Labels/State')}" width="50px">
             <h:outputText value="#{issue.state}" />
           </p:column>
 
-          <p:column headerText="#{ivy.cms.co('/Labels/Assignees')}" width="250px">
+          <p:column headerText="#{ivy.cms.co('/Labels/Assignees')}" width="200px">
             <h:outputText value="#{issuesBean.getAssignessDisplayName(issue)}" />
           </p:column>
 
-          <p:column headerText="#{ivy.cms.co('/Labels/CreatedAt')}" width="150px">
+          <p:column headerText="#{ivy.cms.co('/Labels/CreatedAt')}" width="140px">
             <h:outputText value="#{issue.createdAt}" />
           </p:column>
 
-          <p:column headerText="#{ivy.cms.co('/Labels/UpdatedAt')}" width="150px">
+          <p:column headerText="#{ivy.cms.co('/Labels/UpdatedAt')}" width="140px">
             <h:outputText value="#{issue.updatedAt}" />
           </p:column>
 
