@@ -169,6 +169,9 @@ public class IssuesBean {
     var owner = GitHubApiUtils.extractRepoOwner(repoUrl);
     var repoName = GitHubApiUtils.extractRepoName(repoUrl);
     BigInteger issueNumber = new BigInteger(selectedIssue.getNumber().toString());
+    if (CollectionUtils.isNotEmpty(selectedUsers)) {
+      updateIssue.setAssignees(selectedUsers.stream().map(SimpleUser::getLogin).map(Object::toString).toList());
+    }
     FacesMessage message;
     try {
       Issue issue = issueService.patchIssue(owner, repoName, issueNumber, updateIssue);

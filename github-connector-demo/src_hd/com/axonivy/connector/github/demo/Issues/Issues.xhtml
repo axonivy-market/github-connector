@@ -172,7 +172,7 @@
           <p>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/AddsUpTo10ToAnIssue')}</p>
           <p:outputLabel value="#{ivy.cms.co('/Labels/Users')}" />
           <p:autoComplete multiple="true" value="#{issuesBean.selectedUsers}"
-            completeMethod="#{issuesBean.onCompleteUserSearch}" var="simpleUser" itemValue="#{simpleUser.login}"
+            completeMethod="#{issuesBean.onCompleteUserSearch}" var="simpleUser" itemValue="#{simpleUser}"
             itemLabel="#{simpleUser.login}" styleClass="mt-2" dropdown="true" unique="true" dynamic="true"
             selectLimit="10" />
         </h:panelGroup>
@@ -235,7 +235,8 @@
             <p:outputLabel for="assignees" value="#{ivy.cms.co('/Labels/Assignees')}" />
             <p:autoComplete id="assignees" multiple="true" value="#{issuesBean.selectedUsers}" dynamic="true"
               dropdown="true" selectLimit="10" unique="true" completeMethod="#{issuesBean.onCompleteUserSearch}"
-              var="simpleUser" itemValue="#{simpleUser.login}" itemLabel="#{simpleUser.login}" styleClass="mt-2" />
+              var="simpleUser" itemValue="#{simpleUser}" itemLabel="#{simpleUser.login}" styleClass="mt-2"
+              converter="pojoConverter" />
           </h:panelGroup>
         </h:panelGroup>
         <f:facet name="footer">
