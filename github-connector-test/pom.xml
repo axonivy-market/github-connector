@@ -49,12 +49,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.axonivy.ivy.webtest</groupId>
-      <artifactId>web-tester</artifactId>
-      <version>12.0.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>com.axonivy.utils.e2etest</groupId>
       <artifactId>e2e-test-utils</artifactId>
       <version>[1.0.0,)</version>

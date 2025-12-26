@@ -8,9 +8,7 @@
 
   <modules>
     <module>github-connector</module>
-    <module>github-connector-demo</module>
     <module>github-connector-test</module>
-    <module>github-connector-product</module>
   </modules>
 
   <scm>
