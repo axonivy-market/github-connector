@@ -19,7 +19,7 @@ import com.github.api.client.Issue;
 import com.github.api.client.IssuesIssueNumberBody;
 
 import ch.ivyteam.ivy.environment.Ivy;
-import ch.ivyteam.ivy.process.call.SubProcessCallStart;
+import ch.ivyteam.ivy.process.call.SubProcessCall;
 import ch.ivyteam.ivy.process.call.SubProcessSearchFilter;
 import ch.ivyteam.ivy.process.call.SubProcessSearchFilter.SearchScope;
 import ch.ivyteam.ivy.security.exec.Sudo;
@@ -77,7 +77,7 @@ public class IssueScannerService {
           .setSignature(BUILD_PATCH_ISSUE_BODY_START).toFilter();
 
       // Find subprocess
-      var subProcessStartList = SubProcessCallStart.find(filter);
+      var subProcessStartList = SubProcessCall.find(filter);
       if (CollectionUtils.isEmpty(subProcessStartList)) {
         return null;
       }

@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
   "id" : "19B02204F37B9BCA",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -41,7 +41,7 @@
       ],
       "visual" : {
         "at" : { "x" : 128, "y" : 160 },
-        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       },
       "connect" : [
         { "id" : "f12", "to" : "f13" }

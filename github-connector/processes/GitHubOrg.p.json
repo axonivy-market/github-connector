@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
   "id" : "19B079B4588F5678",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -44,7 +44,7 @@
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },
         "labelOffset" : { "x" : 89, "y" : 49 },
-        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       },
       "connect" : [
         { "id" : "f2", "to" : "f3" }
@@ -55,7 +55,7 @@
       "visual" : {
         "at" : { "x" : 400, "y" : 64 },
         "labelOffset" : { "x" : 13, "y" : 33 },
-        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
       }
     }, {
       "id" : "f3",

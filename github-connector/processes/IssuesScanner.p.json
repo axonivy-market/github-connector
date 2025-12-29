@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
   "id" : "19B10B247B9B0521",
   "config" : {
     "data" : "com.axonivy.connector.github.IssuesScannerData"
@@ -15,7 +15,9 @@
         },
         "permission" : {
           "anonymous" : false,
-          "role" : "GitHubAdmin"
+          "roles" : [
+            "GitHubAdmin"
+          ]
         }
       },
       "visual" : {
@@ -90,7 +92,9 @@
         },
         "permission" : {
           "anonymous" : false,
-          "role" : "GitHubAdmin"
+          "roles" : [
+            "GitHubAdmin"
+          ]
         }
       },
       "visual" : {
