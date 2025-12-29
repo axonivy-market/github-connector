@@ -52,6 +52,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 192 },
         "labelOffset" : { "x" : 193, "y" : 49 },
@@ -149,6 +152,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 320 },
         "labelOffset" : { "x" : 97, "y" : 49 },
@@ -235,6 +241,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 448 },
         "labelOffset" : { "x" : 17, "y" : 41 },
@@ -322,6 +331,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 576 },
         "labelOffset" : { "x" : 9, "y" : 41 },
@@ -409,6 +421,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 704 },
         "labelOffset" : { "x" : 57, "y" : 49 },
@@ -494,6 +509,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 848 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
@@ -573,6 +591,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 160, "y" : 64 },
         "labelOffset" : { "x" : 57, "y" : 49 },

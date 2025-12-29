@@ -27,13 +27,14 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
 @ExtendWith(MultiEnvironmentContextProvider.class)
 public class GitOrgTest extends BaseSetup {
 
-  private static final BpmProcess testOrgProcess = BpmProcess.path("GitHubOrg");
+  private static final BpmProcess orgProcess = BpmProcess.path("GitHubOrg");
 
   @TestTemplate
   public void testGetOrgMembers(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement testGetOrgMembers = testOrgProcess.elementName("getOrgMembers(String,String,String,Integer,Integer)");
-    ExecutionResult result = bpmClient.start().subProcess(testGetOrgMembers)
-        .withParam(GitHubParamConstants.ORG, "my-org").withParam(GitHubConstants.PAGE, 1)
+    BpmElement orgMembersStart = orgProcess.elementName("getOrgMembers(String,String,String,Integer,Integer)");
+    ExecutionResult result = bpmClient.start().subProcess(orgMembersStart)
+        .withParam(GitHubParamConstants.ORG, TEST_ORG_NAME)
+        .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 
     GitHubOrgData data = result.data().last();

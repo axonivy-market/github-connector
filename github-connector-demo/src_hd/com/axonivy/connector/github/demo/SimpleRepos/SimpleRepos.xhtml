@@ -7,6 +7,7 @@
     <ui:define name="title">#{ivy.cms.co('/Labels/Repositories')}</ui:define>
     <ui:define name="content">
       <h1>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleRepos/SimpleView')}</h1>
+      <h4>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleRepos/HelpText')}</h4>
       <h:form id="form">
         <p:dataTable id="repos-table" var="repo" widgetVar="reposTable" value="#{data.repos}" rows="10"
           paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"

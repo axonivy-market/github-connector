@@ -10,7 +10,7 @@
       <h1>#{ivy.cms.co('/Labels/Issues')}</h1>
 
       <h:form id="form">
-        <p:growl redisplay="false" showDetail="true" />
+        <p:growl id="growl-messages" redisplay="false" showDetail="true" />
         <div class="grid m-0 p-0">
           <div class="col-12 grid mx-0 p-0 mb-3">
             <div class="ui-inputgroup w-full ui-fluid">
@@ -36,12 +36,16 @@
                 <h:panelGroup>
                   <p:outputLabel value="#{ivy.cms.co('/Labels/CreatedBetween')}" />
                   <p:datePicker value="#{issuesBean.createdRange}" showIcon="true" selectionMode="range"
-                    showButtonBar="true" showOtherMonths="true" selectOtherMonths="true" />
+                    showButtonBar="true" showOtherMonths="true" selectOtherMonths="true"
+                    mask="true" maskAutoClear="true"
+                    converterMessage="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/RangeDateMessage')}"/>
                 </h:panelGroup>
                 <h:panelGroup>
                   <p:outputLabel value="#{ivy.cms.co('/Labels/UpdatedBetween')}" />
                   <p:datePicker value="#{issuesBean.updatedRange}" showIcon="true" selectionMode="range"
-                    showButtonBar="true" showOtherMonths="true" selectOtherMonths="true" />
+                    showButtonBar="true" showOtherMonths="true" selectOtherMonths="true"
+                    mask="true" maskAutoClear="true"
+                    converterMessage="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/RangeDateMessage')}"/>
                 </h:panelGroup>
                 <p:selectBooleanCheckbox
                   itemLabel="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/IssueHasNO')}"
@@ -55,7 +59,7 @@
                   <p:selectOneMenu id="state" value="#{issuesBean.issueState}" styleClass="mt-2">
                     <f:selectItem itemLabel="#{ivy.cms.co('/Labels/PleaseSelect')}" itemValue=""
                       noSelectionOption="true" />
-                    <f:selectItems value="#{issuesBean.issueStates}" />
+                    <f:selectItems value="#{issuesBean.issueStates}" var="state" itemValue="#{state}" itemLabel="#{state.state}"/>
                   </p:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup id="assignee-group" rendered="#{!issuesBean.showNoAssignee}">

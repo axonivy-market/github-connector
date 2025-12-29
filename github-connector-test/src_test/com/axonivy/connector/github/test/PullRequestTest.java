@@ -25,14 +25,16 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
 @ExtendWith(MultiEnvironmentContextProvider.class)
 public class PullRequestTest extends BaseSetup {
 
-  private static final BpmProcess testRepoProcess = BpmProcess.path("GitHubPullRequest");
+  private static final BpmProcess repoProcess = BpmProcess.path("GitHubPullRequest");
 
   @TestTemplate
   public void testGetPullRequest(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement testGetPullRequest = testRepoProcess
+    BpmElement pullRequestStart = repoProcess
         .elementName("getPullRequests(String,String,String,String,String,String,String,Integer,Integer)");
-    ExecutionResult result = bpmClient.start().subProcess(testGetPullRequest).withParam(GitHubParamConstants.OWNER, "my-test")
-        .withParam(GitHubParamConstants.REPO, "COD").withParam(GitHubConstants.PAGE, 1)
+    ExecutionResult result = bpmClient.start().subProcess(pullRequestStart)
+        .withParam(GitHubParamConstants.OWNER, "my-test")
+        .withParam(GitHubParamConstants.REPO, "COD")
+        .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 
     GitHubPullRequestData data = result.data().last();

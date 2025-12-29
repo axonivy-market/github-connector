@@ -89,10 +89,10 @@ public class IssuesBean {
     } else if (StringUtils.isNoneBlank(orgName)) {
       criteria.org(orgName);
     }
-    if (createdRange != null) {
+    if (createdRange != null && createdRange.size() > 1) {
       criteria.createdBetween(createdRange.getFirst(), createdRange.getLast());
     }
-    if (updatedRange != null) {
+    if (updatedRange != null && updatedRange.size() > 1) {
       criteria.updatedBetween(updatedRange.getFirst(), updatedRange.getLast());
     }
     issuesModel.search(criteria.build());

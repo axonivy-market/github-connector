@@ -18,6 +18,7 @@ import ch.ivyteam.ivy.rest.client.RestClients;
 
 public abstract class BaseSetup {
 
+  protected static final String TEST_ORG_NAME = "my-org";
   protected static final String GH_REST_CLIENT_NAME = "github (GitHub v3 REST API)";
   protected boolean isRealTest;
 
@@ -41,10 +42,13 @@ public abstract class BaseSetup {
     return () -> {
       fixture.var(Variable.ORG.getKey(), GitHubParamConstants.ORG);
       fixture.var(Variable.ACCESS_TOKEN.getKey(), Variable.ACCESS_TOKEN.getKey());
+
       RestClient restClient = RestClients.of(app).find(GH_REST_CLIENT_NAME);
-      Builder builder = RestClient.create(restClient.name()).uuid(restClient.uniqueId())
+      Builder builder = RestClient.create(restClient.name())
+          .uuid(restClient.uniqueId())
           .uri("http://{ivy.engine.host}:{ivy.engine.http.port}/{ivy.request.application}/api/githubMock")
-          .description(restClient.description()).properties(restClient.properties());
+          .description(restClient.description())
+          .properties(restClient.properties());
 
       for (RestClientFeature feature : restClient.features()) {
         builder.feature(feature.clazz());

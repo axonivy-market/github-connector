@@ -1,1 +1,8 @@
-{}
+{
+  "isPublic" : true,
+  "isPrivate" : false,
+  "archived" : false,
+  "noAssignee" : true,
+  "state" : "open",
+  "locked" : false
+}

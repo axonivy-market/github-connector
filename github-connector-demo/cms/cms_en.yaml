@@ -28,14 +28,17 @@ Dialogs:
               NoName: N/A
               PatchIssue: Patch Issue
               PatchIssueMessage: Patch the issue {0} successfully
+              RangeDateMessage: The selected date range is invalid; it must be a range
               SearchIssues: Search issues
               ViewCommentsOfIssue: View comments of issue
             Repositories:
               IssuesOrPulls: Issues or Pull requests
             SimpleIssues:
               Header: Simple Issues View
+              HelpText: This page only shows the first 30 issues that the user has with explicit permissions
               SimpleIssues: Simple Issues
             SimpleRepos:
+              HelpText: This page only shows the first 30 repositories that user has with explicit permissions
               SimpleView: Simple Repositories View
 Labels:
   Actions: Actions
@@ -47,6 +50,7 @@ Labels:
   Comments: Comments
   CreatedAt: Created At
   CreatedBetween: Created between
+  Filters: Filters
   Forks: Forks
   Issues: Issues
   IssuesHasNOComment: Issues has NO Comment

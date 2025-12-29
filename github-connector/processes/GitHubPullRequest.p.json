@@ -46,9 +46,13 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },
-        "labelOffset" : { "x" : 113, "y" : 49 }
+        "labelOffset" : { "x" : 113, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
       "connect" : [
         { "id" : "f2", "to" : "f3" }

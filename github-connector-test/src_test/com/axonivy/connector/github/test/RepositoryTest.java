@@ -27,12 +27,12 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
 @ExtendWith(MultiEnvironmentContextProvider.class)
 public class RepositoryTest extends BaseSetup {
   
-  private static final BpmProcess testRepoProcess = BpmProcess.path("GitHubRepo");
+  private static final BpmProcess repoProcess = BpmProcess.path("GitHubRepo");
 
   @TestTemplate
   public void testGetUserRepos(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement testGetUserRepos = testRepoProcess.elementName("getUserRepos(String,String,String,String,String,Integer,Integer,OffsetDateTime,OffsetDateTime)");
-    ExecutionResult result = bpmClient.start().subProcess(testGetUserRepos)
+    BpmElement userRepoStart = repoProcess.elementName("getUserRepos(String,String,String,String,String,Integer,Integer,OffsetDateTime,OffsetDateTime)");
+    ExecutionResult result = bpmClient.start().subProcess(userRepoStart)
         .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10)
         .execute();
@@ -48,8 +48,8 @@ public class RepositoryTest extends BaseSetup {
 
   @TestTemplate
   public void testSearchRepos(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement testSearchRepos = testRepoProcess.elementName("searchRepos(String,String,Integer,Integer)");
-    ExecutionResult result = bpmClient.start().subProcess(testSearchRepos)
+    BpmElement searchReposStart = repoProcess.elementName("searchRepos(String,String,Integer,Integer)");
+    ExecutionResult result = bpmClient.start().subProcess(searchReposStart)
         .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10)
         .execute();
