@@ -13,4 +13,4 @@ jobs:
   build:
     uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
     secrets:
-      mvnArgs: -Dgithub.org=${{secrets.org}} -Dgithub.accessToken=${{secrets.accessToken}} -DtestEnvironment=E2E
+      mvnArgs: -Dgithub.org=${{secrets.ORG}} -Dgithub.accessToken=${{secrets.ACCESS_TOKEN}} -DtestEnvironment=E2E
