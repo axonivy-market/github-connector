@@ -2,8 +2,6 @@
 
 An Axon Ivy REST API connector that integrates GitHub issues and workflows into your Ivy processes. This connector provides seamless communication with GitHub's REST API, enabling automated issue management, pull request handling, and workflow monitoring and more.
 
-## Features
-
 ### Daily GitHub Issue Scan
 - Automatically queries all open issues from a configured GitHub organization/repository
 - Supports plannable execution schedules (daily, hourly, monthly, etc.)
@@ -31,24 +29,29 @@ An Axon Ivy REST API connector that integrates GitHub issues and workflows into 
 
 ## Demo
 
-The GitHub Connector integrates seamlessly into Ivy workflows, enabling automated GitHub issue management:
+The GitHub Connector seamlessly integrates with Ivy workflows to provide automated GitHub issue management. Key capabilities include:
 
-1. **Automated Issue Scanning**: Schedule regular scans to discover new issues matching your criteria
-2. **Smart Processing**: Filter and route issues based on keywords, labels, or assignees
-3. **Automated Actions**: Automatically comment on, update, or assign issues
-4. **Workflow Integration**: Connect GitHub Actions with your Ivy processes
+1. **Automated Issue Scanning**: Configure scheduled scans to automatically discover and retrieve new issues that match your defined criteria.  
+   ![scanner-config](images/issues-scanner-config.png)
+
+2. **Issue Search**: Search and filter issues within your organization based on keywords, creation date, last updated date, or assignees.  
+   ![search-issues](images/issues.png)
+
+3. **Repository Management**: Browse and manage repositories within your organization.  
+   ![repositories-view](images/repositories.png)
+
+4. **Health Monitoring**: Monitor repository health status with automatic refresh when the last repository access occurred more than ten minutes prior.  
+   ![health-monitor](images/health-monitor.png)
 
 ## Setup
 
 ### Prerequisites
 - GitHub personal access token or OAuth token with appropriate permissions
-- Access to a GitHub organization or repository
 
 ### Configuration
 
 1. **GitHub Authentication**
    - Generate a GitHub personal access token with required scopes (`repo`, `issues`, `workflow`)
-   - Configure the token in your Ivy project settings
 
 2. **Organization/Repository Settings**
    - Set your target GitHub organization name
@@ -63,14 +66,10 @@ The GitHub Connector integrates seamlessly into Ivy workflows, enabling automate
    - Set watcher/team for automatic assignment
 
 4. **Customization**
-   - Override the callable process to customize issue patching behavior
-   - Implement custom logic for specific workflows
+   - Override the callable process `/github-connector/processes/Functional Processes/PatchIssues.p.json` to customize issue patching behavior
+   - Implement custom logic for specific workflows in `buildPatchIssueBody(String,String,BigInteger)` script
 
-### Getting Started
-
-1. Install the GitHub Connector from the Axon Ivy Market
-2. Configure your GitHub credentials and target repositories
-3. Set up your issue scanner with desired filters
-4. Customize workflows using the provided services
-5. Schedule automated scans and let the connector handle GitHub integration
-
+### Update Variables
+```
+@variables.yaml@
+```
