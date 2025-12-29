@@ -55,7 +55,7 @@ The GitHub Connector seamlessly integrates with Ivy workflows to provide automat
 
 2. **Organization/Repository Settings**
    - Set your target GitHub organization name
-   - Configure repository(ies) to monitor
+   - Configure repositories to monitor
 
 3. **Issue Scanner Configuration**
    - Define execution schedule (daily, hourly, monthly, etc.)
@@ -66,8 +66,9 @@ The GitHub Connector seamlessly integrates with Ivy workflows to provide automat
    - Set watcher/team for automatic assignment
 
 4. **Customization**
-   - Override the callable process `/github-connector/processes/Functional Processes/PatchIssues.p.json` to customize issue patching behavior
-   - Implement custom logic for specific workflows in `buildPatchIssueBody(String,String,BigInteger)` script
+   - Override the callable process `github-connector/processes/Functional Processes/PatchIssues.p.json` to customize issue patching behavior
+   - Implement custom logic for specific workflows in `buildPatchIssueBody(String,String,BigInteger)` script  
+   ![override-patch-issue-process](images/override-patch-issue-process.png)
 
 ### Update Variables
 ```
