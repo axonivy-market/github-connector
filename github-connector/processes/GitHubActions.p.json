@@ -36,6 +36,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 128, "y" : 160 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"

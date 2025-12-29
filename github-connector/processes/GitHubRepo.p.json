@@ -46,6 +46,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 192, "y" : 120 },
         "labelOffset" : { "x" : 129, "y" : 49 },
@@ -129,6 +132,9 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 192, "y" : 272 },
         "labelOffset" : { "x" : 33, "y" : 49 },

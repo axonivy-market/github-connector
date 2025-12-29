@@ -7,6 +7,7 @@
     <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleIssues/SimpleIssues')}</ui:define>
     <ui:define name="content">
       <h1>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleIssues/Header')}</h1>
+      <h4>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleIssues/HelpText')}</h4>
       <h:form id="form">
         <p:messages />
 
@@ -34,7 +35,7 @@
           </p:column>
 
           <p:column headerText="#{ivy.cms.co('/Labels/RepositoryUrl')}">
-            <p:link href="#{issue.repositoryUrl}" value="#{issue.repositoryUrl}" />
+            <p:link href="#{issue.htmlUrl}" value="#{issue.htmlUrl}" target="_blank" />
           </p:column>
         </p:dataTable>
         <br />

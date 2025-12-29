@@ -57,7 +57,7 @@ public class IssueScannerService {
         try {
           IssuesIssueNumberBody issueNumberBody = loadPatchIssueBody(owner, repoName, issueNumber);
           issueService.patchIssue(owner, repoName, issueNumber, issueNumberBody);
-          Ivy.log().info("Patch issue {0} of {1}/{2} sucessfull", issueNumber, owner, repoName);
+          Ivy.log().info("Patch issue {0} of {1}/{2} successfully", issueNumber, owner, repoName);
         } catch (Exception e) {
           Ivy.log().error("Cannot patch issue due to {0}", e, e.getMessage());
         }

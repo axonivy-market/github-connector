@@ -25,19 +25,20 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
 @ExtendWith(MultiEnvironmentContextProvider.class)
 public class ActionsTest extends BaseSetup {
 
-  private static final BpmProcess testActionsProcess = BpmProcess.path("GitHubActions");
+  private static final BpmProcess actionsProcess = BpmProcess.path("GitHubActions");
 
   @TestTemplate
   public void testGetWorkflowRun(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement testGetWorkflowRun = testActionsProcess.elementName("getActionsRun(String,String,Integer,Integer)");
-    ExecutionResult result = bpmClient.start().subProcess(testGetWorkflowRun)
+    BpmElement workflowRunStart = actionsProcess.elementName("getActionsRun(String,String,Integer,Integer)");
+    ExecutionResult result = bpmClient.start().subProcess(workflowRunStart)
         .withParam(GitHubParamConstants.OWNER, GitHubParamConstants.OWNER)
-        .withParam(GitHubParamConstants.REPO, GitHubParamConstants.REPO).withParam(GitHubConstants.PAGE, 1)
+        .withParam(GitHubParamConstants.REPO, GitHubParamConstants.REPO)
+        .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 
     GitHubActionsData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     } else {
       WorkflowRunAdvanced workflowRunAdvanced = data.getWorkflowRunAdvanced();
       assertNotNull(workflowRunAdvanced, "The WorkflowRunAdvanced is null");

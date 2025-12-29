@@ -7,13 +7,14 @@
     <ui:define name="title">#{ivy.cms.co('/Labels/Repositories')}</ui:define>
     <ui:define name="content">
       <h1>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleRepos/SimpleView')}</h1>
+      <h4>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleRepos/HelpText')}</h4>
       <h:form id="form">
         <p:dataTable id="repos-table" var="repo" widgetVar="reposTable" value="#{data.repos}" rows="10"
           paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
           paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50" lazy="false">
 
           <p:column headerText="#{ivy.cms.co('/Labels/Repo')}" id="repo-name">
-            <p:link value="#{repo.fullName}" href="#{repo.htmlUrl}" target="_blank" />
+            <p:link value="#{repo.htmlUrl}" href="#{repo.htmlUrl}" target="_blank" />
           </p:column>
 
           <p:column headerText="#{ivy.cms.co('/Labels/Stars')}" id="repo-stars" width="10%">

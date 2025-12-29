@@ -32,9 +32,14 @@
           }
         }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 336, "y" : 192 },
-        "labelOffset" : { "x" : 1, "y" : 41 }
+        "labelOffset" : { "x" : 1, "y" : 41 },
+        "description" : "The process will be called when the issue scanner proceed a issue. You can define what issue data could be  modified by this process",
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
       "connect" : [
         { "id" : "f3", "to" : "f2" }
@@ -64,11 +69,6 @@
       "id" : "f2",
       "type" : "Script",
       "name" : "Generate the IssuesIssueNumberBody for PATCH request",
-      "config" : {
-        "output" : {
-          "code" : "// Call in.patchIssueBody to build the IssuesIssueNumberBody object"
-        }
-      },
       "visual" : {
         "at" : { "x" : 610, "y" : 192 },
         "size" : { "width" : 316, "height" : 71 },
@@ -76,6 +76,34 @@
       },
       "connect" : [
         { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "Call in.patchIssueBody to build the IssuesIssueNumberBody object",
+        "The documentation can be found at \"https://docs.github.com/rest/issues/issues#update-an-issue\"",
+        "Example:",
+        "",
+        "in.patchIssueBody.title = \"New Title\";",
+        "in.patchIssueBody.body = \"Edited text body\";",
+        "in.patchIssueBody.labels = [\"new-feature\", \"feature-request\"];",
+        "in.patchIssueBody.state =  com.axonivy.connector.github.enums.IssueState.OPEN.getState();",
+        "in.patchIssueBody.stateReason = \"completed\";",
+        "",
+        "// The Milestones must be valid ID in https://github.com/{repo}/milestone",
+        "in.patchIssueBody.milestone = 1;",
+        "",
+        "// You cannot pass both `assignee` and `assignees`. Only one may be provided",
+        "// in.patchIssueBody.assignee = \"octopus\";",
+        "// in.patchIssueBody.assignees = [\"octopus\", \"another-username\"];"
+      ],
+      "visual" : {
+        "at" : { "x" : 614, "y" : 380 },
+        "size" : { "width" : 532, "height" : 248 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f2" }
       ]
     } ]
 }

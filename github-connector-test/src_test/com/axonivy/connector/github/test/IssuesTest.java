@@ -25,18 +25,19 @@ import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
 @ExtendWith(MultiEnvironmentContextProvider.class)
 public class IssuesTest extends BaseSetup {
 
-  private static final BpmProcess testIssueProcess = BpmProcess.path("GitHubIssue");
+  private static final BpmProcess issueProcess = BpmProcess.path("GitHubIssue");
 
   @TestTemplate
   public void testSearchIssues(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement testGetOrgMembers = testIssueProcess.elementName("searchIssues(String,String,String,Integer,Integer)");
-    ExecutionResult result = bpmClient.start().subProcess(testGetOrgMembers)
-        .withParam(GitHubParamConstants.ORG, "my-org").withParam(GitHubConstants.PAGE, 1)
+    BpmElement searchIssuesStart = issueProcess.elementName("searchIssues(String,String,String,Integer,Integer)");
+    ExecutionResult result = bpmClient.start().subProcess(searchIssuesStart)
+        .withParam(GitHubParamConstants.ORG, TEST_ORG_NAME)
+        .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 
     GitHubIssueData data = result.data().last();
     if (isRealTest) {
-      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server is return exception code instead of 200");
+      assertTrue(HttpStatus.SC_OK == data.getStatus(), "The server returns exception code instead of 200");
     } else {
       IssueSearch issueSearch = data.getIssuesSearch();
       assertNotNull(issueSearch, "The IssueSearch is null");

@@ -7,6 +7,7 @@ Dialogs:
             Header: Configuration the issue scanner
             Interactions: Interactions filter
             MainInformation: Main information
+            OrgValidateMessage: Organization name must not be empty
             OtherFilter: Other filter
             SaveConfig: Save config
             TimeFilter: Time filter

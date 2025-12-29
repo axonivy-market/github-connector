@@ -7,8 +7,12 @@
     <ui:define name="title">#{ivy.cms.co('/Labels/Repositories')}</ui:define>
     <ui:define name="content">
       <h1>#{ivy.cms.co('/Labels/Repositories')}</h1>
+      <h4>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/SimpleRepos/HelpText')}</h4>
       <h:form id="form">
         <div class="grid m-0 pl-1">
+          <div class="col pl-0">
+            <h4>#{ivy.cms.co('/Labels/Filters')}:</h4>
+          </div>
           <div class="col grid">
             <h:outputText value="#{ivy.cms.co('/Labels/ShowPullRequest')}" />
             <p:toggleSwitch id="pullRequestsCheckbox" value="#{repositoriesBean.showDetailedPullRequests}"
@@ -30,7 +34,7 @@
           paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,20,50" lazy="true">
 
           <p:column headerText="#{ivy.cms.co('/Labels/Repo')}" id="repo-name">
-            <p:link value="#{repo.fullName}" href="#{repo.htmlUrl}" />
+            <p:link value="#{repo.htmlUrl}" href="#{repo.htmlUrl}" target="_blank" />
           </p:column>
 
           <p:column headerText="#{ivy.cms.co('/Labels/WorkflowStatus')}" id="repo-workflow-status"

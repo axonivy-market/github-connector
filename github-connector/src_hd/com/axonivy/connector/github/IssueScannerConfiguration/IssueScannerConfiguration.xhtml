@@ -16,7 +16,7 @@
           <h:panelGroup>
             <p:outputLabel for="org" value="#{ivy.cms.co('/Labels/OrgName')}" />
             <p:inputText id="org" value="#{issueScannerConfigurationBean.issueScannerConfig.org}" required="true"
-              requiredMessage="Organization name must not be empty" />
+              requiredMessage="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/IssueScannerConfiguration/OrgValidateMessage')}" />
           </h:panelGroup>
           <h:panelGroup>
             <p:outputLabel for="repo" value="#{ivy.cms.co('/Labels/RepoName')}" />

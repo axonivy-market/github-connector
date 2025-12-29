@@ -89,10 +89,10 @@ public class IssuesBean {
     } else if (StringUtils.isNoneBlank(orgName)) {
       criteria.org(orgName);
     }
-    if (createdRange != null) {
+    if (createdRange != null && createdRange.size() > 1) {
       criteria.createdBetween(createdRange.getFirst(), createdRange.getLast());
     }
-    if (updatedRange != null) {
+    if (updatedRange != null && updatedRange.size() > 1) {
       criteria.updatedBetween(updatedRange.getFirst(), updatedRange.getLast());
     }
     issuesModel.search(criteria.build());
@@ -169,6 +169,9 @@ public class IssuesBean {
     var owner = GitHubApiUtils.extractRepoOwner(repoUrl);
     var repoName = GitHubApiUtils.extractRepoName(repoUrl);
     BigInteger issueNumber = new BigInteger(selectedIssue.getNumber().toString());
+    if (CollectionUtils.isNotEmpty(selectedUsers)) {
+      updateIssue.setAssignees(selectedUsers.stream().map(SimpleUser::getLogin).map(Object::toString).toList());
+    }
     FacesMessage message;
     try {
       Issue issue = issueService.patchIssue(owner, repoName, issueNumber, updateIssue);
