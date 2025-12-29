@@ -1,0 +1,279 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "17F92CE6CA3FD67B",
+  "config" : {
+    "data" : "com.axonivy.connector.github.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "showSimpleRepositoriesView.ivp",
+      "config" : {
+        "signature" : "showSimpleRepositoriesView",
+        "request" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoSimple/name\")%>"
+        },
+        "task" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoSimple/Tasks/SimpleView/name\")%>"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 144, "y" : 80 },
+        "labelOffset" : { "x" : 17, "y" : 33 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 648, "y" : 80 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "SubProcessCall",
+      "name" : "Get GitHub Repos",
+      "config" : {
+        "processCall" : "GitHubRepo:getUserRepos(String,String,String,String,String,Integer,Integer,java.time.OffsetDateTime,java.time.OffsetDateTime)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.repos" : "result.repos"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 80 },
+        "size" : { "width" : 144 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f2" }
+      ]
+    }, {
+      "id" : "f20",
+      "type" : "RequestStart",
+      "name" : "showRepoLazyDataTable.ivp",
+      "config" : {
+        "signature" : "showRepoLazyDataTable",
+        "request" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoLazy/name\")%>"
+        },
+        "task" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/RepoLazy/Tasks/LazyView/name\")%>"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 144, "y" : 176 },
+        "labelOffset" : { "x" : 17, "y" : 33 }
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f21" }
+      ]
+    }, {
+      "id" : "f21",
+      "type" : "DialogCall",
+      "name" : "Repositories as lazy table",
+      "config" : {
+        "dialog" : "com.axonivy.connector.github.demo.Repositories:start(com.axonivy.connector.github.demo.Data)"
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 176 },
+        "size" : { "width" : 144, "height" : 62 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 176 }
+      }
+    }, {
+      "id" : "f25",
+      "type" : "RequestStart",
+      "name" : "healthMonitor.ivp",
+      "config" : {
+        "signature" : "healthMonitor",
+        "request" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/HealthMonitor/name\")%>"
+        },
+        "task" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/HealthMonitor/Tasks/Monitor/name\")%>"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 144, "y" : 272 },
+        "labelOffset" : { "x" : 17, "y" : 33 }
+      },
+      "connect" : [
+        { "id" : "f28", "to" : "f26" }
+      ]
+    }, {
+      "id" : "f26",
+      "type" : "DialogCall",
+      "name" : "Health Monitor",
+      "config" : {
+        "dialog" : "com.axonivy.connector.github.demo.HealthMonitor:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 272 },
+        "size" : { "width" : 144, "height" : 62 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f27" }
+      ]
+    }, {
+      "id" : "f27",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 272 }
+      }
+    }, {
+      "id" : "f2",
+      "type" : "DialogCall",
+      "name" : "Simple Repos View",
+      "config" : {
+        "dialog" : "com.axonivy.connector.github.demo.SimpleRepos:start(java.util.List<com.github.api.client.Repository>)",
+        "call" : {
+          "map" : {
+            "param.repos" : "in.repos"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 80 },
+        "size" : { "width" : 144, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "RequestStart",
+      "name" : "showSimpleIssuesView.ivp",
+      "config" : {
+        "signature" : "showSimpleIssuesView",
+        "request" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/IssueSimple/name\")%>"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 144, "y" : 432 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "SubProcessCall",
+      "name" : "Get assigned issue",
+      "config" : {
+        "processCall" : "GitHubIssue:getOrgIssues(String,String,String,String,String,java.time.OffsetDateTime,Integer,Integer,String)",
+        "call" : {
+          "map" : {
+            "param.org" : "\"axonivy-market\""
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.issues" : "result.issues"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 432 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f11", "to" : "f12" }
+      ]
+    }, {
+      "id" : "f10",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 648, "y" : 432 }
+      }
+    }, {
+      "id" : "f12",
+      "type" : "DialogCall",
+      "name" : "Simple Issue View",
+      "config" : {
+        "dialog" : "com.axonivy.connector.github.demo.SimpleIssues:start(List<com.github.api.client.Issue>)",
+        "call" : {
+          "map" : {
+            "param.issues" : "in.issues"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 432 },
+        "size" : { "width" : 136 }
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f10", "color" : "default" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "RequestStart",
+      "name" : "showIssuesLazyDataTable.ivp",
+      "config" : {
+        "signature" : "showIssuesLazyDataTable",
+        "request" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/GitHubDemo/IssueLazy/name\")%>"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 144, "y" : 544 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f31" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 544 }
+      }
+    }, {
+      "id" : "f31",
+      "type" : "DialogCall",
+      "name" : "Issues as lazy table",
+      "config" : {
+        "dialog" : "com.axonivy.connector.github.demo.Issues:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 544 },
+        "size" : { "width" : 144, "height" : 62 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f17", "color" : "default" }
+      ]
+    } ],
+  "layout" : {
+    "lanes" : [ {
+        "name" : "GitHub Demo",
+        "offset" : 24,
+        "size" : 672,
+        "lanes" : [ {
+            "name" : "Repos Demo",
+            "size" : 328,
+            "color" : "lane1"
+          }, {
+            "name" : "Issues Demo",
+            "size" : 344,
+            "color" : "lane2"
+          } ]
+      } ],
+    "colors" : {
+      "lane1" : "#4ec200",
+      "lane2" : "#800000"
+    }
+  }
+}

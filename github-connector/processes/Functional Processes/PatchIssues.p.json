@@ -1,0 +1,109 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "19B10BF212AC64B3",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.PatchIssues"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "buildPatchIssueBody(String,String,BigInteger)",
+      "config" : {
+        "signature" : "buildPatchIssueBody",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" }
+          ],
+          "map" : {
+            "out.issueNumber" : "param.issueNumber",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "patchIssueBody", "type" : "com.github.api.client.IssuesIssueNumberBody", "desc" : "" }
+          ],
+          "map" : {
+            "result.patchIssueBody" : "in.patchIssueBody"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 336, "y" : 192 },
+        "labelOffset" : { "x" : 1, "y" : 41 },
+        "description" : "The process will be called when the issue scanner proceed a issue. You can define what issue data could be  modified by this process",
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f2" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 864, "y" : 192 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "This sub process can be customized",
+        "",
+        "The custom process signature must be: \"buildPatchIssueBody(String,String,BigInteger)\""
+      ],
+      "visual" : {
+        "at" : { "x" : 336, "y" : 97 },
+        "size" : { "width" : 558, "height" : 66 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f0" }
+      ]
+    }, {
+      "id" : "f2",
+      "type" : "Script",
+      "name" : "Generate the IssuesIssueNumberBody for PATCH request",
+      "visual" : {
+        "at" : { "x" : 610, "y" : 192 },
+        "size" : { "width" : 316, "height" : 71 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "Call in.patchIssueBody to build the IssuesIssueNumberBody object",
+        "The documentation can be found at \"https://docs.github.com/rest/issues/issues#update-an-issue\"",
+        "Example:",
+        "",
+        "in.patchIssueBody.title = \"New Title\";",
+        "in.patchIssueBody.body = \"Edited text body\";",
+        "in.patchIssueBody.labels = [\"new-feature\", \"feature-request\"];",
+        "in.patchIssueBody.state =  com.axonivy.connector.github.enums.IssueState.OPEN.getState();",
+        "in.patchIssueBody.stateReason = \"completed\";",
+        "",
+        "// The Milestones must be valid ID in https://github.com/{repo}/milestone",
+        "in.patchIssueBody.milestone = 1;",
+        "",
+        "// You cannot pass both `assignee` and `assignees`. Only one may be provided",
+        "// in.patchIssueBody.assignee = \"octopus\";",
+        "// in.patchIssueBody.assignees = [\"octopus\", \"another-username\"];"
+      ],
+      "visual" : {
+        "at" : { "x" : 614, "y" : 380 },
+        "size" : { "width" : 532, "height" : 248 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f2" }
+      ]
+    } ]
+}

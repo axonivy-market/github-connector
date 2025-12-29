@@ -1,0 +1,97 @@
+Dialogs:
+  com:
+    axonivy:
+      connector:
+        github:
+          demo:
+            HealthMonitor:
+              ForceRefresh: Force refresh
+              HealthMonitor: Health Monitor
+              LastUpdated: 'Last updated: {0}'
+            Issues:
+              AddCommentTo: Add comment to issue
+              AddedComment: Added Comment
+              AddedMessageDetails: 'Your comment is added to the issue {0} successfully with #Id: {1}'
+              AddsUpTo10ToAnIssue: Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
+              AdvanceFilter: Advance filter
+              AssignUserMessage: Assigned users to the issue {0} successfully
+              AssignUsers: Assign Users
+              AssignUsersToIssue: Assign users to issue
+              CannotAddCommentMessage: Cannot add your comment to the issue {0}
+              CannotAssignUserMessage: Cannot assign users to the issue {0}
+              CannotPatchIssueMessage: Cannot update the issue {0}
+              DisplayNamePattern: '{0} ({1})'
+              ExceptionMessage: Exception {0}
+              Failed: Failed
+              IssueHasNO: Issue has NO Assignee
+              IssuesHasNO: Issues has NO Comment
+              NoName: N/A
+              PatchIssue: Patch Issue
+              PatchIssueMessage: Patch the issue {0} successfully
+              RangeDateMessage: The selected date range is invalid; it must be a range
+              SearchIssues: Search issues
+              ViewCommentsOfIssue: View comments of issue
+            Repositories:
+              IssuesOrPulls: Issues or Pull requests
+            SimpleIssues:
+              Header: Simple Issues View
+              HelpText: This page only shows the first 30 issues that the user has with explicit permissions
+              SimpleIssues: Simple Issues
+            SimpleRepos:
+              HelpText: This page only shows the first 30 repositories that user has with explicit permissions
+              SimpleView: Simple Repositories View
+Labels:
+  Actions: Actions
+  AddComment: Add comment
+  AssignUser: Assign user
+  Assignees: Assignees
+  Body: Body
+  Close: Close
+  Comments: Comments
+  CreatedAt: Created At
+  CreatedBetween: Created between
+  Filters: Filters
+  Forks: Forks
+  Issues: Issues
+  IssuesHasNOComment: Issues has NO Comment
+  Milestone: Milestone
+  Proceed: Proceed
+  PullRequests: Pull Requests
+  Repo: Repo
+  Repositories: Repositories
+  RepositoryUrl: Repository Url
+  Search: Search
+  ShowPullRequest: Show pull requests
+  ShowWorkflowRun: Show workflow runs
+  Stars: Stars
+  StateReason: State Reason
+  Submit: Submit
+  TheseIsNoComment: These is no comment!
+  Title: Title
+  UpdateIssue: Update Issue Information
+  UpdatedAt: Updated At
+  UpdatedBetween: Updated between
+  Users: Users
+  ViewComments: View comments
+  WorkflowStatus: Workflow status
+Processes:
+  GitHubDemo:
+    HealthMonitor:
+      Tasks:
+        Monitor:
+          name: Health Monitor
+      name: Health Monitor
+    IssueLazy:
+      name: Show Issues in The Lazy Datatable
+    IssueSimple:
+      name: Show Issues in A Simple View
+    RepoLazy:
+      Tasks:
+        LazyView:
+          name: Show the repo as lazy datatable
+      name: Show Repositories in The Lazy Datatable
+    RepoSimple:
+      Tasks:
+        SimpleView:
+          name: Simple Repositories View
+      name: Show Repositories in A Simple View

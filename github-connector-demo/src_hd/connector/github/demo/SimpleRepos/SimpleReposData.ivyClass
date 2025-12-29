@@ -1,4 +1,0 @@
-SimpleReposData #class
-connector.github.demo.SimpleRepos #namespace
-repos java.util.List<com.github.api.client.Repository> #field
-repos PERSISTENT #fieldModifier
