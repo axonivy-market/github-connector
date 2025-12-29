@@ -1,4 +1,0 @@
-Data #class
-connector.github.demo #namespace
-repos List<com.github.api.client.Repository> #field
-repos PERSISTENT #fieldModifier

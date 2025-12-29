@@ -1,0 +1,258 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="/layouts/frame-10.xhtml">
+    <ui:define name="title">#{ivy.cms.co('/Labels/Issues')}</ui:define>
+    <ui:define name="content">
+
+      <h1>#{ivy.cms.co('/Labels/Issues')}</h1>
+
+      <h:form id="form">
+        <p:growl id="growl-messages" redisplay="false" showDetail="true" />
+        <div class="grid m-0 p-0">
+          <div class="col-12 grid mx-0 p-0 mb-3">
+            <div class="ui-inputgroup w-full ui-fluid">
+              <p:inputText placeholder="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/SearchIssues')}"
+                value="#{issuesBean.keyword}" />
+              <p:commandButton value="#{ivy.cms.co('/Labels/Search')}" actionListener="#{issuesBean.searchIssues()}"
+                styleClass="w-auto" update="form" process="form" icon="pi pi-search" />
+            </div>
+          </div>
+          <div class="col-12 grid m-0 p-0 mb-4">
+            <p:fieldset widgetVar="advance-filter"
+              legend="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/AdvanceFilter')}"
+              styleClass="w-full mx-0" collapsed="true" toggleable="true">
+              <p:panelGrid id="advance-filter-panel" columns="2" styleClass="ui-fluid">
+                <h:panelGroup id="org-name-group">
+                  <p:outputLabel value="#{ivy.cms.co('/Labels/OrgName')}" styleClass="block mb-2" />
+                  <p:inputText value="#{issuesBean.orgName}" />
+                </h:panelGroup>
+                <h:panelGroup id="repo-group">
+                  <p:outputLabel value="#{ivy.cms.co('/Labels/RepoName')}" styleClass="block mb-2" />
+                  <p:inputText value="#{issuesBean.repoName}" />
+                </h:panelGroup>
+                <h:panelGroup>
+                  <p:outputLabel value="#{ivy.cms.co('/Labels/CreatedBetween')}" />
+                  <p:datePicker value="#{issuesBean.createdRange}" showIcon="true" selectionMode="range"
+                    showButtonBar="true" showOtherMonths="true" selectOtherMonths="true"
+                    mask="true" maskAutoClear="true"
+                    converterMessage="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/RangeDateMessage')}"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                  <p:outputLabel value="#{ivy.cms.co('/Labels/UpdatedBetween')}" />
+                  <p:datePicker value="#{issuesBean.updatedRange}" showIcon="true" selectionMode="range"
+                    showButtonBar="true" showOtherMonths="true" selectOtherMonths="true"
+                    mask="true" maskAutoClear="true"
+                    converterMessage="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/RangeDateMessage')}"/>
+                </h:panelGroup>
+                <p:selectBooleanCheckbox
+                  itemLabel="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/IssueHasNO')}"
+                  value="#{issuesBean.showNoAssignee}">
+                  <p:ajax update="advance-filter-panel" process="advance-filter-panel" partialSubmit="true" />
+                </p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox itemLabel="#{ivy.cms.co('/Labels/IssuesHasNOComment')}"
+                  value="#{issuesBean.showNoComment}" />
+                <h:panelGroup id="state-group">
+                  <p:outputLabel value="State" />
+                  <p:selectOneMenu id="state" value="#{issuesBean.issueState}" styleClass="mt-2">
+                    <f:selectItem itemLabel="#{ivy.cms.co('/Labels/PleaseSelect')}" itemValue=""
+                      noSelectionOption="true" />
+                    <f:selectItems value="#{issuesBean.issueStates}" var="state" itemValue="#{state}" itemLabel="#{state.state}"/>
+                  </p:selectOneMenu>
+                </h:panelGroup>
+                <h:panelGroup id="assignee-group" rendered="#{!issuesBean.showNoAssignee}">
+                  <p:outputLabel value="#{ivy.cms.co('/Labels/Assignee')}" styleClass="block mb-2" />
+                  <p:inputText value="#{issuesBean.assignee}" />
+                </h:panelGroup>
+              </p:panelGrid>
+            </p:fieldset>
+          </div>
+        </div>
+
+        <p:dataTable id="issues-table" widgetVar="issues-table" value="#{issuesBean.issuesModel}" var="issue"
+          lazy="true" showGridlines="true" resizableColumns="true" liveResize="true"
+          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+          rows="10" paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="5,10,20,50"
+          paginatorAlwaysVisible="false" scrollable="true" scrollHeight="500">
+          <p:column resizable="false" width="100px" styleClass="text-center">
+            <p:menuButton value="#{ivy.cms.co('/Labels/Actions')}">
+              <p:menuitem value="#{ivy.cms.co('/Labels/AddComment')}"
+                actionListener="#{issuesBean.setSelectedIssue(issue)}" update="comment-dialog" icon="pi pi-plus"
+                oncomplete="PF('comment-dialog').show();" />
+              <p:menuitem value="#{ivy.cms.co('/Labels/AssignUser')}"
+                actionListener="#{issuesBean.onSelectIssue(issue)}" update="assign-user-dialog" icon="pi pi-user-plus"
+                oncomplete="PF('assign-user-dialog').show();" />
+              <p:menuitem value="#{ivy.cms.co('/Labels/UpdateIssue')}"
+                actionListener="#{issuesBean.onSelectIssue(issue)}" oncomplete="PF('update-issue-dialog').show()"
+                update="update-issue-dialog" icon="pi pi-server" />
+              <p:menuitem value="#{ivy.cms.co('/Labels/ViewComments')}"
+                actionListener="#{issuesBean.loadCommentsForIssue(issue)}"
+                oncomplete="PF('view-comments-dialog').show()" update="view-comments-dialog" icon="pi pi-comments" />
+            </p:menuButton>
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/Title')}" width="200px">
+            <h:outputText value="#{issue.title}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/State')}" width="50px">
+            <h:outputText value="#{issue.state}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/Assignees')}" width="200px">
+            <h:outputText value="#{issuesBean.getAssignessDisplayName(issue)}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/CreatedAt')}" width="140px">
+            <h:outputText value="#{issue.createdAt}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/UpdatedAt')}" width="140px">
+            <h:outputText value="#{issue.updatedAt}" />
+          </p:column>
+
+          <p:column headerText="#{ivy.cms.co('/Labels/RepositoryUrl')}" width="200px">
+            <p:link href="#{issue.htmlUrl}" value="#{issue.htmlUrl}" target="_blank" />
+          </p:column>
+          <p:spacer />
+        </p:dataTable>
+        <br />
+        <div class="command-btns">
+          <p:commandButton id="close" actionListener="#{ivyWorkflowView.cancel()}" process="@this"
+            value="#{ivy.cms.co('/Labels/Close')}" icon="ui-icon-check"/>
+        </div>
+      </h:form>
+
+      <p:dialog id="comment-dialog"
+        header="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/AddCommentTo')}"
+        widgetVar="comment-dialog" width="600" fitViewport="true" closeOnEscape="false" closable="false"
+        appendTo="@(body)" modal="true" blockScroll="true">
+        <h:panelGroup id="comment-group" layout="block" styleClass="grid ui-fluid m-0 p-0">
+          <p:outputLabel for="comment" value="Comment" />
+          <p:inputTextarea id="comment" value="#{issuesBean.comment}" styleClass="mt-2" rows="5" autoResize="true"
+            required="true" requiredMessage="Comment could not be empty!" />
+          <p:message for="comment" />
+        </h:panelGroup>
+        <f:facet name="footer">
+          <p:commandLink value="#{ivy.cms.co('/Labels/Cancel')}" onclick="PF('comment-dialog').hide();" immediate="true" />
+          <p:commandButton value="#{ivy.cms.co('/Labels/Submit')}" actionListener="#{issuesBean.addCommentToIssue()}"
+            process="comment-group" update="comment-group form" partialSubmit="true"
+            oncomplete="if (!args.validationFailed) PF('comment-dialog').hide();" styleClass="m-0 ml-4" />
+        </f:facet>
+      </p:dialog>
+
+      <p:dialog id="view-comments-dialog"
+        header="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/ViewCommentsOfIssue')}"
+        widgetVar="view-comments-dialog" width="600" fitViewport="true" closeOnEscape="false" closable="false"
+        appendTo="@(body)" modal="true" blockScroll="true" onShow="PF('view-comments-dialog').resetPosition()">
+        <h:panelGroup id="view-comments-group" layout="block" styleClass="grid ui-fluid m-0 p-0">
+          <h3 class="w-full mb-2">#{ivy.cms.co('/Labels/Comments')}</h3>
+          <h:panelGroup rendered="#{not empty issuesBean.issueComments}">
+            <ui:repeat var="comment" value="#{issuesBean.issueComments}">
+              <p:card styleClass="w-full mt-2">
+                <f:facet name="subtitle">
+                  <h:outputText styleClass="font-bold" value="#{comment.user.login} - #{comment.createdAt}" />
+                </f:facet>
+                <h:outputText value="#{comment.body}" escape="false" />
+              </p:card>
+            </ui:repeat>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{empty issuesBean.issueComments}">
+            <p>#{ivy.cms.co('/Labels/TheseIsNoComment')}</p>
+          </h:panelGroup>
+        </h:panelGroup>
+        <f:facet name="footer">
+          <p:commandButton value="Close" onclick="PF('view-comments-dialog').hide();" type="button" styleClass="mt-4" />
+        </f:facet>
+      </p:dialog>
+
+      <p:dialog id="assign-user-dialog"
+        header="#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/AssignUsersToIssue')}"
+        widgetVar="assign-user-dialog" width="600" fitViewport="true" closeOnEscape="false" closable="false"
+        appendTo="@(body)" modal="true" blockScroll="true">
+        <h:panelGroup id="add-assignee-group" layout="block" styleClass="grid ui-fluid m-0 p-0">
+          <p>#{ivy.cms.co('/Dialogs/com/axonivy/connector/github/demo/Issues/AddsUpTo10ToAnIssue')}</p>
+          <p:outputLabel value="#{ivy.cms.co('/Labels/Users')}" />
+          <p:autoComplete multiple="true" value="#{issuesBean.selectedUsers}"
+            completeMethod="#{issuesBean.onCompleteUserSearch}" var="simpleUser" itemValue="#{simpleUser}"
+            itemLabel="#{simpleUser.login}" styleClass="mt-2" dropdown="true" unique="true" dynamic="true"
+            selectLimit="10" scrollHeight="500" converter="pojoConverter"/>
+        </h:panelGroup>
+        <f:facet name="footer">
+          <p:commandLink value="#{ivy.cms.co('/Labels/Cancel')}" onclick="PF('assign-user-dialog').hide();"
+            immediate="true" />
+          <p:commandButton value="#{ivy.cms.co('/Labels/Submit')}" actionListener="#{issuesBean.assignUsersToIssue()}"
+            process="add-assignee-group" update="add-assignee-group form" partialSubmit="true"
+            oncomplete="PF('assign-user-dialog').hide();" styleClass="m-0 ml-4" />
+        </f:facet>
+      </p:dialog>
+
+      <p:dialog id="update-issue-dialog" header="#{ivy.cms.co('/Labels/UpdateIssue')}" widgetVar="update-issue-dialog"
+        width="800" fitViewport="true" closeOnEscape="false" closable="false" appendTo="@(body)" modal="true"
+        blockScroll="true" onShow="PF('update-issue-dialog').resetPosition()">
+        <h:panelGroup id="update-issue-group" styleClass="ui-fluid m-0 p-0 w-full grid" layout="block">
+          <p:messages redisplay="false" styleClass="col-12 p-0 m-0" />
+          <h:panelGroup styleClass="col-6">
+            <p:outputLabel for="title" value="#{ivy.cms.co('/Labels/Title')}" />
+            <p:inputText id="title" value="#{issuesBean.updateIssue.title}" styleClass="mt-2" />
+          </h:panelGroup>
+          <h:panelGroup styleClass="col-6">
+            <p:outputLabel for="labels" value="#{ivy.cms.co('/Labels/Labels')}" />
+            <p:selectCheckboxMenu id="labels" value="#{issuesBean.updateIssue.labels}" styleClass="mt-2" multiple="true">
+              <f:selectItem itemLabel="Please select" itemValue="" noSelectionOption="true" />
+              <f:selectItem itemLabel="Bug" itemValue="bug" />
+              <f:selectItem itemLabel="New Feature" itemValue="new_feature" />
+              <f:selectItem itemLabel="Improvement" itemValue="improvement" />
+              <f:selectItem itemLabel="Question" itemValue="question" />
+              <f:selectItem itemLabel="Test" itemValue="test" />
+            </p:selectCheckboxMenu>
+          </h:panelGroup>
+          <h:panelGroup styleClass="col-6">
+            <p:outputLabel for="milestone" value="#{ivy.cms.co('/Labels/Milestone')}" />
+            <p:inputText id="milestone" value="#{issuesBean.updateIssue.milestone}" styleClass="mt-2" />
+          </h:panelGroup>
+          <h:panelGroup styleClass="col-6">
+            <p:outputLabel for="state" value="#{ivy.cms.co('/Labels/State')}" />
+            <p:selectOneMenu id="state" value="#{issuesBean.updateIssue.state}" styleClass="mt-2">
+              <f:selectItem itemLabel="Please select" itemValue="" noSelectionOption="true" />
+              <f:selectItem itemLabel="Open" itemValue="open" />
+              <f:selectItem itemLabel="Closed" itemValue="closed" />
+            </p:selectOneMenu>
+          </h:panelGroup>
+          <h:panelGroup styleClass="col-6">
+            <p:outputLabel for="state-reason" value="#{ivy.cms.co('/Labels/StateReason')}" />
+            <p:selectOneMenu id="state-reason" value="#{issuesBean.updateIssue.stateReason}" styleClass="mt-2">
+              <f:selectItem itemLabel="Please select" itemValue="" noSelectionOption="true" />
+              <f:selectItem itemLabel="Completed" itemValue="completed" />
+              <f:selectItem itemLabel="Not planned" itemValue="not_planned" />
+              <f:selectItem itemLabel="Reopened" itemValue="reopened" />
+            </p:selectOneMenu>
+          </h:panelGroup>
+          <h:panelGroup styleClass="col-12">
+            <p:outputLabel for="body" value="#{ivy.cms.co('/Labels/Body')}" />
+            <p:inputTextarea id="body" value="#{issuesBean.updateIssue.body}" styleClass="mt-2" rows="5"
+              autoResize="true" />
+          </h:panelGroup>
+          <h:panelGroup styleClass="col-12">
+            <p:outputLabel for="assignees" value="#{ivy.cms.co('/Labels/Assignees')}" />
+            <p:autoComplete id="assignees" multiple="true" value="#{issuesBean.selectedUsers}" dynamic="true"
+              dropdown="true" selectLimit="10" unique="true" completeMethod="#{issuesBean.onCompleteUserSearch}"
+              var="simpleUser" itemValue="#{simpleUser}" itemLabel="#{simpleUser.login}" styleClass="mt-2"
+              converter="pojoConverter" scrollHeight="500" />
+          </h:panelGroup>
+        </h:panelGroup>
+        <f:facet name="footer">
+          <p:commandLink value="#{ivy.cms.co('/Labels/Cancel')}" onclick="PF('update-issue-dialog').hide();"
+            immediate="true" />
+          <p:commandButton value="#{ivy.cms.co('/Labels/Submit')}" actionListener="#{issuesBean.patchIssue()}"
+            process="update-issue-group" update="update-issue-group form" partialSubmit="true"
+            oncomplete="if (!args.validationFailed) PF('update-issue-dialog').hide();" styleClass="m-0 ml-4" />
+        </f:facet>
+      </p:dialog>
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>

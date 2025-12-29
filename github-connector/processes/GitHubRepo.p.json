@@ -1,0 +1,188 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "id" : "17F92A2C7E745913",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.GitHubRepoData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getUserRepos(String,String,String,String,String,Integer,Integer,OffsetDateTime,OffsetDateTime)",
+      "config" : {
+        "signature" : "getUserRepos",
+        "input" : {
+          "params" : [
+            { "name" : "visibility", "type" : "String", "desc" : "" },
+            { "name" : "affiliation", "type" : "String", "desc" : "" },
+            { "name" : "type", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "direction", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
+            { "name" : "since", "type" : "java.time.OffsetDateTime", "desc" : "" },
+            { "name" : "before", "type" : "java.time.OffsetDateTime", "desc" : "" }
+          ],
+          "map" : {
+            "out.affiliation" : "param.#affiliation",
+            "out.before" : "param.#before",
+            "out.direction" : "param.#direction",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.since" : "param.#since",
+            "out.sort" : "param.#sort",
+            "out.type" : "param.#type",
+            "out.visibility" : "param.#visibility"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "repos", "type" : "List<com.github.api.client.Repository>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.repos" : "in.repos",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 192, "y" : 120 },
+        "labelOffset" : { "x" : 129, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 592, "y" : 120 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "Get User repos",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/user/repos",
+          "queryParams" : {
+            "visibility" : "in.#visibility is initialized ? in.#visibility : null",
+            "affiliation" : "in.#affiliation is initialized ? in.#affiliation : null",
+            "type" : "in.#type is initialized ? in.#type : null",
+            "sort" : "in.#sort is initialized ? in.#sort : null",
+            "direction" : "in.#direction is initialized ? in.#direction : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null",
+            "page" : "in.#page is initialized ? in.#page : null",
+            "since" : "in.#since is initialized ? in.#since : null",
+            "before" : "in.#before is initialized ? in.#before : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.github.api.client.Repository>",
+            "map" : {
+              "out.repos" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 119 },
+        "size" : { "width" : 160, "height" : 63 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "searchRepos(String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "searchRepos",
+        "input" : {
+          "params" : [
+            { "name" : "query", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.query" : "param.query",
+            "out.sort" : "param.#sort"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "repositorySearch", "type" : "com.axonivy.connector.github.models.RepositorySearch", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.repositorySearch" : "in.repositorySearch",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 192, "y" : 272 },
+        "labelOffset" : { "x" : 33, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "RestClientCall",
+      "name" : "Search Repositories",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/search/repositories",
+          "queryParams" : {
+            "q" : "in.#query",
+            "sort" : "in.#sort is initialized ? in.#sort : null",
+            "page" : "in.#page is initialized ? in.#page : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.InlineResponse20033",
+            "code" : [
+              "import com.axonivy.connector.github.models.RepositorySearch;",
+              "in.repositorySearch = new RepositorySearch(result);",
+              "in.status = response.getStatus();"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 272 },
+        "size" : { "width" : 160, "height" : 63 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 592, "y" : 272 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    } ]
+}

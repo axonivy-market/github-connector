@@ -1,0 +1,88 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "GitHubIssueData",
+  "namespace" : "com.axonivy.connector.github",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "issues",
+    "type" : "List<com.github.api.client.Issue>"
+  }, {
+    "name" : "filter",
+    "type" : "String"
+  }, {
+    "name" : "state",
+    "type" : "String"
+  }, {
+    "name" : "labels",
+    "type" : "String"
+  }, {
+    "name" : "sort",
+    "type" : "String"
+  }, {
+    "name" : "direction",
+    "type" : "String"
+  }, {
+    "name" : "since",
+    "type" : "java.time.OffsetDateTime"
+  }, {
+    "name" : "collab",
+    "type" : "Boolean"
+  }, {
+    "name" : "orgs",
+    "type" : "Boolean"
+  }, {
+    "name" : "owned",
+    "type" : "Boolean"
+  }, {
+    "name" : "pulls",
+    "type" : "Boolean"
+  }, {
+    "name" : "pageSize",
+    "type" : "java.lang.Integer"
+  }, {
+    "name" : "page",
+    "type" : "java.lang.Integer"
+  }, {
+    "name" : "org",
+    "type" : "String"
+  }, {
+    "name" : "query",
+    "type" : "String"
+  }, {
+    "name" : "issuesSearch",
+    "type" : "com.axonivy.connector.github.models.IssueSearch"
+  }, {
+    "name" : "order",
+    "type" : "String"
+  }, {
+    "name" : "owner",
+    "type" : "String"
+  }, {
+    "name" : "repo",
+    "type" : "String"
+  }, {
+    "name" : "issuesNumber",
+    "type" : "java.math.BigInteger"
+  }, {
+    "name" : "comment",
+    "type" : "String"
+  }, {
+    "name" : "issueComment",
+    "type" : "com.github.api.client.IssueComment"
+  }, {
+    "name" : "usernames",
+    "type" : "List<String>"
+  }, {
+    "name" : "issue",
+    "type" : "com.github.api.client.Issue"
+  }, {
+    "name" : "updateIssueBody",
+    "type" : "com.github.api.client.IssuesIssueNumberBody"
+  }, {
+    "name" : "issueComments",
+    "type" : "List<com.github.api.client.IssueComment>"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
+  } ]
+}

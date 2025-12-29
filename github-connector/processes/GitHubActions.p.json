@@ -1,0 +1,91 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "id" : "19B02204F37B9BCA",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.GitHubActionsData"
+  },
+  "elements" : [ {
+      "id" : "f10",
+      "type" : "CallSubStart",
+      "name" : "getActionsRun(String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "getActionsRun",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.owner" : "param.#owner",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.repo" : "param.#repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "workflowRunAdvanced", "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.workflowRunAdvanced" : "in.workflowRunAdvanced",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 128, "y" : 160 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 160 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f13",
+      "type" : "RestClientCall",
+      "name" : "Get Actions runs",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/actions/runs",
+          "templateParams" : {
+            "owner" : "in.#owner is initialized ? in.#owner : null",
+            "repo" : "in.#repo is initialized ? in.repo : null"
+          },
+          "queryParams" : {
+            "page" : "in.#page is initialized ? in.#page : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.InlineResponse20016",
+            "code" : [
+              "import com.axonivy.connector.github.models.WorkflowRunAdvanced;",
+              "out.workflowRunAdvanced = new WorkflowRunAdvanced(result);"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 328, "y" : 160 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f11", "color" : "default" }
+      ]
+    } ]
+}

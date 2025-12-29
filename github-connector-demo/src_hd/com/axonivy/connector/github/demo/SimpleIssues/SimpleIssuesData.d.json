@@ -1,0 +1,10 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "SimpleIssuesData",
+  "namespace" : "com.axonivy.connector.github.demo.SimpleIssues",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "issues",
+    "type" : "List<com.github.api.client.Issue>"
+  } ]
+}

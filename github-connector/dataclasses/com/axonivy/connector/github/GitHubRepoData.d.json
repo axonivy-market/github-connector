@@ -1,0 +1,64 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "GitHubRepoData",
+  "namespace" : "com.axonivy.connector.github",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "repos",
+    "type" : "List<com.github.api.client.Repository>"
+  }, {
+    "name" : "visibility",
+    "type" : "String"
+  }, {
+    "name" : "affiliation",
+    "type" : "String"
+  }, {
+    "name" : "type",
+    "type" : "String"
+  }, {
+    "name" : "sort",
+    "type" : "String"
+  }, {
+    "name" : "direction",
+    "type" : "String"
+  }, {
+    "name" : "page",
+    "type" : "java.lang.Integer"
+  }, {
+    "name" : "pageSize",
+    "type" : "java.lang.Integer"
+  }, {
+    "name" : "since",
+    "type" : "java.time.OffsetDateTime"
+  }, {
+    "name" : "before",
+    "type" : "java.time.OffsetDateTime"
+  }, {
+    "name" : "query",
+    "type" : "String"
+  }, {
+    "name" : "repositorySearch",
+    "type" : "com.axonivy.connector.github.models.RepositorySearch"
+  }, {
+    "name" : "owner",
+    "type" : "String"
+  }, {
+    "name" : "repo",
+    "type" : "String"
+  }, {
+    "name" : "pullRequests",
+    "type" : "List<com.github.api.client.PullRequestSimple>"
+  }, {
+    "name" : "base",
+    "type" : "String"
+  }, {
+    "name" : "head",
+    "type" : "String"
+  }, {
+    "name" : "state",
+    "type" : "String"
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer"
+  } ]
+}

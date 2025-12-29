@@ -1,0 +1,110 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "id" : "19B26244F248C71C",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.GitHubPullRequestData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getPullRequests(String,String,String,String,String,String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "getPullRequests",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "state", "type" : "String", "desc" : "" },
+            { "name" : "head", "type" : "String", "desc" : "" },
+            { "name" : "base", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "direction", "type" : "String", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.base" : "param.#base",
+            "out.direction" : "param.#direction",
+            "out.head" : "param.#head",
+            "out.owner" : "param.#owner",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.repo" : "param.#repo",
+            "out.sort" : "param.#sort",
+            "out.state" : "param.#state"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "pullRequestAdvanced", "type" : "com.axonivy.connector.github.models.PullRequestAdvanced", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.pullRequestAdvanced" : "in.pullRequestAdvanced",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : 113, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 464, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "Get list of pull requests",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/pulls",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo"
+          },
+          "queryParams" : {
+            "state" : "in.#state is initialized ? in.state : null",
+            "head" : "in.#head is initialized ? in.head : null",
+            "base" : "in.#base is initialized ? in.base : null",
+            "sort" : "in.#sort is initialized ? in.sort : null",
+            "direction" : "in.#direction is initialized ? in.direction : null",
+            "page" : "in.#page is initialized ? in.#page : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.github.api.client.PullRequestSimple>",
+            "code" : [
+              "import com.axonivy.connector.github.service.GitHubPullRequestService;",
+              "int totalCount = GitHubPullRequestService.getInstance().getTotalCountFromHeader(response, result.size());",
+              "out.pullRequestAdvanced.pullRequests = result;",
+              "out.pullRequestAdvanced.totalCount = totalCount;",
+              "out.status = response.getStatus();"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 64 },
+        "size" : { "width" : 168 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    } ]
+}

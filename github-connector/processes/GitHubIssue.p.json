@@ -1,0 +1,648 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "id" : "19AFC463B2B110F2",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.github.GitHubIssueData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "getAssignedIssues(String,String,String,String,String,OffsetDateTime,Boolean,Boolean,Boolean,Boolean,Integer,Integer)",
+      "config" : {
+        "signature" : "getAssignedIssues",
+        "input" : {
+          "params" : [
+            { "name" : "filter", "type" : "String", "desc" : "" },
+            { "name" : "state", "type" : "String", "desc" : "" },
+            { "name" : "labels", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "direction", "type" : "String", "desc" : "" },
+            { "name" : "since", "type" : "java.time.OffsetDateTime", "desc" : "" },
+            { "name" : "collab", "type" : "Boolean", "desc" : "" },
+            { "name" : "orgs", "type" : "Boolean", "desc" : "" },
+            { "name" : "owned", "type" : "Boolean", "desc" : "" },
+            { "name" : "pulls", "type" : "Boolean", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.collab" : "param.#collab",
+            "out.direction" : "param.#direction",
+            "out.filter" : "param.#filter",
+            "out.labels" : "param.#labels",
+            "out.orgs" : "param.#orgs",
+            "out.owned" : "param.#owned",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.pulls" : "param.#pulls",
+            "out.since" : "param.#since",
+            "out.sort" : "param.#sort",
+            "out.state" : "param.#state"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issues" : "in.issues",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 192 },
+        "labelOffset" : { "x" : 193, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 192 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "Get assigned issues",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/issues",
+          "queryParams" : {
+            "filter" : "in.#filter is initialized ? in.#filter : null",
+            "state" : "in.#state is initialized ? in.#state : null",
+            "sort" : "in.#sort is initialized ? in.#sort : null",
+            "collab" : "in.#collab is initialized ? in.#collab : null",
+            "orgs" : "in.#orgs is initialized ? in.#orgs : null",
+            "owned" : "in.#owned is initialized ? in.#owned : null",
+            "pulls" : "in.#pulls is initialized ? in.#pulls : null",
+            "labels" : "in.#labels is initialized ? in.#labels : null",
+            "direction" : "in.#direction is initialized ? in.#direction : null",
+            "since" : "in.#since is initialized ? in.#since : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null",
+            "page" : "in.#page is initialized ? in.#page : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.github.api.client.Issue>",
+            "map" : {
+              "out.issues" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 191 },
+        "size" : { "width" : 152, "height" : 59 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "getOrgIssues(String,String,String,String,String,OffsetDateTime,Integer,Integer,String)",
+      "config" : {
+        "signature" : "getOrgIssues",
+        "input" : {
+          "params" : [
+            { "name" : "filter", "type" : "String", "desc" : "" },
+            { "name" : "state", "type" : "String", "desc" : "" },
+            { "name" : "labels", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "direction", "type" : "String", "desc" : "" },
+            { "name" : "since", "type" : "java.time.OffsetDateTime", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" },
+            { "name" : "org", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.direction" : "param.#direction",
+            "out.filter" : "param.#filter",
+            "out.labels" : "param.#labels",
+            "out.org" : "param.#org",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.since" : "param.#since",
+            "out.sort" : "param.#sort",
+            "out.state" : "param.#state"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issues", "type" : "List<com.github.api.client.Issue>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issues" : "in.issues",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 320 },
+        "labelOffset" : { "x" : 97, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "RestClientCall",
+      "name" : "Get assigned issues",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/orgs/{org}/issues",
+          "templateParams" : {
+            "org" : "in.#org is initialized ? in.#org : null"
+          },
+          "queryParams" : {
+            "filter" : "in.#filter is initialized ? in.#filter : null",
+            "state" : "in.#state is initialized ? in.#state : null",
+            "sort" : "in.#sort is initialized ? in.#sort : null",
+            "labels" : "in.#labels is initialized ? in.#labels : null",
+            "direction" : "in.#direction is initialized ? in.#direction : null",
+            "since" : "in.#since is initialized ? in.#since : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : 50",
+            "page" : "in.#page is initialized ? in.#page : 1"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "java.util.List<com.github.api.client.Issue>",
+            "map" : {
+              "out.issues" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 319 },
+        "size" : { "width" : 152, "height" : 59 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f7", "color" : "default" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 320 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    }, {
+      "id" : "f10",
+      "type" : "CallSubStart",
+      "name" : "addComment(String,String,BigInteger,String)",
+      "config" : {
+        "signature" : "addComment",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" },
+            { "name" : "comment", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.comment" : "param.comment",
+            "out.issuesNumber" : "param.issueNumber",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issueComment", "type" : "com.github.api.client.IssueComment", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issueComment" : "in.issueComment",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 448 },
+        "labelOffset" : { "x" : 17, "y" : 41 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f18" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 448 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    }, {
+      "id" : "f18",
+      "type" : "RestClientCall",
+      "name" : "Add a comment to issue",
+      "config" : {
+        "method" : "POST",
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/issues/{issue_number}/comments",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo",
+            "issue_number" : "in.issuesNumber"
+          }
+        },
+        "body" : {
+          "entity" : {
+            "type" : "com.github.api.client.IssueNumberCommentsBody",
+            "map" : {
+              "param.body" : "in.comment"
+            }
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.IssueComment",
+            "map" : {
+              "out.issueComment" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 448 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f11", "color" : "default" }
+      ]
+    }, {
+      "id" : "f20",
+      "type" : "CallSubStart",
+      "name" : "assignUser(String,String,BigInteger,List<String>)",
+      "config" : {
+        "signature" : "assignUser",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" },
+            { "name" : "usernames", "type" : "List<String>", "desc" : "" }
+          ],
+          "map" : {
+            "out.issuesNumber" : "param.issueNumber",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo",
+            "out.usernames" : "param.usernames"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issue", "type" : "com.github.api.client.Issue", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issue" : "in.issue",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 576 },
+        "labelOffset" : { "x" : 9, "y" : 41 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f21" }
+      ]
+    }, {
+      "id" : "f21",
+      "type" : "RestClientCall",
+      "name" : "Assign users to issue",
+      "config" : {
+        "method" : "POST",
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/issues/{issue_number}/assignees",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo",
+            "issue_number" : "in.issuesNumber"
+          }
+        },
+        "body" : {
+          "entity" : {
+            "type" : "com.github.api.client.IssueNumberAssigneesBody",
+            "map" : {
+              "param" : "com.axonivy.connector.github.service.GitHubIssueService.getInstance().buildAssigneeBodyRequest(in.usernames)"
+            }
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.Issue",
+            "map" : {
+              "out.issue" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 576 },
+        "size" : { "width" : 144, "height" : 63 }
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f22", "color" : "default" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 576 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    }, {
+      "id" : "f25",
+      "type" : "CallSubStart",
+      "name" : "patchIssue(String,String,BigInteger,IssuesIssueNumberBody)",
+      "config" : {
+        "signature" : "patchIssue",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" },
+            { "name" : "issueRequest", "type" : "com.github.api.client.IssuesIssueNumberBody", "desc" : "" }
+          ],
+          "map" : {
+            "out.issuesNumber" : "param.issueNumber",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo",
+            "out.updateIssueBody" : "param.issueRequest"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issue", "type" : "com.github.api.client.Issue", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issue" : "in.issue",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 704 },
+        "labelOffset" : { "x" : 57, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f28", "to" : "f26" }
+      ]
+    }, {
+      "id" : "f26",
+      "type" : "RestClientCall",
+      "name" : "Add a comment to issue",
+      "config" : {
+        "method" : "PATCH",
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/issues/{issue_number}",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo",
+            "issue_number" : "in.issuesNumber"
+          }
+        },
+        "body" : {
+          "entity" : {
+            "type" : "com.github.api.client.IssuesIssueNumberBody",
+            "map" : {
+              "param" : "in.updateIssueBody"
+            }
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.Issue",
+            "map" : {
+              "out.issue" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 704 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f27", "color" : "default" }
+      ]
+    }, {
+      "id" : "f27",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 704 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    }, {
+      "id" : "f30",
+      "type" : "CallSubStart",
+      "name" : "getComments(String,String,BigInteger)",
+      "config" : {
+        "signature" : "getComments",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" }
+          ],
+          "map" : {
+            "out.issuesNumber" : "param.issueNumber",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issueComments", "type" : "List<com.github.api.client.IssueComment>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issueComments" : "in.issueComments",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 848 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f33" }
+      ]
+    }, {
+      "id" : "f31",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 848 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    }, {
+      "id" : "f33",
+      "type" : "RestClientCall",
+      "name" : "Get Comments of issue",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/issues/{issue_number}/comments",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo",
+            "issue_number" : "in.issuesNumber"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "List<com.github.api.client.IssueComment>",
+            "map" : {
+              "out.issueComments" : "result",
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 848 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f34", "to" : "f31", "color" : "default" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "CallSubStart",
+      "name" : "searchIssues(String,String,String,Integer,Integer)",
+      "config" : {
+        "signature" : "searchIssues",
+        "input" : {
+          "params" : [
+            { "name" : "query", "type" : "String", "desc" : "" },
+            { "name" : "sort", "type" : "String", "desc" : "" },
+            { "name" : "order", "type" : "String", "desc" : "" },
+            { "name" : "pageSize", "type" : "Integer", "desc" : "" },
+            { "name" : "page", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.order" : "param.#order",
+            "out.page" : "param.#page",
+            "out.pageSize" : "param.#pageSize",
+            "out.query" : "param.#query",
+            "out.sort" : "param.#sort"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issueSearch", "type" : "com.axonivy.connector.github.models.IssueSearch", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issueSearch" : "in.issuesSearch",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 64 },
+        "labelOffset" : { "x" : 57, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "RestClientCall",
+      "name" : "Search Issue",
+      "config" : {
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/search/issues",
+          "queryParams" : {
+            "q" : "in.#query is initialized ? in.query : null",
+            "sort" : "in.#sort is initialized ? in.sort : null",
+            "order" : "in.#order is initialized ? in.#order : null",
+            "per_page" : "in.#pageSize is initialized ? in.#pageSize : null",
+            "page" : "in.#page is initialized ? in.#page : null"
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.github.api.client.InlineResponse20031",
+            "code" : [
+              "import com.axonivy.connector.github.models.IssueSearch;",
+              "out.issuesSearch = new IssueSearch(result);",
+              "out.status = response.getStatus();"
+            ]
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 64 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f13", "color" : "default" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png"
+      }
+    } ]
+}
