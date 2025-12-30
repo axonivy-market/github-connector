@@ -1,6 +1,5 @@
 package com.axonivy.connector.github.managedbean;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import com.axonivy.connector.github.constant.GitHubConstants;
+import com.axonivy.connector.github.converter.JSONConverter;
 import com.axonivy.connector.github.models.PullRequestAdvanced;
 import com.axonivy.connector.github.models.RepositoryAdvanced;
 import com.axonivy.connector.github.models.RepositorySearch;
@@ -21,8 +19,6 @@ import com.axonivy.connector.github.service.GitHubPullRequestService;
 import com.axonivy.connector.github.service.GitHubRepoService;
 import com.axonivy.connector.github.util.VariableUtils;
 import com.github.api.client.Repository;
-
-import ch.ivyteam.ivy.environment.Ivy;
 
 @ManagedBean
 @SessionScoped
@@ -73,13 +69,7 @@ public class HealthMonitorBean {
   }
 
   private RepositoryAdvanced cloneRepositoryToAdvanced(Repository repo) {
-    var advanced = new RepositoryAdvanced();
-    try {
-      BeanUtils.copyProperties(advanced, repo);
-    } catch (IllegalAccessException | InvocationTargetException e) {
-      Ivy.log().error("Cannot clone repo properties to new model", e);
-    }
-    return advanced;
+    return JSONConverter.convertToClass(repo, RepositoryAdvanced.class);
   }
 
   private void fetchPullRequestForRepo(RepositoryAdvanced repo) {

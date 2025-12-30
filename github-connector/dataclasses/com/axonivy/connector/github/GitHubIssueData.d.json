@@ -1,88 +1,103 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "$schema" : "https://json-schema.axonivy.com/data-class/13.2.0/data-class.json",
   "simpleName" : "GitHubIssueData",
   "namespace" : "com.axonivy.connector.github",
-  "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "issues",
-    "type" : "List<com.github.api.client.Issue>"
+    "type" : "List<com.github.api.client.Issue>",
+    "modifiers" : [ ]
   }, {
     "name" : "filter",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "state",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "labels",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "sort",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "direction",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "since",
-    "type" : "java.time.OffsetDateTime"
+    "type" : "java.time.OffsetDateTime",
+    "modifiers" : [ ]
   }, {
     "name" : "collab",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   }, {
     "name" : "orgs",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   }, {
     "name" : "owned",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   }, {
     "name" : "pulls",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   }, {
     "name" : "pageSize",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "page",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "org",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "query",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "issuesSearch",
-    "type" : "com.axonivy.connector.github.models.IssueSearch"
+    "type" : "com.axonivy.connector.github.models.IssueSearch",
+    "modifiers" : [ ]
   }, {
     "name" : "order",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "owner",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "repo",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "issuesNumber",
-    "type" : "java.math.BigInteger"
+    "type" : "java.math.BigInteger",
+    "modifiers" : [ ]
   }, {
     "name" : "comment",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "issueComment",
-    "type" : "com.github.api.client.IssueComment"
+    "type" : "com.github.api.client.IssueComment",
+    "modifiers" : [ ]
   }, {
     "name" : "usernames",
-    "type" : "List<String>"
+    "type" : "List<String>",
+    "modifiers" : [ ]
   }, {
     "name" : "issue",
-    "type" : "com.github.api.client.Issue"
+    "type" : "com.github.api.client.Issue",
+    "modifiers" : [ ]
   }, {
     "name" : "updateIssueBody",
-    "type" : "com.github.api.client.IssuesIssueNumberBody"
+    "type" : "com.github.api.client.IssuesIssueNumberBody",
+    "modifiers" : [ ]
   }, {
     "name" : "issueComments",
-    "type" : "List<com.github.api.client.IssueComment>"
+    "type" : "List<com.github.api.client.IssueComment>",
+    "modifiers" : [ ]
   }, {
     "name" : "status",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   } ]
 }

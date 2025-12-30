@@ -46,6 +46,13 @@ public class JSONConverter {
     return getMapper().convertValue(entity, typeRef);
   }
 
+  public static <T> T convertToClass(Object entity, Class<T> clazz) {
+    if (entity == null) {
+      return null;
+    }
+    return getMapper().convertValue(entity, clazz);
+  }
+
   public static String convertToString(Object entity) {
     try {
       return getMapper().writeValueAsString(entity);

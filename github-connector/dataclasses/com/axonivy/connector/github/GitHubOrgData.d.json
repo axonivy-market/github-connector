@@ -1,28 +1,31 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "$schema" : "https://json-schema.axonivy.com/data-class/13.2.0/data-class.json",
   "simpleName" : "GitHubOrgData",
   "namespace" : "com.axonivy.connector.github",
-  "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "org",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "filter",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "role",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "page",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "pageSize",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "users",
-    "type" : "List<com.github.api.client.SimpleUser>"
+    "type" : "List<com.github.api.client.SimpleUser>",
+    "modifiers" : [ ]
   }, {
     "name" : "status",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   } ]
 }

@@ -1,40 +1,43 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "$schema" : "https://json-schema.axonivy.com/data-class/13.2.0/data-class.json",
   "simpleName" : "GitHubPullRequestData",
   "namespace" : "com.axonivy.connector.github",
-  "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "owner",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "repo",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "state",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "head",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "base",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "sort",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "direction",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "page",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "pageSize",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "pullRequestAdvanced",
-    "type" : "com.axonivy.connector.github.models.PullRequestAdvanced"
+    "type" : "com.axonivy.connector.github.models.PullRequestAdvanced",
+    "modifiers" : [ ]
   }, {
     "name" : "status",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   } ]
 }
