@@ -3,14 +3,14 @@
   <groupId>com.axonivy.connector.github</groupId>
   <name>github-connector</name>
   <artifactId>github-connector-modules</artifactId>
-  <version>12.0.1-SNAPSHOT</version>
+  <version>13.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
     <module>github-connector</module>
-	<module>github-connector-demo</module>
+    <module>github-connector-demo</module>
     <module>github-connector-test</module>
-	<module>github-connector-product</module>
+    <module>github-connector-product</module>
   </modules>
 
   <scm>

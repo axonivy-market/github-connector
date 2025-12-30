@@ -1,21 +1,18 @@
 package com.axonivy.connector.github.models;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 
+import com.axonivy.connector.github.converter.JSONConverter;
 import com.axonivy.connector.github.models.criteria.SearchRepositoryCriteria;
 import com.axonivy.connector.github.service.GitHubActionsService;
 import com.axonivy.connector.github.service.GitHubPullRequestService;
 import com.axonivy.connector.github.service.GitHubRepoService;
 import com.github.api.client.Repository;
-
-import ch.ivyteam.ivy.environment.Ivy;
 
 public class ReposModel extends LazyDataModel<RepositoryAdvanced> {
 
@@ -58,13 +55,7 @@ public class ReposModel extends LazyDataModel<RepositoryAdvanced> {
   }
 
   private RepositoryAdvanced copyPropertiesForRepo(Repository repo) {
-    RepositoryAdvanced repositoryAdvanced = new RepositoryAdvanced();
-     try {
-      BeanUtils.copyProperties(repositoryAdvanced, repo);
-    } catch (IllegalAccessException | InvocationTargetException e) {
-      Ivy.log().error("Cannot cast Repository to RepositoryAdvanced", e);
-    }
-     return repositoryAdvanced;
+     return JSONConverter.convertToClass(repo, RepositoryAdvanced.class);
   }
 
   private void fetchPullRequestForRepo(RepositoryAdvanced repo) {

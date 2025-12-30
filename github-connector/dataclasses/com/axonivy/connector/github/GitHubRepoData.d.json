@@ -1,64 +1,71 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "$schema" : "https://json-schema.axonivy.com/data-class/13.2.0/data-class.json",
   "simpleName" : "GitHubRepoData",
   "namespace" : "com.axonivy.connector.github",
-  "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "repos",
-    "type" : "List<com.github.api.client.Repository>"
+    "type" : "List<com.github.api.client.Repository>",
+    "modifiers" : [ ]
   }, {
     "name" : "visibility",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "affiliation",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "type",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "sort",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "direction",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "page",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "pageSize",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   }, {
     "name" : "since",
-    "type" : "java.time.OffsetDateTime"
+    "type" : "java.time.OffsetDateTime",
+    "modifiers" : [ ]
   }, {
     "name" : "before",
-    "type" : "java.time.OffsetDateTime"
+    "type" : "java.time.OffsetDateTime",
+    "modifiers" : [ ]
   }, {
     "name" : "query",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "repositorySearch",
-    "type" : "com.axonivy.connector.github.models.RepositorySearch"
+    "type" : "com.axonivy.connector.github.models.RepositorySearch",
+    "modifiers" : [ ]
   }, {
     "name" : "owner",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "repo",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "pullRequests",
-    "type" : "List<com.github.api.client.PullRequestSimple>"
+    "type" : "List<com.github.api.client.PullRequestSimple>",
+    "modifiers" : [ ]
   }, {
     "name" : "base",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "head",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "state",
-    "type" : "String"
+    "modifiers" : [ ]
   }, {
     "name" : "status",
-    "type" : "java.lang.Integer"
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
   } ]
 }
