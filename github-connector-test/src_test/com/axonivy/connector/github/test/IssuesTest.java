@@ -13,6 +13,7 @@ import com.axonivy.connector.github.GitHubIssueData;
 import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.models.IssueSearch;
+import com.axonivy.connector.github.models.criteria.SearchIssueCriteria;
 import com.axonivy.utils.e2etest.context.MultiEnvironmentContextProvider;
 
 import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
@@ -32,6 +33,7 @@ public class IssuesTest extends BaseSetup {
     BpmElement searchIssuesStart = issueProcess.elementName("searchIssues(String,String,String,Integer,Integer)");
     ExecutionResult result = bpmClient.start().subProcess(searchIssuesStart)
         .withParam(GitHubParamConstants.ORG, TEST_ORG_NAME)
+        .withParam(GitHubConstants.QUERY, SearchIssueCriteria.builder().stateOpen().assigneeAny().buildString())
         .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 
