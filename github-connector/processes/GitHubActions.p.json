@@ -73,6 +73,9 @@
         "response" : {
           "entity" : {
             "type" : "com.github.api.client.InlineResponse20016",
+            "map" : {
+              "out.status" : "response.getStatus()"
+            },
             "code" : [
               "import com.axonivy.connector.github.models.WorkflowRunAdvanced;",
               "out.workflowRunAdvanced = new WorkflowRunAdvanced(result);"

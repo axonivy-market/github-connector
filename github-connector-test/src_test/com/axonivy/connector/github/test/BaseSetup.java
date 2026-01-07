@@ -1,11 +1,8 @@
 package com.axonivy.connector.github.test;
 
-import static com.axonivy.utils.e2etest.enums.E2EEnvironment.REAL_SERVER;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.enums.Variable;
 import com.axonivy.utils.e2etest.utils.E2ETestUtils;
 
@@ -18,13 +15,14 @@ import ch.ivyteam.ivy.rest.client.RestClients;
 
 public abstract class BaseSetup {
 
-  protected static final String TEST_ORG_NAME = "my-org";
+  protected static final String TEST_REPO_NAME = "testing-api";
+  protected static final String TEST_ORG_NAME = "internal-testing";
   protected static final String GH_REST_CLIENT_NAME = "github (GitHub v3 REST API)";
   protected boolean isRealTest;
 
   @BeforeEach
   public void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
-    isRealTest = context.getDisplayName().equals(REAL_SERVER.getDisplayName());
+    isRealTest = true;
     E2ETestUtils.determineConfigForContext(context.getDisplayName(), runRealEnv(fixture), runMockEnv(fixture, app));
   }
 
@@ -40,7 +38,7 @@ public abstract class BaseSetup {
 
   protected Runnable runMockEnv(AppFixture fixture, IApplication app) {
     return () -> {
-      fixture.var(Variable.ORG.getKey(), GitHubParamConstants.ORG);
+      fixture.var(Variable.ORG.getKey(), TEST_ORG_NAME);
       fixture.var(Variable.ACCESS_TOKEN.getKey(), Variable.ACCESS_TOKEN.getKey());
 
       RestClient restClient = RestClients.of(app).find(GH_REST_CLIENT_NAME);

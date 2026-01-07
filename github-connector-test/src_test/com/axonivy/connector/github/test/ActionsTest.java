@@ -13,6 +13,7 @@ import com.axonivy.connector.github.GitHubActionsData;
 import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.models.WorkflowRunAdvanced;
+import com.axonivy.connector.github.util.VariableUtils;
 import com.axonivy.utils.e2etest.context.MultiEnvironmentContextProvider;
 
 import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
@@ -31,8 +32,8 @@ public class ActionsTest extends BaseSetup {
   public void testGetWorkflowRun(BpmClient bpmClient, ExtensionContext context) {
     BpmElement workflowRunStart = actionsProcess.elementName("getActionsRun(String,String,Integer,Integer)");
     ExecutionResult result = bpmClient.start().subProcess(workflowRunStart)
-        .withParam(GitHubParamConstants.OWNER, GitHubParamConstants.OWNER)
-        .withParam(GitHubParamConstants.REPO, GitHubParamConstants.REPO)
+        .withParam(GitHubParamConstants.OWNER, VariableUtils.getDefaultOrg())
+        .withParam(GitHubParamConstants.REPO, TEST_REPO_NAME)
         .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 

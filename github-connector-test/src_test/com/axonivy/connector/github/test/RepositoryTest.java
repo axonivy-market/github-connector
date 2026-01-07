@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import com.axonivy.connector.github.GitHubRepoData;
 import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.models.RepositorySearch;
+import com.axonivy.connector.github.models.criteria.SearchRepositoryCriteria;
 import com.axonivy.utils.e2etest.context.MultiEnvironmentContextProvider;
 import com.github.api.client.Repository;
 
@@ -50,6 +51,7 @@ public class RepositoryTest extends BaseSetup {
   public void testSearchRepos(BpmClient bpmClient, ExtensionContext context) {
     BpmElement searchReposStart = repoProcess.elementName("searchRepos(String,String,Integer,Integer)");
     ExecutionResult result = bpmClient.start().subProcess(searchReposStart)
+        .withParam(GitHubConstants.QUERY, SearchRepositoryCriteria.builder().isPublic().buildString())
         .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10)
         .execute();
