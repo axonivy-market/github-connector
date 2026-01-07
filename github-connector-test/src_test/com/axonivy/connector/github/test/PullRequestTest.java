@@ -13,6 +13,7 @@ import com.axonivy.connector.github.GitHubPullRequestData;
 import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.models.PullRequestAdvanced;
+import com.axonivy.connector.github.util.VariableUtils;
 import com.axonivy.utils.e2etest.context.MultiEnvironmentContextProvider;
 
 import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
@@ -32,8 +33,8 @@ public class PullRequestTest extends BaseSetup {
     BpmElement pullRequestStart = repoProcess
         .elementName("getPullRequests(String,String,String,String,String,String,String,Integer,Integer)");
     ExecutionResult result = bpmClient.start().subProcess(pullRequestStart)
-        .withParam(GitHubParamConstants.OWNER, "my-test")
-        .withParam(GitHubParamConstants.REPO, "COD")
+        .withParam(GitHubParamConstants.OWNER, VariableUtils.getDefaultOrg())
+        .withParam(GitHubParamConstants.REPO, TEST_REPO_NAME)
         .withParam(GitHubConstants.PAGE, 1)
         .withParam(GitHubConstants.PAGE_SIZE, 10).execute();
 
