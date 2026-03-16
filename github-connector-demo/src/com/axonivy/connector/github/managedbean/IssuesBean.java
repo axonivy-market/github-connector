@@ -227,7 +227,7 @@ public class IssuesBean {
         || isContainsKeyword(user.getName(), filter) || isContainsKeyword(user.getEmail(), filter)).toList();
   }
 
-  public String getAssignessDisplayName(Issue issue) {
+  public String getAssigneesDisplayName(Issue issue) {
     if (issue == null || issue.getAssignees() == null) {
       return StringUtils.EMPTY;
     }

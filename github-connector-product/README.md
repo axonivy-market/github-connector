@@ -4,7 +4,7 @@ An Axon Ivy REST API connector that integrates GitHub issues and workflows into 
 
 ### Daily GitHub Issue Scan
 - Automatically queries all open issues from a configured GitHub organization/repository
-- Supports plannable execution schedules (daily, hourly, monthly, etc.)
+- Supports planable execution schedules (daily, hourly, monthly, etc.)
 - Retrieves comprehensive issue information for processing
 
 ### Smart Filter Logic
