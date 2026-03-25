@@ -50,10 +50,10 @@ Labels:
   Reactions: Reactions
   ReactionsMax: Reactions max
   ReactionsMin: Reactions min
-  RepoName: Repositpry name
+  RepoName: Repository name
   State: State
   Total: Total interactions
-  TotalInterations: Total interactions
+  TotalInteractions: Total interactions
   TotalOfComments: Total of comments
 Processes:
   IssuesScanner:
