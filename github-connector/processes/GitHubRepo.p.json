@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json",
   "id" : "17F92A2C7E745913",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -69,7 +69,7 @@
       "name" : "Get User repos",
       "config" : {
         "target" : {
-          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "clientId" : "github-GitHub-v3-REST-API",
           "path" : "/user/repos",
           "queryParams" : {
             "visibility" : "in.#visibility is initialized ? in.#visibility : null",
@@ -149,7 +149,7 @@
       "name" : "Search Repositories",
       "config" : {
         "target" : {
-          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "clientId" : "github-GitHub-v3-REST-API",
           "path" : "/search/repositories",
           "queryParams" : {
             "q" : "in.#query",
