@@ -14,7 +14,7 @@
     "type" : "String"
   }, {
     "name" : "labels",
-    "type" : "String"
+    "type" : "List<String>"
   }, {
     "name" : "sort",
     "type" : "String"
@@ -84,5 +84,8 @@
   }, {
     "name" : "status",
     "type" : "java.lang.Integer"
+  }, {
+    "name" : "label",
+    "type" : "String"
   } ]
 }

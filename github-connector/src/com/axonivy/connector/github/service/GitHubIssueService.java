@@ -1,4 +1,5 @@
 package com.axonivy.connector.github.service;
+
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.constant.GitHubParamConstants;
 import com.axonivy.connector.github.converter.JSONConverter;
+import com.axonivy.connector.github.models.IssueLabelsRequest;
 import com.axonivy.connector.github.models.IssueSearch;
 import com.axonivy.connector.github.models.criteria.SearchIssueCriteria;
 import com.axonivy.connector.github.util.VariableUtils;
@@ -31,6 +33,7 @@ public class GitHubIssueService extends AbstractGitHubService {
   public static final String ADD_COMMENT_START = "addComment";
   public static final String ADD_COMMENT_RESULT = "issueComment";
   public static final String ASSIGN_USER_START = "assignUser";
+  public static final String ADD_LABELS_START = "addLabels";
   public static final String GET_COMMENTS_START = "getComments";
   public static final String GET_COMMENTS_RESULT = "issueComments";
   public static final String PATCH_ISSUE_START = "patchIssue";
@@ -64,6 +67,14 @@ public class GitHubIssueService extends AbstractGitHubService {
       assigneeBody.setAssignees(usernames);
     }
     return assigneeBody;
+  }
+  
+  public IssueLabelsRequest buildLabelsBodyRequest(List<String> labels) {
+    var labelsRequest = new IssueLabelsRequest();
+    if (CollectionUtils.isNotEmpty(labels)) {
+      labelsRequest.setLabels(labels);
+    }
+    return labelsRequest;
   }
 
   public IssueNumberAssigneesBody1 buildRemoveAssigneeBodyRequest(List<String> usernames) {
@@ -131,6 +142,15 @@ public class GitHubIssueService extends AbstractGitHubService {
         .withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
         .withParam(GitHubParamConstants.USERNAMES, usernamesParam);
     return caller.call().get(ISSUE_RESULT, Issue.class);
+  }
+
+  public void addLabelsToIssue(String owner, String repo, BigInteger issueNumber, List<String> labels) {
+    validateParams(owner, repo, issueNumber);
+    var labelsParam = ch.ivyteam.ivy.scripting.objects.List.create(String.class, labels);
+    SubProcessCallStartParamCaller caller = createCallSubProcessWithStartPath(ADD_LABELS_START).withParam(GitHubParamConstants.OWNER, owner)
+        .withParam(GitHubParamConstants.REPO, repo).withParam(GitHubParamConstants.ISSUE_NUMBER, issueNumber)
+        .withParam(GitHubParamConstants.LABELS, labelsParam);
+    caller.call();
   }
 
   public Issue patchIssue(String owner, String repo, BigInteger issueNumber, IssuesIssueNumberBody issueNumberBody) {
