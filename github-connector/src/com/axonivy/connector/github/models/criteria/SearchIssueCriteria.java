@@ -362,6 +362,14 @@ public class SearchIssueCriteria extends SearchCriteria {
     }
 
     /**
+     * Search for issues that don't have given label
+     */
+    public Builder notLabel(String label) {
+      parts.add(String.format(FORMAT_NEGATION, LABEL, label));
+      return this;
+    }
+
+    /**
      * Search by milestone
      */
     public Builder milestone(String milestone) {

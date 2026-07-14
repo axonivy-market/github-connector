@@ -12,6 +12,7 @@ public class GitHubParamConstants {
   public static final String USERS = "users";
   public static final String USER = "user";
   public static final String USERNAMES = "usernames";
+  public static final String LABELS = "labels";
   public static final String ASSIGNEE = "assignee";
   public static final String NO = "no";
   public static final String AUTHOR = "author";

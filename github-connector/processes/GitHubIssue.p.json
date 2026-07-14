@@ -30,7 +30,7 @@
             "out.collab" : "param.#collab",
             "out.direction" : "param.#direction",
             "out.filter" : "param.#filter",
-            "out.labels" : "param.#labels",
+            "out.label" : "param.#labels",
             "out.orgs" : "param.#orgs",
             "out.owned" : "param.#owned",
             "out.page" : "param.#page",
@@ -132,7 +132,7 @@
           "map" : {
             "out.direction" : "param.#direction",
             "out.filter" : "param.#filter",
-            "out.labels" : "param.#labels",
+            "out.label" : "param.#labels",
             "out.org" : "param.#org",
             "out.page" : "param.#page",
             "out.pageSize" : "param.#pageSize",
@@ -336,7 +336,7 @@
       ],
       "visual" : {
         "at" : { "x" : 160, "y" : 576 },
-        "labelOffset" : { "x" : 9, "y" : 41 },
+        "labelOffset" : { "x" : -7, "y" : 41 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       },
       "connect" : [
@@ -644,5 +644,93 @@
         "labelOffset" : { "x" : 13, "y" : 33 },
         "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
       }
+    }, {
+      "id" : "f35",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 952 },
+        "labelOffset" : { "x" : 13, "y" : 33 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      }
+    }, {
+      "id" : "f36",
+      "type" : "RestClientCall",
+      "name" : "Get Comments of issue",
+      "config" : {
+        "method" : "POST",
+        "target" : {
+          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "path" : "/repos/{owner}/{repo}/issues/{issue_number}/labels",
+          "templateParams" : {
+            "owner" : "in.owner",
+            "repo" : "in.repo",
+            "issue_number" : "in.issuesNumber"
+          }
+        },
+        "body" : {
+          "raw" : "in.<%=in.labels%>",
+          "entity" : {
+            "map" : {
+              "param" : "com.axonivy.connector.github.service.GitHubIssueService.getInstance().buildLabelsBodyRequest(in.labels)"
+            }
+          }
+        },
+        "response" : {
+          "entity" : {
+            "map" : {
+              "out.status" : "response.getStatus()"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 952 },
+        "size" : { "width" : 144, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f38", "to" : "f35", "color" : "default" }
+      ]
+    }, {
+      "id" : "f37",
+      "type" : "CallSubStart",
+      "name" : "addLabels(String,String,BigInteger,List<String>)",
+      "config" : {
+        "signature" : "addLabels",
+        "input" : {
+          "params" : [
+            { "name" : "owner", "type" : "String", "desc" : "" },
+            { "name" : "repo", "type" : "String", "desc" : "" },
+            { "name" : "issueNumber", "type" : "BigInteger", "desc" : "" },
+            { "name" : "labels", "type" : "List<String>", "desc" : "" }
+          ],
+          "map" : {
+            "out.issuesNumber" : "param.issueNumber",
+            "out.labels" : "param.labels",
+            "out.owner" : "param.owner",
+            "out.repo" : "param.repo"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "issueComments", "type" : "List<com.github.api.client.IssueComment>", "desc" : "" },
+            { "name" : "status", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "result.issueComments" : "in.issueComments",
+            "result.status" : "in.status"
+          }
+        }
+      },
+      "tags" : [
+        "connector"
+      ],
+      "visual" : {
+        "at" : { "x" : 160, "y" : 952 },
+        "labelOffset" : { "x" : 9, "y" : 49 },
+        "icon" : "res:/webContent/icons/GitHub-Mark-64px.png?small"
+      },
+      "connect" : [
+        { "id" : "f39", "to" : "f36" }
+      ]
     } ]
 }
