@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json",
   "id" : "19B26244F248C71C",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -70,7 +70,7 @@
       "name" : "Get list of pull requests",
       "config" : {
         "target" : {
-          "clientId" : "4895b78f-4d15-49f6-9754-de015d91d52e",
+          "clientId" : "github-GitHub-v3-REST-API",
           "path" : "/repos/{owner}/{repo}/pulls",
           "templateParams" : {
             "owner" : "in.owner",
