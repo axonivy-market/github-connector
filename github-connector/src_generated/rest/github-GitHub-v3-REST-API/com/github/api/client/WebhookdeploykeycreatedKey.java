@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * The [&#x60;deploy key&#x60;](https://docs.github.com/en/rest/reference/deployments#get-a-deploy-key) resource.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class WebhookdeploykeycreatedKey {
   @JsonProperty("added_by")

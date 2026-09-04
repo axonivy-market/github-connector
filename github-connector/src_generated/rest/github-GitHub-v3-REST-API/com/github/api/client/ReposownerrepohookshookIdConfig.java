@@ -25,7 +25,7 @@ import com.github.api.client.WebhookConfigUrl;
 /**
  * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class ReposownerrepohookshookIdConfig {
   @JsonProperty("url")

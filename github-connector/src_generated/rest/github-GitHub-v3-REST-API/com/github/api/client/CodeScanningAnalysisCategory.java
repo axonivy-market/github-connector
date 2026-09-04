@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * Identifies the configuration under which the analysis was executed. Used to distinguish between multiple analyses for the same tool and commit, but performed on different languages or different parts of the code.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class CodeScanningAnalysisCategory {
 

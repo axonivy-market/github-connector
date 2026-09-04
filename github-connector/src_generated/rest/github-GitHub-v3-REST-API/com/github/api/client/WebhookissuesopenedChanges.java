@@ -24,7 +24,7 @@ import com.github.api.client.Repository1;
  * WebhookissuesopenedChanges
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class WebhookissuesopenedChanges {
   @JsonProperty("old_issue")

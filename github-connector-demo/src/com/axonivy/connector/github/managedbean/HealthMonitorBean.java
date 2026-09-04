@@ -1,11 +1,12 @@
 package com.axonivy.connector.github.managedbean;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Named;
+import jakarta.enterprise.context.SessionScoped;
 
 import com.axonivy.connector.github.constant.GitHubConstants;
 import com.axonivy.connector.github.converter.JSONConverter;
@@ -20,9 +21,9 @@ import com.axonivy.connector.github.service.GitHubRepoService;
 import com.axonivy.connector.github.util.VariableUtils;
 import com.github.api.client.Repository;
 
-@ManagedBean
+@Named
 @SessionScoped
-public class HealthMonitorBean {
+public class HealthMonitorBean implements Serializable {
 
   private GitHubRepoService gitHubRepoService = GitHubRepoService.getInstance();
   private GitHubActionsService gitHubActionsService = GitHubActionsService.getInstance();

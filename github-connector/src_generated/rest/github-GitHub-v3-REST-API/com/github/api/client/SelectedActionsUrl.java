@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * The API URL to use to get or set the actions and reusable workflows that are allowed to run, when &#x60;allowed_actions&#x60; is set to &#x60;selected&#x60;.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class SelectedActionsUrl {
 
