@@ -1,0 +1,11 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "SimpleReposData",
+  "namespace" : "com.axonivy.connector.github.demo.SimpleRepos",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "repos",
+    "type" : "java.util.List<com.github.api.client.Repository>",
+    "modifiers" : [ ]
+  } ]
+}

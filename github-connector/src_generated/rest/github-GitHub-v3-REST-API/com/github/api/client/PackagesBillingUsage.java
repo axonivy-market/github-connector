@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * PackagesBillingUsage
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class PackagesBillingUsage {
   @JsonProperty("total_gigabytes_bandwidth_used")

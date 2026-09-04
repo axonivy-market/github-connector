@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class CodeScanningAnalysisAnalysisKey {
 

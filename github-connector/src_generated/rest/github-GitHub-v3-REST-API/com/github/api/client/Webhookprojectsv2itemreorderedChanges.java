@@ -23,7 +23,7 @@ import com.github.api.client.WebhookmembereditedChangesPermission;
  * Webhookprojectsv2itemreorderedChanges
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class Webhookprojectsv2itemreorderedChanges {
   @JsonProperty("previous_projects_v2_item_node_id")
