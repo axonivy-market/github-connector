@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import com.axonivy.connector.github.enums.Variable;
 import com.axonivy.utils.e2etest.utils.E2ETestUtils;
 
-import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.app.Application;
 import ch.ivyteam.ivy.environment.AppFixture;
 import ch.ivyteam.ivy.rest.client.RestClient;
 import ch.ivyteam.ivy.rest.client.RestClient.Builder;
@@ -21,7 +21,7 @@ public abstract class BaseSetup {
   protected boolean isRealTest;
 
   @BeforeEach
-  public void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
+  public void beforeEach(ExtensionContext context, AppFixture fixture, Application app) {
     isRealTest = true;
     E2ETestUtils.determineConfigForContext(context.getDisplayName(), runRealEnv(fixture), runMockEnv(fixture, app));
   }
@@ -36,7 +36,7 @@ public abstract class BaseSetup {
     };
   }
 
-  protected Runnable runMockEnv(AppFixture fixture, IApplication app) {
+  protected Runnable runMockEnv(AppFixture fixture, Application app) {
     return () -> {
       fixture.var(Variable.ORG.getKey(), TEST_ORG_NAME);
       fixture.var(Variable.ACCESS_TOKEN.getKey(), Variable.ACCESS_TOKEN.getKey());

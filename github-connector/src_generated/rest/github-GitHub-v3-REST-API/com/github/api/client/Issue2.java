@@ -26,7 +26,7 @@ import com.github.api.client.User1;
 /**
  * The [issue](https://docs.github.com/en/rest/reference/issues) itself.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class Issue2 {
   @JsonProperty("active_lock_reason")

@@ -27,7 +27,7 @@ import com.github.api.client.WebhookcommitcommentcreatedComment;
 /**
  * A commit comment is created. The type of activity is specified in the &#x60;action&#x60; property. 
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class WebhookCommitCommentCreated {
   @JsonProperty("action")

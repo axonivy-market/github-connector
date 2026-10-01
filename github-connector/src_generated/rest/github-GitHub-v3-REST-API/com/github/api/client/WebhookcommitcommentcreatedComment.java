@@ -23,7 +23,7 @@ import com.github.api.client.User;
 /**
  * The [commit comment](https://docs.github.com/en/rest/reference/repos#get-a-commit-comment) resource.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class WebhookcommitcommentcreatedComment {
   @JsonProperty("author_association")

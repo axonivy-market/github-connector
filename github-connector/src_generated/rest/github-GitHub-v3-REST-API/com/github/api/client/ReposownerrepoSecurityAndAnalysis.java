@@ -24,7 +24,7 @@ import com.github.api.client.ReposownerrepoSecurityAndAnalysisSecretScanningPush
 /**
  * Specify which security and analysis features to enable or disable for the repository.  To use this parameter, you must have admin permissions for the repository or be an owner or security manager for the organization that owns the repository. For more information, see \&quot;[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization).\&quot;  For example, to enable GitHub Advanced Security, use this data in the body of the &#x60;PATCH&#x60; request: &#x60;{ \&quot;security_and_analysis\&quot;: {\&quot;advanced_security\&quot;: { \&quot;status\&quot;: \&quot;enabled\&quot; } } }&#x60;.  You can check which security and analysis features are currently enabled by using a &#x60;GET /repos/{owner}/{repo}&#x60; request.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class ReposownerrepoSecurityAndAnalysis {
   @JsonProperty("advanced_security")
