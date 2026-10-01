@@ -2,15 +2,17 @@ package com.axonivy.connector.github.converter;
 
 import java.util.Map;
 
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
-import javax.faces.convert.FacesConverter;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.convert.Converter;
+import jakarta.faces.convert.ConverterException;
+import jakarta.faces.convert.FacesConverter;
+import jakarta.enterprise.context.ApplicationScoped;
 
-@FacesConverter("pojoConverter")
-public class PojoConverter implements Converter {
+@FacesConverter(value = "pojoConverter", managed = true)
+@ApplicationScoped
+public class PojoConverter implements Converter<Object> {
   private static final String CONVERTER_IDENTIFIER = PojoConverter.class.getName();
   private static final String KEY = ":::";
   private static final String MAP_KEY_TEMPLATE = CONVERTER_IDENTIFIER + KEY + "%s" + KEY + "%s";

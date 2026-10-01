@@ -1,0 +1,6 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "IssuesData",
+  "namespace" : "com.axonivy.connector.github.demo.Issues",
+  "isBusinessCaseData" : false
+}

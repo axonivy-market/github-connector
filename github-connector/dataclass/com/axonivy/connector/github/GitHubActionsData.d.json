@@ -1,0 +1,28 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "GitHubActionsData",
+  "namespace" : "com.axonivy.connector.github",
+  "fields" : [ {
+    "name" : "owner",
+    "modifiers" : [ ]
+  }, {
+    "name" : "repo",
+    "modifiers" : [ ]
+  }, {
+    "name" : "page",
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
+  }, {
+    "name" : "pageSize",
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
+  }, {
+    "name" : "workflowRunAdvanced",
+    "type" : "com.axonivy.connector.github.models.WorkflowRunAdvanced",
+    "modifiers" : [ ]
+  }, {
+    "name" : "status",
+    "type" : "java.lang.Integer",
+    "modifiers" : [ ]
+  } ]
+}

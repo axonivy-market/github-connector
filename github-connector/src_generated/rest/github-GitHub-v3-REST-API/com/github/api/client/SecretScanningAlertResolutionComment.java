@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * An optional comment when closing an alert. Cannot be updated or deleted. Must be &#x60;null&#x60; when changing &#x60;state&#x60; to &#x60;open&#x60;.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class SecretScanningAlertResolutionComment {
 

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * InlineResponse20013
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class InlineResponse20013 {
   @JsonProperty("total_count")

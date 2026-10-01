@@ -1,5 +1,6 @@
 package com.axonivy.connector.github.managedbean;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,11 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.faces.context.FacesContext;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,9 +35,9 @@ import com.github.api.client.User;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.process.call.SubProcessCall;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class IssuesBean {
+public class IssuesBean implements Serializable {
   private static final String FAILED_CMS = "/Dialogs/com/axonivy/connector/github/demo/Issues/Failed";
   private static final String EXCEPTION_MESSAGE = "/Dialogs/com/axonivy/connector/github/demo/Issues/ExceptionMessage";
   private String keyword;

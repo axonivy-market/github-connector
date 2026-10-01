@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Information about the author of the commit. By default, the &#x60;author&#x60; will be the authenticated user and the current date. See the &#x60;author&#x60; and &#x60;committer&#x60; object below for details.
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-09T11:03:27.416787800+07:00[Asia/Saigon]")
 
 public class ReposownerrepogitcommitsAuthor {
   @JsonProperty("name")

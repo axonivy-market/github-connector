@@ -1,0 +1,20 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "PatchIssues",
+  "namespace" : "com.axonivy.connector.github",
+  "fields" : [ {
+    "name" : "owner",
+    "modifiers" : [ ]
+  }, {
+    "name" : "repo",
+    "modifiers" : [ ]
+  }, {
+    "name" : "issueNumber",
+    "type" : "java.math.BigInteger",
+    "modifiers" : [ ]
+  }, {
+    "name" : "patchIssueBody",
+    "type" : "com.github.api.client.IssuesIssueNumberBody",
+    "modifiers" : [ ]
+  } ]
+}

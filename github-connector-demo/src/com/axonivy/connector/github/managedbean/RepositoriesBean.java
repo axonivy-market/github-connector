@@ -1,15 +1,16 @@
 package com.axonivy.connector.github.managedbean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import com.axonivy.connector.github.models.ReposModel;
 import com.axonivy.connector.github.models.criteria.SearchRepositoryCriteria;
 import com.axonivy.connector.github.util.VariableUtils;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class RepositoriesBean {
+public class RepositoriesBean implements Serializable {
 
   private ReposModel reposModel;
 
